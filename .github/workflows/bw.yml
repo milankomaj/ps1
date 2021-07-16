@@ -1,0 +1,29 @@
+name: Generate Wallpaper Github README.md
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+ Generate_Wallpaper :
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v2
+    - name: Generate Wallpaper Himawari
+      run: ./himawari.ps1
+      shell: pwsh
+    - name: Generate Wallpaper BingWallpaper
+      run: ./bing-wallpaper.ps1
+      shell: pwsh
+    - name: Deploy
+      run: |
+        git config --global user.email ${{ secrets.EMAIL }}
+        git config --global user.name ${{ secrets.NAME }}
+        git add -A
+        git commit --amend -am "set wallpaper"
+        git push --force
+

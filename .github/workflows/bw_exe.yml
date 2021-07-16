@@ -1,0 +1,37 @@
+name: ps1ToExe BingWallpaper
+
+on: [repository_dispatch,workflow_dispatch]
+
+jobs:
+ windows_executable:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Version
+      run: |
+       $version = (Get-Content bing-wallpaper.ps1 -First 1).split('#(v)')
+       Write-Output $version
+       Write-Output "Converts powershell scripts to standalone executables."
+       ./executables/ps2exe.ps1 -inputFile ./executables/BING/bing-wallpaper.ps1 -outputFile ./executables/BING/bing-wallpaper.exe -noConsole -title "Bing Wallpaper" -iconFile ./executables/BING/bing-wallpaper.ico -version 8.1.2.2       
+      shell: pwsh  
+    - name: "Build & test"
+      run: |
+       echo "done!"
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+       repo_token: "${{ secrets.GITHUB_TOKEN }}"
+       prerelease: false
+       title: BingWallpaper
+       automatic_release_tag: bing-wallpaper
+       files: |           
+            ./executables/BING/bing-wallpaper.exe
+            ./executables/BING/SettingsBw.xml
+    - name: Deploy
+      run: |
+        git config --global user.email ${{ secrets.EMAIL }}
+        git config --global user.name ${{ secrets.NAME }}
+        git add .
+        git commit -m "Generate windows executable" || echo
+        git push
