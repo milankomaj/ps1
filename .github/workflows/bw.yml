@@ -25,5 +25,5 @@ jobs:
         git config --global user.name ${{ secrets.NAME }}
         git add .
         git commit -m "set wallpaper" || echo
-        git pushe
+        git push
 
