@@ -33,5 +33,5 @@ jobs:
         git commit -m "set wallpaper"
         git push
     - name: Markdown autodocs
-      uses: dineshsonachalam/markdown-autodocs@v1.0.3
+      uses: dineshsonachalam/markdown-autodocs@v1.0.2
 
