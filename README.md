@@ -2,6 +2,7 @@
 
 - ##### BingWallpaper 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=https://raw.githubusercontent.com/milankomaj/ps1/main/BingWallpaper/timestamp) -->
+<!-- The below code snippet is automatically added from https://raw.githubusercontent.com/milankomaj/ps1/main/BingWallpaper/timestamp -->
 ```
 ```
 <!-- MARKDOWN-AUTO-DOCS:END -->
@@ -9,6 +10,7 @@
 
 - ##### Himawari 
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=https://raw.githubusercontent.com/milankomaj/ps1/main/Himawari/timestamp) -->
+<!-- The below code snippet is automatically added from https://raw.githubusercontent.com/milankomaj/ps1/main/Himawari/timestamp -->
 ```
 ```
 <!-- MARKDOWN-AUTO-DOCS:END --> 
