@@ -11,10 +11,8 @@ jobs:
  Generate_Wallpaper :
     runs-on: windows-latest
     timeout-minutes: 10
-    strategy:
-     matrix:
-      file: [./BingWallpaper/latest.jpg, ./Himawari/latest.jpg]
-      line: [4, 9]
+
+
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper Himawari
@@ -32,11 +30,15 @@ jobs:
     - name: timestamp to readme   
       run: |
        $prefix = "- ##### "
-       $filedate = Get-ChildItem ${{ matrix.file }} -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %m/%d/%Y %R %Z"
-       $textToAdd = "$($prefix)$($filedate)"
-       $lineNumber = ${{ matrix.line }}
+       $bingdate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %m/%d/%Y %R %Z"
+       $HimawariDate = Get-ChildItem ./Himawari/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %m/%d/%Y %R %Z"
+       $textToAdd = "$($prefix)$($bingdate)"
+       $textToAdd2 = "$($prefix)$($HimawariDate)"
+       $BingLineNumber = 4
+       $HimawariLineNumber = 9
        $fileContent = Get-Content ./README.md
-       $fileContent[$lineNumber-1] = $textToAdd
+       $fileContent[$BingLineNumber-1] = $textToAdd
+       $fileContent[$HimawariLineNumber r-1] = $textToAdd2
        $fileContent | Set-Content ./README.md
        
     - name: Deploy
