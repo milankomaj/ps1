@@ -30,8 +30,8 @@ jobs:
     - name: timestamp to readme   
       run: |
        $prefix = "- ##### "
-       $bingdate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %d/%m/%Y %T %Z"
-       $HimawariDate = Get-ChildItem ./Himawari/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %d/%m/%Y %T %Z"
+       $bingdate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | [System.Threading.Thread]::CurrentThread.CurrentUICulture = "sk-SK"; Get-Date -UFormat "%A %d/%m/%Y %T %Z"
+       $HimawariDate = Get-ChildItem ./Himawari/latest.jpg -Force | Select-Object LastWriteTime | [System.Threading.Thread]::CurrentThread.CurrentUICulture = "sk-SK"; Get-Date -UFormat "%A %d/%m/%Y %T %Z"
        $textToAdd = "$($prefix)$($bingdate)"
        $textToAdd2 = "$($prefix)$($HimawariDate)"
        $BingLineNumber = 4
