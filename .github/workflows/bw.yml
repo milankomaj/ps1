@@ -25,6 +25,16 @@ jobs:
     - name: timestamp BingWallpaper   
       run: Write-Output (Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date) | Out-File ./BingWallpaper/timestamp
       shell: pwsh
+    - name: timestamp to readme   
+      run: |
+       $prefix = "- #### "
+       $filedate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -Second 00
+       $textToAdd = "$($prefix)$($filedate)"
+       $lineNumber = 4
+       $fileContent = Get-Content ./README.md
+       $fileContent[$lineNumber-1] = $textToAdd
+       $fileContent | Set-Content ./README.md
+       
     - name: Deploy
       run: |
        git config --global user.email ${{ secrets.EMAIL }}
