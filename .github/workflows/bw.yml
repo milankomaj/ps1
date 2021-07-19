@@ -1,11 +1,11 @@
 name: Generate Wallpaper Github README.md
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
+    
   schedule:
     - cron: "0 3 * * *"
-  workflow_dispatch:
+  
 
 jobs:
  Generate_Wallpaper :
