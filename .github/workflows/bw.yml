@@ -38,7 +38,7 @@ jobs:
        $HimawariLineNumber = 9
        $fileContent = Get-Content ./README.md
        $fileContent[$BingLineNumber-1] = $textToAdd
-       $fileContent[$HimawariLineNumber r-1] = $textToAdd2
+       $fileContent[$HimawariLineNumber-1] = $textToAdd2
        $fileContent | Set-Content ./README.md
        
     - name: Deploy
