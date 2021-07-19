@@ -27,8 +27,8 @@ jobs:
       shell: pwsh
     - name: timestamp to readme   
       run: |
-       $prefix = "- #### "
-       $filedate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -Second 00
+       $prefix = "- ##### "
+       $filedate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %m/%d/%Y %R %Z"
        $textToAdd = "$($prefix)$($filedate)"
        $lineNumber = 4
        $fileContent = Get-Content ./README.md
