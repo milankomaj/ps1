@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper Himawari
-      run: ./himawari.ps1
+      run: ./himawar.ps1
       shell: pwsh
     - name: timestamp Himawari  
       run: Write-Output (Get-ChildItem ./Himawari/latest.jpg -Force | Select-Object LastWriteTime | Get-Date) | Out-File ./Himawari/timestamp
