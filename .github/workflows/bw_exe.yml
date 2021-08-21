@@ -15,7 +15,7 @@ jobs:
        Write-Output $version
        echo "action_state=$version" >> $GITHUB_ENV
        echo ----------------------
-       echo "${{ env.action_state }}"
+       echo ${{ env.action_state }}
        Write-Output "Converts powershell scripts to standalone executables."
        ./executables/ps2exe.ps1 -inputFile ./executables/BING/bing-wallpaper.ps1 -outputFile ./executables/BING/bing-wallpaper.exe -noConsole -title "Bing Wallpaper" -iconFile ./executables/BING/bing-wallpaper.ico -version 8.1.2.2       
       shell: pwsh  
@@ -26,7 +26,7 @@ jobs:
       with:
        repo_token: "${{ secrets.GITHUB_TOKEN }}"
        prerelease: false
-       title: BingWallpaper
+       title: BingWallpaper_${{ env.action_state }}
        automatic_release_tag: bing-wallpaper
        files: |           
             ./executables/BING/bing-wallpaper.exe
