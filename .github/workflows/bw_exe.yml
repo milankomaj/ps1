@@ -12,7 +12,7 @@ jobs:
     - name: Version
       run: |
        $version = (Get-Content ./executables/BING/bing-wallpaper.ps1 -First 1).split('# (v)')
-       Write-Output (Get-Content ./executables/BING/bing-wallpaper.ps1 -First 1).split('# (v)')
+       Write-Output $version.split('# (v)')
        
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
