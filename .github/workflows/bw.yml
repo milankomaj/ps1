@@ -22,7 +22,7 @@ jobs:
       run: Write-Output (Get-ChildItem ./Himawari/latest.jpg -Force | Select-Object LastWriteTime | Get-Date) | Out-File ./Himawari/timestamp
       shell: pwsh
     - name: Generate Wallpaper BingWallpaper
-      run: ./bing.ps1
+      run: ./bing-wallpaper.ps1
       shell: pwsh
     - name: timestamp BingWallpaper   
       run: Write-Output (Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date) | Out-File ./BingWallpaper/timestamp
