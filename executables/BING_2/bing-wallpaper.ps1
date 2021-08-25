@@ -21,9 +21,7 @@ $debug = $Config.Configuration.debug
 Add-Type -Assembly System.Web | Out-Null
 $BW = New-Object Net.WebClient
 $BW.Encoding = [Text.Encoding]::UTF8
-[void][System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
-$notification = New-Object System.Windows.Forms.NotifyIcon 
-$notification.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon((Get-Process -id $pid | Select-Object -ExpandProperty Path))
+
 if ($notification.Visible = $Config.Configuration.notification -match 'true') {
 $notification.Visible = $Config.Configuration.notification} 
 
