@@ -29,6 +29,14 @@ $notification.Visible = $Config.Configuration.notification}
 
 try
 {
+$request = [System.Net.WebRequest]::create($url)
+
+$response = $request.getResponse()
+
+$HTTP_Status = [int]$response.StatusCode.value__    
+
+Write-Host HTTP_Status:($HTTP_Status)
+
 $json = ConvertFrom-Json ($BW.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=$market"))
 $url = "https://www.bing.com{0}_$resolution.jpg" -f $json.images.urlbase
 $copyright = ($json.images.copyright)
@@ -39,7 +47,6 @@ $author = $copyright.split('()')[1].split([IO.Path]::GetInvalidFileNameChars()) 
 $title = ($json.images.title)
 $description = $copyright.split('()')[0].split([IO.Path]::GetInvalidFileNameChars()) -join ' '
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
-Write-Host outpath:($outpath)
 $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
