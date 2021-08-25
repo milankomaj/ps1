@@ -64,7 +64,7 @@ Write-Host title:($title)
 if ($TestPath -match 'false') 
 {   
 $BW.DownloadFile($url,$ImageFileName)
-# [Wallpaper]::SetWallpaper($ImageFileName)
+[Wallpaper]::SetWallpaper($ImageFileName)
 
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
