@@ -35,7 +35,7 @@ $copyright = ($json.images.copyright)
 $urlbase = ($json.images.urlbase)
 $startdate = ($json.images.startdate)
 $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split('_')[0]}
-$author = $copyright.split('()')[1].split([IO.Path]::GetInvalidFileNameChars()) -replace '_'
+$author = $copyright.split('()')[1].split([string]::join('_',[IO.Path]::GetInvalidFileNameChars()))
 $title = ($json.images.title)
 # $description = $copyright.split('()')[0]..split([IO.Path]::GetInvalidFileNameChars()) -join ''
 # $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
