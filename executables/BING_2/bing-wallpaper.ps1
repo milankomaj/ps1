@@ -25,7 +25,7 @@ $BW.Encoding = [Text.Encoding]::UTF8
 
 try
 {
-$json = ConvertFrom-Json ($BW.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=$market"))
+$json = ConvertFrom-Json ($BW.DownloadString('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US'))
 $url = "https://www.bing.com{0}_$resolution.jpg" -f $json.images.urlbase
 $copyright = ($json.images.copyright)
 $urlbase = ($json.images.urlbase)
