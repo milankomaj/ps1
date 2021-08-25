@@ -39,7 +39,8 @@ $author = $copyright.split('()')[1].split([IO.Path]::GetInvalidFileNameChars()) 
 $title = ($json.images.title)
 $description = $copyright.split('()')[0].split([IO.Path]::GetInvalidFileNameChars()) -join ' '
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
-$ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
+# $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
+$ImageFileName = "./executables/BING_2/latest.jpg" # github
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
 if ($debug -match 'true') {
@@ -63,7 +64,7 @@ Write-Host title:($title)
 if ($TestPath -match 'false') 
 {   
 $BW.DownloadFile($url,$ImageFileName)
-[Wallpaper]::SetWallpaper($ImageFileName)
+# [Wallpaper]::SetWallpaper($ImageFileName)
 
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
