@@ -17,8 +17,12 @@ jobs:
     - name: Generate Wallpaper BingWallpaper
       shell: pwsh
       run: |
+       $textToAdd = '$ImageFileName = "./executables/BING_2/latest.jpg"'
+       $BingLineNumber = 42
+       $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
+       $fileContent[$BingLineNumber-1] = $textToAdd
+       $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
-
        dir
 
