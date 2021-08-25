@@ -27,7 +27,7 @@ jobs:
        $copyright = ($json.images.copyright)
 
        $startdate = ($json.images.startdate)
-       $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split('_')[0]}
+       $shortname = (($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split('_')[0]})
        $author = $copyright.split('()')[1].split([IO.Path]::GetInvalidFileNameChars()) -join '_'
        $ImageFileName = "$($shortname)_$($startdate)($($author)).jpg"
        $title = ($json.images.title)
