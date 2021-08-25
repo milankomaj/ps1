@@ -37,7 +37,7 @@ $startdate = ($json.images.startdate)
 $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split('_')[0]}
 $title = ($json.images.title)
 # $author = $copyright.split('()')[1].split([IO.Path]::GetInvalidFileNameChars()) -join '_'
-# $description = $copyright.split('()')[0]..split([IO.Path]::GetInvalidFileNameChars()) -join ' '
+$description = $copyright.split('()')[0]..split([IO.Path]::GetInvalidFileNameChars()) -join ' '
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
 # $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
 $ImageFileName = "./executables/BING_2/latest.jpg" # github
