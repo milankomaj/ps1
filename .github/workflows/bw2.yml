@@ -18,5 +18,5 @@ jobs:
       run: |
        cd ./executables/BING_2
        dir
-       bing-wallpaper.ps1
+       ./bing-wallpaper.ps1
       shell: pwsh
