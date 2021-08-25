@@ -38,9 +38,9 @@ $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split(
 $title = ($json.images.title)
 $description = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split('()')[0]
 $author = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join '_').split('©')[1]
-
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
-$ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($©$author).jpg"
+$symbols = [PSCustomObject] @{COPYRIGHT = ([char]169)}
+$ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($symbols.COPYRIGHT)$author).jpg"
 # $ImageFileName = "./executables/BING_2/latest.jpg" # github
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
