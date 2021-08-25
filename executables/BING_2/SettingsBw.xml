@@ -8,7 +8,7 @@
  <notification>false</notification> 
  <metadata>false</metadata>
  <rating>0</rating>
- <debug>true</debug>
+ <debug>false</debug>
 </Configuration>
 
 <!--
