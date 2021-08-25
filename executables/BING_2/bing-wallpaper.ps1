@@ -40,7 +40,7 @@ $description = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ' '
 $author = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join '_').split('©')[1]
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
 $symbols = [PSCustomObject] @{COPYRIGHT = ([char]169)}
-$ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($symbols.COPYRIGHT)$author).jpg"
+$ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($symbols.COPYRIGHT)$author.jpg"
 # $ImageFileName = "./executables/BING_2/latest.jpg" # github
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
