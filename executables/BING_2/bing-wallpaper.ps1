@@ -78,13 +78,13 @@ $adapter.Save() = "SilentlyContinue"
 
 } 
 else {}
-
+if ($notification.Visible -match 'true') {
 $notification.BalloonTipIcon = "Info"
 $notification.BalloonTipText = $copyright
 $notification.BalloonTipTitle = if ($TestPath -match 'false') {"Wallpaper was downloaded and changed."} else {"Wallpaper already exist."}
 $notification.ShowBalloonTip(30000)
 [void][System.Threading.Thread]::Sleep(30000)
-$notification.Dispose() 
+$notification.Dispose() }
 
 }
 catch
@@ -95,12 +95,13 @@ if ($debug -match 'true') {
 Write-Output "Failed! $ErrorMessage"
 Write-Output "Failed! $ErrorMessageFull"
 }
+if ($notification.Visible -match 'true') {
 $notification.BalloonTipIcon = "Error"
 $notification.BalloonTipText = $ErrorMessageFull
 $notification.BalloonTipTitle = $ErrorMessage
 $notification.ShowBalloonTip(30000)
 [void][System.Threading.Thread]::Sleep(30000)
-$notification.Dispose() 
+$notification.Dispose() }
 exit 1
 }
 
