@@ -43,6 +43,47 @@ $description = $copyright.split('()')[0].split([IO.Path]::GetInvalidFileNameChar
 $ImageFileName = "./Blatest.jpg"
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
+      
+
+Write-Host market:($market)
+      
+      
+        
+Write-Host url:($url)
+      
+      
+        
+Write-Host copyright:($copyright)
+      
+      
+        
+Write-Host urlbase:($urlbase)
+      
+      
+        
+Write-Host startdate:($startdate)
+      
+      
+        
+Write-Host shortname:($shortname)
+      
+      
+        
+Write-Host author:($author)
+      
+      
+        
+Write-Host ImageFileName:($ImageFileName) 
+      
+      
+        
+Write-Host description:($description)  
+      
+      
+        
+Write-Host title:($title)Write-Host TestPath:($TestPath)
+      
+        
 if ($debug -match 'true') {
 $request = [System.Net.WebRequest]::create($url)
 $response = $request.getResponse()
