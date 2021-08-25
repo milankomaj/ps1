@@ -39,6 +39,7 @@ $author = $copyright.split('()')[1].split([IO.Path]::GetInvalidFileNameChars()) 
 $title = ($json.images.title)
 $description = $copyright.split('()')[0].split([IO.Path]::GetInvalidFileNameChars()) -join ' '
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
+Write-Host outpath:($outpath)
 $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
@@ -90,15 +91,15 @@ $notification.Dispose() }
 catch
 {
 $ErrorMessageFull = $_.Exception.Message
-#$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ''
+$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ''
 if ($debug -match 'true') {
-#Write-Output "Failed! $ErrorMessage"
+Write-Output "Failed! $ErrorMessage"
 Write-Output "Failed! $ErrorMessageFull"
 }
 if ($notification.Visible -match 'true') {
 $notification.BalloonTipIcon = "Error"
 $notification.BalloonTipText = $ErrorMessageFull
-$notification.BalloonTipTitle = #$ErrorMessage
+$notification.BalloonTipTitle = $ErrorMessage
 $notification.ShowBalloonTip(30000)
 [void][System.Threading.Thread]::Sleep(30000)
 $notification.Dispose() }
