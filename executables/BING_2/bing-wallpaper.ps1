@@ -48,6 +48,7 @@ $request = [System.Net.WebRequest]::create($url)
 $response = $request.getResponse()
 $HTTP_Status = [int]$response.StatusCode.value__    
 Write-Host HTTP_Status:($HTTP_Status)
+Write-Host outpath:($outpath)
 Write-Host TestPath:($TestPath)
 Write-Host market:($market)
 Write-Host url:($url)
