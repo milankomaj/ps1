@@ -19,6 +19,8 @@ jobs:
       run: |
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
+       cd ~
        Move-Item -Path C:\Users\runneradmin\Pictures\BingWallpaper\*.jpg -Destination ./executables/BING_2/latest.jpg
+       cd ./executables/BING_2
        dir
 
