@@ -5,10 +5,10 @@
  
  <folderpath>MyPictures</folderpath> 
  <foldername>BingWallpaper</foldername>
- <notification>false</notification> 
+ <notification>true</notification> 
  <metadata>false</metadata>
  <rating>0</rating>
- <debug>true</debug>
+ <debug>false</debug>
 </Configuration>
 
 <!--
