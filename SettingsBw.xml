@@ -6,7 +6,7 @@
  <folderpath>MyPictures</folderpath> 
  <foldername>BingWallpaper</foldername>
  <notification>true</notification> 
- <metadata>true</metadata>
+ <metadata>false</metadata>
  <rating>0</rating>
  <debug>false</debug>
 </Configuration>
