@@ -39,8 +39,8 @@ $title = ($json.images.title)
 $author = ($copyright.Split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split("©")[1]
 $description = ($copyright.Split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split('()')[0]
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
-# $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
-$ImageFileName = "./executables/BING_2/latest.jpg" # github
+$ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
+# $ImageFileName = "./executables/BING_2/latest.jpg" # github
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
 if ($debug -match 'true') {
