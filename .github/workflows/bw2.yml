@@ -15,7 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
-      shell: pwsh
       run: |
-       cd ./executables/BING_2/
-       ./executables/BING_2/bing-wallpaper.ps1
+       cd ./executables/BING_2
+       bing-wallpaper.ps1
