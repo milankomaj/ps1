@@ -38,7 +38,7 @@ $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split(
 $author = $copyright.split('()')[1].split([IO.Path]::GetInvalidFileNameChars()) -join '_'
 $title = ($json.images.title)
 # $description = $copyright.split('()')[0]..split([IO.Path]::GetInvalidFileNameChars()) -join ''
-$outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
+# $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
 # $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
 $ImageFileName = "./executables/BING_2/latest.jpg" # github
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
@@ -57,7 +57,7 @@ Write-Host startdate:($startdate)
 Write-Host shortname:($shortname)
 Write-Host author:($author)
 Write-Host ImageFileName:($ImageFileName) 
-Write-Host description:($description)  
+# Write-Host description:($description)  
 Write-Host title:($title)
 }
 
