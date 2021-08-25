@@ -5,7 +5,7 @@
  <connection>www.bing.com</connection>
  <folderpath>MyPictures</folderpath> 
  <foldername>BingWallpaper</foldername>
- <notification>true</notification> 
+ <notification>false</notification> 
  <metadata>false</metadata>
  <rating>0</rating>
  <debug>false</debug>
