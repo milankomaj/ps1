@@ -23,8 +23,8 @@ jobs:
        $BW = New-Object Net.WebClient
        $BW.Encoding = [Text.Encoding]::UTF8
        $json = ConvertFrom-Json ($BW.DownloadString('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US'))
-       $url = 'https://www.bing.com{0}_1920x1080.jpg' -f $json.images.urlbase
-			 $copyright = ($json.images.copyright)
+       $url = 'https://www.bing.com{0}_1920x1080.jpg' -f $json.images.urlbase 
+       $copyright = ($json.images.copyright)
 
        $startdate = ($json.images.startdate)
        $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split('_')[0]}
