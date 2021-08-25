@@ -29,14 +29,6 @@ $notification.Visible = $Config.Configuration.notification}
 
 try
 {
-$request = [System.Net.WebRequest]::create($url)
-
-$response = $request.getResponse()
-
-$HTTP_Status = [int]$response.StatusCode.value__    
-
-Write-Host HTTP_Status:($HTTP_Status)
-
 $json = ConvertFrom-Json ($BW.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=$market"))
 $url = "https://www.bing.com{0}_$resolution.jpg" -f $json.images.urlbase
 $copyright = ($json.images.copyright)
