@@ -3,19 +3,18 @@ name: bw2
 on:
   workflow_dispatch:
     
-
-  
-
 jobs:
  Generate_Wallpaper :
     runs-on: windows-latest
     timeout-minutes: 10
-
+    strategy:
+     matrix:
+      shell: [powershell,pwsh]
 
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
-      shell: powershell
+      shell: ${{ matrix.shell }}
       run: |
        $textToAdd = '$outpath = "./executables/BING_2"'
        $BingLineNumber = 42
