@@ -36,9 +36,9 @@ $urlbase = ($json.images.urlbase)
 $startdate = ($json.images.startdate)
 $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split('_')[0]}
 $title = ($json.images.title)
-$description = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split('()')[0]
+$description = ($copyright.split('()')[0] -join ' ').split([IO.Path]::GetInvalidFileNameChars())
 $tag = Select-String '\b[A-Z]\w+,*' -CaseSensitive -input $description -AllMatches | Foreach {$_.matches}
-$author = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join '_').split('()')[1]
+$author = ($copyright.split('()')[1] -join '_').split([IO.Path]::GetInvalidFileNameChars())
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
 $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)$($author).jpg"
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
