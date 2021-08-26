@@ -93,10 +93,10 @@ $notification.Dispose() }
 catch
 {
 $ErrorMessageFull = $_.Exception.Message
-$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ''
+$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ' '
 if ($debug -match 'true') {
-if ($ErrorMessage -eq $null) {Write-Output "Failed! $ErrorMessage"} else {Write-Output "Failed! $ErrorMessageFull"}
 Write-Output "Failed! $ErrorMessageFull"
+Write-Output "Failed! $ErrorMessage"
 }
 if ($notification.Visible -match 'true') {
 $notification.BalloonTipIcon = "Error"
