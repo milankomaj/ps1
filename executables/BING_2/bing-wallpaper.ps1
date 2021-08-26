@@ -36,7 +36,8 @@ $urlbase = ($json.images.urlbase)
 $startdate = ($json.images.startdate)
 $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split('_')[0]}
 $title = ($json.images.title)
-$description = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split('()')[0] | Select-String ("\w*[A-Z]") -AllMatches | Foreach {$_.matches}
+$description = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split('()')[0]
+$tag = Select-String '\b[A-Z]\w+,*' -CaseSensitive -input $description -AllMatches | Foreach {$_.matches}
 $author = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join '_').split('()')[1]
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
 $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)$($author).jpg"
@@ -57,7 +58,8 @@ Write-Host startdate:($startdate)
 Write-Host shortname:($shortname)
 Write-Host author:($author)
 Write-Host ImageFileName:($ImageFileName) 
-Write-Host description:($description)  
+Write-Host description:($description)
+Write-Host tag:($tag)
 Write-Host title:($title)
 }
 
@@ -72,7 +74,7 @@ $adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileNam
 $adapter.Metadata.Title = ${copyright};
 $adapter.Metadata.Subject = ${author};
 $adapter.Metadata.Rating = $Config.Configuration.rating;
-$adapter.Metadata.Keywords.Add(${shortname});
+$adapter.Metadata.Keywords.Add("${shortname}, ${tag}");
 $adapter.Metadata.Comments = ${url};
 $adapter.Save() = "SilentlyContinue"
 }
