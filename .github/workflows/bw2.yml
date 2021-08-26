@@ -4,17 +4,16 @@ on:
   workflow_dispatch:
     
 jobs:
+ shell: ${{ matrix.pro.shell }}
  Generate_Wallpaper :
     runs-on: windows-latest
     timeout-minutes: 10
-		shell: ${{ matrix.pro.shell }}
-    strategy:
+		
+    strategy:	 
      fail-fast: false
      matrix:
-      pro: 
-			 - { shell: powershell } 
-			 - { shell: pwsh }
-      
+        pro: [powershell,pwsh] 
+				
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
