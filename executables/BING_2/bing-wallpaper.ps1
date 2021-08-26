@@ -1,4 +1,4 @@
-#(v0.0.2)
+#(v0.0.3)
 Add-Type @"
 using System.Runtime.InteropServices;
 public class Wallpaper {
@@ -93,7 +93,7 @@ $notification.Dispose() }
 catch
 {
 $ErrorMessageFull = $_.Exception.Message
-$ErrorMessage = ($_.Exception.Message.split([IO.Path]::GetInvalidFileNameChars()) -join '').split(':')[2]
+$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ''
 if ($debug -match 'true') {
 Write-Output "Failed! $ErrorMessage"
 Write-Output "Failed! $ErrorMessageFull"
