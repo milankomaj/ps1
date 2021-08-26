@@ -67,7 +67,7 @@ if ($TestPath -match 'false')
 {   
 $BW.DownloadFile($url,$ImageFileName)
 [Wallpaper]::SetWallpaper($ImageFileName)
-
+dir
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
 $adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileName})` 
