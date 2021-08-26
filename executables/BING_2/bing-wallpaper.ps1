@@ -95,7 +95,7 @@ catch
 $ErrorMessageFull = $_.Exception.Message
 $ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ''
 if ($debug -match 'true') {
-Write-Output "Failed! $ErrorMessage" -ErrorAction SilentlyContinue
+if ($ErrorMessage) {Write-Output "Failed! $ErrorMessage"}
 Write-Output "Failed! $ErrorMessageFull"
 }
 if ($notification.Visible -match 'true') {
