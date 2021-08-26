@@ -17,11 +17,7 @@ jobs:
     - name: Generate Wallpaper BingWallpaper
       shell: powershell
       run: |
-       $textToAdd = '$ImageFileName = "./executables/BING_2/latest.jpg"'
-       $BingLineNumber = 42
-       $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
-       $fileContent[$BingLineNumber-1] = $textToAdd
-       $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
+
        $textToAdd2 = ' <debug>true</debug>'
        $BingLineNumber2 = 11
        $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
