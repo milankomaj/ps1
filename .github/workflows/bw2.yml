@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
-      
+      shell: powershell
       run: |
        $textToAdd = '$ImageFileName = "./executables/BING_2/latest.jpg"'
        $BingLineNumber = 42
