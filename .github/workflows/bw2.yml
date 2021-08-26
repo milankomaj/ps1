@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
     
 jobs:
- shell: ${{ matrix.pro.shell }}
  Generate_Wallpaper :
     runs-on: windows-latest
     timeout-minutes: 10
@@ -15,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
-      
+    - shell: ${{ matrix.pro.shell }}
       run: |
        $textToAdd = '$outpath = "./executables/BING_2"'
        $BingLineNumber = 42
