@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
-      shell: powershell
+      shell: pwsh
       run: |
        $textToAdd = '$outpath = "./executables/BING_2"'
        $BingLineNumber = 42
