@@ -7,15 +7,18 @@ jobs:
  Generate_Wallpaper :
     runs-on: windows-latest
     timeout-minutes: 10
+		shell: ${{ matrix.pro.shell }}
     strategy:
      fail-fast: false
      matrix:
-      pro: [powershell,pwsh]
-
+      pro: 
+			 - { shell: powershell } 
+			 - { shell: pwsh }
+      
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
-      shell: ${{ matrix.pro }}
+      
       run: |
        $textToAdd = '$outpath = "./executables/BING_2"'
        $BingLineNumber = 42
