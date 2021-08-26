@@ -25,8 +25,7 @@ jobs:
        $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml      
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
-
-       Move-Item -Path "*.jpg" -Destination "*.jpg"
+       Move-Item -Path "C:\Users\runneradmin\Pictures\BingWallpaper\*.jpg" -Destination "*.jpg"
        cd ./executables/BING_2
        dir
  
