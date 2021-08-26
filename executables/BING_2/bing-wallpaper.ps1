@@ -38,7 +38,7 @@ $shortname = ($urlbase -match '/th\?id=OHR.(.*)$') | Foreach {$Matches[1].split(
 $title = ($json.images.title)
 $description = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split('()')[0]
 $tag = Select-String '\b[A-Z]\w+,*' -CaseSensitive -input $description -AllMatches | Foreach {$_.matches}
-$author = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ('_')).split('()')[1]
+$author = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join (' ')).split('()')[1]
 $outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
 $ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
@@ -93,9 +93,9 @@ $notification.Dispose() }
 catch
 {
 $ErrorMessageFull = $_.Exception.Message
-#$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ''
+$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join '' -ErrorAction SilentlyContinue
 if ($debug -match 'true') {
-Write-Output "Failed! $ErrorMessage"
+Write-Output "Failed! $ErrorMessage" -ErrorAction SilentlyContinue
 Write-Output "Failed! $ErrorMessageFull"
 }
 if ($notification.Visible -match 'true') {
