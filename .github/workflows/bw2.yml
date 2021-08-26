@@ -18,7 +18,7 @@ jobs:
       shell: powershell
       run: |
        $textToAdd = '$ImageFileName = "./executables/BING_2"'
-       $BingLineNumber = 42
+       $BingLineNumber = 43
        $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
        $fileContent[$BingLineNumber-1] = $textToAdd
        $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
