@@ -9,12 +9,12 @@ jobs:
     timeout-minutes: 10
     strategy:
      matrix:
-      shell: [powershell,pwsh]
+      pro: [powershell,pwsh]
 
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper BingWallpaper
-      shell: ${{ matrix.shell }}
+      shell: ${{ matrix.pro }}
       run: |
        $textToAdd = '$outpath = "./executables/BING_2"'
        $BingLineNumber = 42
