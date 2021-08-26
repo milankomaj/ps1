@@ -39,8 +39,8 @@ $title = ($json.images.title)
 $description = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join ' ').split('()')[0]
 $tag = Select-String '\b[A-Z]\w+,*' -CaseSensitive -input $description -AllMatches | Foreach {$_.matches}
 $author = ($copyright.split([IO.Path]::GetInvalidFileNameChars()) -join (' ')).split('()')[1]
-$outpath = [Environment]::GetFolderPath($folderpath) + "\" + $foldername
-$ImageFileName = "$($outpath)\$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
+$outpath = [Environment]::GetFolderPath($folderpath) + "/" + $foldername
+$ImageFileName = "$($outpath)/$($shortname)_$($startdate)_$($resolution)($($author)).jpg"
 $TestPath = ((Test-Path -ErrorAction SilentlyContinue "$ImageFileName") -And (Get-ChildItem -ErrorAction SilentlyContinue "$ImageFileName"))
 
 if ($debug -match 'true') {
