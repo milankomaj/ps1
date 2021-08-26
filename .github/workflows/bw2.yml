@@ -26,7 +26,7 @@ jobs:
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
 
-       Move-Item -Path "$outpath/*.jpg" -Destination "*.jpg"
+       Move-Item -Path "*.jpg" -Destination "*.jpg"
        cd ./executables/BING_2
        dir
  
