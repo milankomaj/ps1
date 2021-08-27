@@ -17,11 +17,8 @@ jobs:
        $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
        $fileContent[$BingLineNumber-1] = $textToAdd
        $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
-       $textToAdd2 = ' <debug>true</debug>'
-       $BingLineNumber2 = 11
-       $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
-       $fileContent2[$BingLineNumber2-1] = $textToAdd2
-       $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml      
+
+  
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
         Write-Host HTTP_Status:($HTTP_Status)
