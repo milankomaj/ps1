@@ -93,7 +93,7 @@ $notification.Dispose() }
 catch
 {
 $ErrorMessageFull = $_.Exception.Message
-$ErrorMessage = $_.Exception.Message.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ' '
+if(!$ErrorMessageFull.split(':')[2] -eq $null) {$ErrorMessage = $ErrorMessageFull.split(':')[2].split([IO.Path]::GetInvalidFileNameChars()) -join ''} else {$ErrorMessage = $ErrorMessageFull.split(':')[1].split([IO.Path]::GetInvalidFileNameChars()) -join ''}
 if ($debug -match 'true') {
 Write-Output "Failed! $ErrorMessageFull"
 Write-Output "Failed! $ErrorMessage"
