@@ -24,7 +24,20 @@ jobs:
        $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml      
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
-
+        Write-Host HTTP_Status:($HTTP_Status)
+        Write-Host outpath:($outpath)
+        Write-Host TestPath:($TestPath)
+        Write-Host market:($market)
+        Write-Host url:($url)
+        Write-Host copyright:($copyright)
+        Write-Host urlbase:($urlbase)
+        Write-Host startdate:($startdate)
+        Write-Host shortname:($shortname)
+        Write-Host author:($author)
+        Write-Host ImageFileName:($ImageFileName) 
+        Write-Host description:($description)
+        Write-Host tag:($tag)
+        Write-Host title:($title) 
        
        dir
  
