@@ -12,7 +12,7 @@ public class Wallpaper {
 [xml]$Config = Get-Content SettingsBw.xml
 $market = $Config.Configuration.market
 $resolution = $Config.Configuration.resolution
-
+$timeout = $Config.Configuration.timeout
 $folderpath = $Config.Configuration.folderpath
 $metadata = $Config.Configuration.metadata
 $foldername = $Config.Configuration.foldername
@@ -85,8 +85,8 @@ if ($notification.Visible -match 'true') {
 $notification.BalloonTipIcon = "Info"
 $notification.BalloonTipText = $copyright
 $notification.BalloonTipTitle = if ($TestPath -match 'false') {"Wallpaper was downloaded and changed."} else {"Wallpaper already exist."}
-$notification.ShowBalloonTip(30000)
-[void][System.Threading.Thread]::Sleep(30000)
+$notification.ShowBalloonTip($timeout)
+[void][System.Threading.Thread]::Sleep($timeout)
 $notification.Dispose() }
 
 }
@@ -102,8 +102,8 @@ if ($notification.Visible -match 'true') {
 $notification.BalloonTipIcon = "Error"
 $notification.BalloonTipText = $ErrorMessageFull
 $notification.BalloonTipTitle = $ErrorMessage
-$notification.ShowBalloonTip(30000)
-[void][System.Threading.Thread]::Sleep(30000)
+$notification.ShowBalloonTip($timeout)
+[void][System.Threading.Thread]::Sleep($timeout)
 $notification.Dispose() }
 exit 1
 }
