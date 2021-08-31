@@ -33,7 +33,7 @@ jobs:
           # The below set up runs PSScriptAnalyzer to your entire repository and runs some basic security rules.
           # Include your own basic security rules. Removing this option will run all the rules 
           includeRule: ''
-          excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
+          # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: ${{ matrix.script }}.results.sarif
           path: ./${{ matrix.script }}       
           recurse: true
