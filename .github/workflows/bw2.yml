@@ -21,6 +21,6 @@ jobs:
        
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
-       cd ~
+       cd D:
        dir -r
        
