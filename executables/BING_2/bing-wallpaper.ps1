@@ -47,7 +47,7 @@ if ($debug -match 'true') {
 $request = [System.Net.WebRequest]::create($url)
 $response = $request.getResponse()
 $HTTP_Status = [int]$response.StatusCode.value__    
-Write-Host HTTP_Status: ($HTTP_Status)  -ForegroundColor Green; 
+Write-Host HTTP_Status:   -ForegroundColor Yellow -NoNewline; Write-Host ($HTTP_Status)  -ForegroundColor Green;
 Write-Host TestPath:      -ForegroundColor Yellow -NoNewline; Write-Host ($TestPath)     -ForegroundColor Green;
 Write-Host outpath:       -ForegroundColor Yellow -NoNewline; Write-Host($outpath)       -ForegroundColor Cyan; 
 Write-Host market:        -ForegroundColor Yellow -NoNewline; Write-Host($market)        -ForegroundColor Cyan; 
