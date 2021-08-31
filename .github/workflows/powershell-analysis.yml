@@ -52,8 +52,9 @@ jobs:
         uses: actions/upload-artifact@v2 
         with:
          name: results.sarif
-         path: ./*.sarif
-         
+         path: |
+          ./*.sarif
+          ./${{ matrix.script }}
     
       - uses: actions/download-artifact@v2
         with:
