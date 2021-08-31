@@ -35,7 +35,7 @@ jobs:
           # Include your own basic security rules. Removing this option will run all the rules 
           includeRule: ''
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
-          output: results.sarif
+          output: ${{ matrix.script }}.results.sarif
           path: ./${{ matrix.script }}
          
           recurse: true
@@ -45,7 +45,7 @@ jobs:
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: ${{ matrix.script }}.sarif
+          sarif_file: ${{ matrix.script }}.results.sarif
           
       - name: artifact upload results.sarif
         uses: actions/upload-artifact@v2 
