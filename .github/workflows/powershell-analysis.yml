@@ -20,6 +20,10 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+       script:
+         [himawari.ps1,bing-wallpaper.ps1]
     steps:
       - uses: actions/checkout@v2
 
@@ -32,7 +36,7 @@ jobs:
           includeRule: ''
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
-          path: ./himawari.ps1
+          path: ./${{ matrix.site }}
          
           recurse: true
           
