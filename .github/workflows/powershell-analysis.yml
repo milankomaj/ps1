@@ -63,8 +63,8 @@ jobs:
         with:
          name: upload artifact (results.sarif,.ps1.bak) & fix script (.ps1)
          path: |
-          ./*.sarif
-          ./${{ matrix.script }}
+          ./${{ needs.build.matrix.script }}.*.sarif
+          ./${{ needs.build.script.matrix.script }}
           ./${{ matrix.script }}.bak
      # Artifacts download  
       - uses: actions/download-artifact@v2
