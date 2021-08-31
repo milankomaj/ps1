@@ -15,7 +15,6 @@ on:
   pull_request:
     branches: [ main ]
 
-    
 jobs:
   build:
     name: PSScriptAnalyzer
@@ -39,9 +38,7 @@ jobs:
           path: ./${{ matrix.script }}       
           recurse: true
           fix: true
-
-
-      
+    
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v1
