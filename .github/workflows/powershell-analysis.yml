@@ -32,7 +32,7 @@ jobs:
           includeRule: ''
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
-          path: ./
+          path: ./himawari.ps1
          
           recurse: true
           
