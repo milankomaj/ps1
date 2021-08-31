@@ -58,13 +58,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - run: echo ${{needs.build.sarif_file}} ${{needs.build.script.matrix.script}}
      # Artifacts upload     
       - uses: actions/upload-artifact@v2 
         with:
          name: upload artifact (results.sarif,.ps1.bak) & fix script (.ps1)
          path: |
-          ./${{ needs.build.sarif_file }}
-          ./${{ needs.build.script.matrix.script }}
+          ./*.sarif
+          ./${{ matrix.script }}
           ./${{ matrix.script }}.bak
      # Artifacts download  
       - uses: actions/download-artifact@v2
