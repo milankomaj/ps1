@@ -45,7 +45,7 @@ jobs:
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: results.sarif
+          sarif_file: ${{ matrix.script }}.sarif
           
       - name: artifact upload results.sarif
         uses: actions/upload-artifact@v2 
