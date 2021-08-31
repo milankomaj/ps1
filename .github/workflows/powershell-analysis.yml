@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
        script:
-         [himawari.ps1,bing-wallpaper.ps1]
+         [himawari.ps1]
     steps:
       - uses: actions/checkout@v2
 
@@ -38,7 +38,7 @@ jobs:
           output: ${{ matrix.script }}.results.sarif
           path: ./${{ matrix.script }}       
           recurse: true
-          enableExit: true
+          fix: true
 
 
       
