@@ -36,10 +36,11 @@ jobs:
           includeRule: ''
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: ${{ matrix.script }}.results.sarif
-          path: ./${{ matrix.script }}
-         
+          path: ./${{ matrix.script }}       
           recurse: true
-          
+          enableExit: true
+
+
       
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
