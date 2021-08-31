@@ -48,7 +48,7 @@ jobs:
         with:
           sarif_file: ${{ matrix.script }}.results.sarif
           
-      - name: artifact upload results.sarif
+      - name: upload artifact results.sarif & fix script
         uses: actions/upload-artifact@v2 
         with:
          name: results.sarif
