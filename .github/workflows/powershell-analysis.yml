@@ -36,7 +36,7 @@ jobs:
           includeRule: ''
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
-          path: ./${{ matrix.site }}
+          path: ./${{ matrix.script }}
          
           recurse: true
           
