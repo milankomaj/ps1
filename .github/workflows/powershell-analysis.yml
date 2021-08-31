@@ -33,7 +33,7 @@ jobs:
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
           
-          customRulePath: '".\executables\BING\bing-wallpaper.ps1", ".\executables\BING_2\bing-wallpaper.ps1", ".\himawari.ps1"'
+          customRulePath: '"executables\BING\bing-wallpaper.ps1", "executables\BING_2\bing-wallpaper.ps1", "himawari.ps1"'
           recurse: true
           includeDefaultRules: false
       
