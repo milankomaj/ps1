@@ -47,20 +47,20 @@ if ($debug -match 'true') {
 $request = [System.Net.WebRequest]::create($url)
 $response = $request.getResponse()
 $HTTP_Status = [int]$response.StatusCode.value__    
-Write-Host HTTP_Status:($HTTP_Status)
-Write-Host outpath:($outpath)
-Write-Host TestPath:($TestPath)
-Write-Host market:($market)
-Write-Host url:($url)
-Write-Host copyright:($copyright)
-Write-Host urlbase:($urlbase)
-Write-Host startdate:($startdate)
-Write-Host shortname:($shortname)
-Write-Host author:($author)
-Write-Host ImageFileName:($ImageFileName) 
-Write-Host description:($description)
-Write-Host tag:($tag)
-Write-Host title:($title)
+Write-Host HTTP_Status:   -ForegroundColor Yellow -NoNewline; Write-Host ($HTTP_Status)  -ForegroundColor Green; 
+Write-Host TestPath:      -ForegroundColor Yellow -NoNewline; Write-Host ($TestPath)     -ForegroundColor Green;
+Write-Host outpath:       -ForegroundColor Yellow -NoNewline; Write-Host($outpath)       -ForegroundColor Cyan; 
+Write-Host market:        -ForegroundColor Yellow -NoNewline; Write-Host($market)        -ForegroundColor Cyan; 
+Write-Host url:           -ForegroundColor Yellow -NoNewline; Write-Host($url)           -ForegroundColor Blue; 
+Write-Host copyright:     -ForegroundColor Yellow -NoNewline; Write-Host($copyright)     -ForegroundColor Gray;  
+Write-Host urlbase:       -ForegroundColor Yellow -NoNewline; Write-Host($urlbase)       -ForegroundColor Gray; 
+Write-Host startdate:     -ForegroundColor Yellow -NoNewline; Write-Host($startdate)     -ForegroundColor Gray;  
+Write-Host shortname:     -ForegroundColor Yellow -NoNewline; Write-Host($shortname)     -ForegroundColor Red; 
+Write-Host author:        -ForegroundColor Yellow -NoNewline; Write-Host($author)        -ForegroundColor Red; 
+Write-Host ImageFileName: -ForegroundColor Yellow -NoNewline; Write-Host($ImageFileName) -ForegroundColor Cyan;  
+Write-Host description:   -ForegroundColor Yellow -NoNewline; Write-Host($description)   -ForegroundColor Red;     
+Write-Host tag:           -ForegroundColor Yellow -NoNewline; Write-Host($tag)           -ForegroundColor Red; 
+Write-Host title:         -ForegroundColor Yellow -NoNewline; Write-Host($title)         -ForegroundColor Red; 
 }
 
 if ($TestPath -match 'false') 
