@@ -33,7 +33,7 @@ jobs:
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
           path: ./
-          customRulePath: '"bing-wallpaper.ps1", "himawari.ps1"'
+         
           recurse: true
           
       
