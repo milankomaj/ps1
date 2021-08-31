@@ -25,6 +25,16 @@ jobs:
          [himawari.ps1]
     steps:
       - uses: actions/checkout@v2
+     # scripts .ps1.bak
+      - name: .bak files
+        run: |
+         cp ${{ matrix.script }} ${{ matrix.script }}.bak
+      - uses: actions/upload-artifact@v2 
+        with:
+         name: upload artifact .ps1.bak files
+         path: |       
+          ./${{ matrix.script }}.bak
+
 
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
@@ -32,31 +42,34 @@ jobs:
           # Check https://github.com/microsoft/action-psscriptanalyzer for more info about the options.
           # The below set up runs PSScriptAnalyzer to your entire repository and runs some basic security rules.
           # Include your own basic security rules. Removing this option will run all the rules 
-          includeRule: ''
+          # includeRule: ''
           # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: ${{ matrix.script }}.results.sarif
           path: ./${{ matrix.script }}       
           recurse: true
           fix: true
-    
+
+  artifacts: 
+    needs: build
+    steps:
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: ${{ matrix.script }}.results.sarif
-          
-      - name: upload artifact results.sarif & fix script
-        uses: actions/upload-artifact@v2 
+     # Artifacts upload     
+      - uses: actions/upload-artifact@v2 
         with:
-         name: results.sarif
+         name: upload artifact (results.sarif,.ps1.bak) & fix script (.ps1)
          path: |
           ./*.sarif
           ./${{ matrix.script }}
-    
+          ./${{ matrix.script }}.bak
+     # Artifacts download  
       - uses: actions/download-artifact@v2
         with:
          path: ./artifacts/ 
-         
+     # tree      
       - name: Display structure of downloaded files 
         run: tree -h ./artifacts/   
          
