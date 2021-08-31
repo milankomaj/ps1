@@ -33,8 +33,9 @@ jobs:
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
           
-          path: .\
+          customRulePath: '".\executables\BING\bing-wallpaper.ps1", ".\executables\BING_2\bing-wallpaper.ps1", ".\himawari.ps1"'
           recurse: true
+          includeDefaultRules: false
       
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
