@@ -33,6 +33,7 @@ jobs:
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
           enableExit: true
+          path: .\
           customRulePath: '".\executables/BING/bing-wallpaper.ps1", ".\executables/BING_2/bing-wallpaper.ps1", ".\himawari.ps1"'
       
       # Upload the SARIF file generated in the previous step
