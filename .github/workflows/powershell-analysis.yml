@@ -32,7 +32,7 @@ jobs:
           includeRule: ''
           excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: results.sarif
-          enableExit: true
+          
           path: .\
           recurse: true
       
