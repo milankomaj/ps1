@@ -84,8 +84,8 @@ jobs:
       - name: dry_run
         run: |
          
-         
-         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
+         cc = $(echo ${{needs.build.outputs.output1}})
+         ${{steps.download.outputs.download-path}}/prebuild/$cc
 
          
 
