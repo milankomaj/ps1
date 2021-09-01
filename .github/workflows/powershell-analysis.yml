@@ -37,7 +37,7 @@ jobs:
          cp ${{ matrix.script }}{,.bak}
       - uses: actions/upload-artifact@v2 
         with:
-         name: ps1.bak
+         name: prebuild
          path: |       
           ./${{ matrix.script }}.bak
              
@@ -77,7 +77,7 @@ jobs:
          path: ./artifacts/ 
      # tree      
       - name: Display structure of downloaded files 
-        run: tree -h ./artifacts/   
+        run: ls -R ./artifacts/   
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
      # dry_run
