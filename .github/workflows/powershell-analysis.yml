@@ -85,7 +85,11 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-
+     # dry_run2
+      - name: dry_run2
+        run: |
+         echo ${{needs.build.outputs.output1}}
+         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
          
 
  
