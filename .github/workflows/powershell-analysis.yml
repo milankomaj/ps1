@@ -84,7 +84,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     # Map a step output to a job output
-    env:
+    outputs:
       output1: ${{ steps.step1.outputs.test }}
  
     steps:
