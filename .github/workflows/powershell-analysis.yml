@@ -35,7 +35,7 @@ jobs:
          path: |       
           ./${{ matrix.script }}.bak
           
-      - name: SKRIPT
+ 
         env: 
          SKRIPT: ${{ matrix.script }}
          
