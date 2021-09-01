@@ -31,7 +31,7 @@ jobs:
          cp ${{ matrix.script }} ${{ matrix.script }}.bak
       - uses: actions/upload-artifact@v2 
         with:
-         name: upload artifact .ps1.bak files
+         name: .ps1.bak
          path: |       
           ./${{ matrix.script }}.bak
 
