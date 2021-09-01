@@ -76,10 +76,6 @@ jobs:
         run: tree -h ./artifacts/   
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
-
-  dry_run:
-    runs-on: ubuntu-latest
-    needs: [build,artifacts]
-    steps:
-    - name: tests
-      run: ./${{ matrix.script }}
+     # dry_run
+      - name: dry_run
+        run: ./${{steps.download.outputs.download-path}}/himawari.ps1
