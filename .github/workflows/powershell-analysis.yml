@@ -31,7 +31,7 @@ jobs:
          cp ${{ matrix.script }} ${{ matrix.script }}.bak
       - uses: actions/upload-artifact@v2 
         with:
-         name: upload artifact .ps1.bak files
+         name: .ps1.bak
          path: |       
           ./${{ matrix.script }}.bak
 
@@ -64,9 +64,11 @@ jobs:
         with:
          name: upload artifact (results.sarif,.ps1.bak) & fix script (.ps1)
          path: |
-          ./*.sarif
-          ./${{ matrix.script }}
-          ./${{ matrix.script }}.bak
+          ./${{needs.build.sarif_file}}
+          ${{needs.build.sarif_file}}
+          ./${{sarif_file}}
+          ${{sarif_file}}
+ 
      # Artifacts download  
       - uses: actions/download-artifact@v2
         with:
