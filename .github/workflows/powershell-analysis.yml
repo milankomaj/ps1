@@ -38,6 +38,8 @@ jobs:
  
         env: 
          SKRIPT: ${{ matrix.script }}
+      - name: jj
+        run: echo $SCRIPT
          
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
@@ -85,5 +87,4 @@ jobs:
      # dry_run
       - name: dry_run
         run: |
-         echo $SKRIPT
-         ${{steps.download.outputs.download-path}}/prebuild/$SKRIPT
+         ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
