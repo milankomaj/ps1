@@ -19,15 +19,14 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    env:
+     SKRIPT: ${{ matrix.script }}
     strategy:
       matrix:
        script:
          [himawari.ps1]
     steps:
       - uses: actions/checkout@v2
-      - name: env
-        env:
-         SKRIPT: ${{ matrix.script }}
      # upload artifact (.ps1.bak)
       - name: Create .bak files
         run: |
