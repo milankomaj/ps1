@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}    
-      output2: ${{ steps.step1.outputs.test }}   
+  
     strategy:
       matrix:
        script:
@@ -29,8 +29,8 @@ jobs:
     steps:
       - id: step1
         run: echo "::set-output name=test::${{ matrix.script }}" 
-      - id: step2       
-        run: echo "::set-output name=test::${{ matrix.script }}"         
+
+        
       - uses: actions/checkout@v2			 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -39,7 +39,7 @@ jobs:
          cp ${{ matrix.script }}{,.bak}
       - uses: actions/upload-artifact@v2 
         with:
-         name: ps1.bak
+         name: prebuild&bak
          path: |       
           ./${{ matrix.script }}.bak
              
@@ -63,7 +63,7 @@ jobs:
       # Artifacts upload     
       - uses: actions/upload-artifact@v2 
         with:
-         name: prebuild
+         name: prebuild&bak
          path: |
           ./*.sarif
           ./${{ matrix.script }}             
@@ -87,8 +87,8 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-         echo ${{needs.build.outputs.output2}}
-         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output2}}       
+
+       
 
  
          
