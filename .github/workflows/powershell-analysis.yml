@@ -36,8 +36,7 @@ jobs:
           ./${{ matrix.script }}.bak
       - name: SKRIPT
         env: 
-         SKRIPT: ${{ matrix.script }}
-			
+         SKRIPT: ${{ matrix.script }}			
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
         with:
@@ -61,8 +60,7 @@ jobs:
          name: prebuild
          path: |
           ./*.sarif
-          ./${{ matrix.script }}
-	  
+          ./${{ matrix.script }}  
       - name: echo                                                                                       
         run: echo $SKRIPT
 
