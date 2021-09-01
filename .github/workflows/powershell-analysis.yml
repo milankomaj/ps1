@@ -81,3 +81,4 @@ jobs:
         run:  |
          cp ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1 ./dry_run.ps1
          ./dry_run.ps1
+         ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
