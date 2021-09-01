@@ -82,5 +82,4 @@ jobs:
      # dry_run
       - name: dry_run
         run: |
-         echo $SKRIPT
          ${{steps.download.outputs.download-path}}/prebuild/$SKRIPT
