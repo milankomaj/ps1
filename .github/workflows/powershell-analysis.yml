@@ -85,7 +85,7 @@ jobs:
         run: |
          
          cc = $(echo ${{needs.build.outputs.output1}})
-         ${{steps.download.outputs.download-path}}/prebuild/$cc
+         ${{steps.download.outputs.download-path}}/prebuild/${cc}
 
          
 
