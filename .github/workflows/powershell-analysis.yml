@@ -1,0 +1,92 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+#
+# https://github.com/microsoft/action-psscriptanalyzer
+# For more information on PSScriptAnalyzer in general, see
+# https://github.com/PowerShell/PSScriptAnalyzer
+
+name: PSScriptAnalyzer
+
+on:
+  workflow_dispatch:
+    
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: PSScriptAnalyzer
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}    
+
+    strategy:
+      matrix:
+       script:
+         [himawari.ps1,bing-wallpaper.ps1]
+    steps:
+      - id: step1
+        run: echo "::set-output name=test::${{ matrix.script }}"      
+      - uses: actions/checkout@v2			 
+     # upload artifact (.ps1.bak)
+      - name: Create .bak files
+        run: |
+
+         cp ${{ matrix.script }}{,.bak}
+      - uses: actions/upload-artifact@v2 
+        with:
+         name: ps1.bak
+         path: |       
+          ./${{ matrix.script }}.bak
+             
+      - name: Run PSScriptAnalyzer
+        uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
+        with:
+          # Check https://github.com/microsoft/action-psscriptanalyzer for more info about the options.
+          # The below set up runs PSScriptAnalyzer to your entire repository and runs some basic security rules.
+          # Include your own basic security rules. Removing this option will run all the rules 
+          # includeRule: ''
+          # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
+          output: ${{ matrix.script }}.results.sarif
+          path: ./${{ matrix.script }}       
+          recurse: true
+          fix: true
+      # Upload the SARIF file generated in the previous step
+      - name: Upload SARIF results file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: ${{ matrix.script }}.results.sarif
+      # Artifacts upload     
+      - uses: actions/upload-artifact@v2 
+        with:
+         name: prebuild
+         path: |
+          ./*.sarif
+          ./${{ matrix.script }}             
+
+  artifacts:
+    runs-on: windows-latest
+    needs: build
+    steps:
+     # Artifacts download  
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+         path: ./artifacts/ 
+     # tree      
+      - name: Display structure of downloaded files 
+        run: tree -h ./artifacts/   
+      - name: 'Echo download path'
+        run: echo ${{steps.download.outputs.download-path}}
+     # dry_run
+      - name: dry_run
+        run: |
+         echo ${{needs.build.outputs.output1}}
+         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
+
+         
+
+ 
+         
