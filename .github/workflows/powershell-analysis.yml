@@ -37,8 +37,6 @@ jobs:
       - name: SKRIPT
         env: 
          SKRIPT: ${{ matrix.script }}
-      - name: echo											 
-	run: echo $SKRIPT
 			
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
@@ -64,7 +62,11 @@ jobs:
          path: |
           ./*.sarif
           ./${{ matrix.script }}
-                
+	  
+      - name: echo                                                                                       
+        run: echo $SKRIPT
+
+             
 
   artifacts:
     runs-on: windows-latest
