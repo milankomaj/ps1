@@ -95,7 +95,7 @@ jobs:
         id: dry_run
         run: |
          echo ${{needs.build.outputs.output1}}
-         echo ${{needs.build.outputs.output2}}
+         echo ${{needs.artifacts.outputs.output2}}
          ${{needs.artifacts.outputs.output2}}/prebuild/${{needs.build.outputs.output1}}
 
          
