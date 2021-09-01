@@ -84,7 +84,7 @@ jobs:
       - name: dry_run
         run: |
          $cc = ${{needs.build.outputs.output1}}
-         echo $cc
+         echo ${cc}
          ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
 
          
