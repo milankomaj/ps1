@@ -90,7 +90,7 @@ jobs:
     steps:
       - id: step1
         run: |
-         $test = "22"
+         
          echo $test 
 
   job2:
