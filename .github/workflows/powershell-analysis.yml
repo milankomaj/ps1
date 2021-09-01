@@ -21,14 +21,16 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}    
-
+      output2: ${{ steps.step2.outputs.test }}   
     strategy:
       matrix:
        script:
          [himawari.ps1,bing-wallpaper.ps1]
     steps:
       - id: step1
-        run: echo "::set-output name=test::${{ matrix.script }}"      
+        run: echo "::set-output name=test::${{ matrix.script }}" 
+      - id: step2       
+        run: echo "::set-output name=test::${{ matrix.script }}"         
       - uses: actions/checkout@v2			 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -85,8 +87,8 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-
-         
+         echo ${{needs.build.outputs.output2}}
+         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output2}}       
 
  
          
