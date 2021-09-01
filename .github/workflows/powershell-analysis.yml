@@ -25,8 +25,8 @@ jobs:
          [himawari.ps1]
     steps:
       - uses: actions/checkout@v2
-     # scripts .ps1.bak
-      - name: .bak files
+     # upload artifact (.ps1.bak)
+      - name: .bak_files
         run: |
          cp ${{ matrix.script }} ${{ matrix.script }}.bak
       - uses: actions/upload-artifact@v2 
@@ -56,7 +56,7 @@ jobs:
       # Artifacts upload     
       - uses: actions/upload-artifact@v2 
         with:
-         name: upload artifact (results.sarif,.ps1.bak) & fix script (.ps1)
+         name: prebuild
          path: |
           ./*.sarif
           ./${{ matrix.script }}
