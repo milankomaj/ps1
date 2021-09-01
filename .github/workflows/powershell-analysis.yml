@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}    
-      output2: ${{ steps.step2.outputs.test }}   
+      output2: ${{ steps.step1.outputs.test }}   
     strategy:
       matrix:
        script:
