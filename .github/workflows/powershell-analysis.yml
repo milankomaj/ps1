@@ -23,8 +23,8 @@ jobs:
       output1: ${{ steps.step1.outputs.test }}    
 
     strategy:
-      fail-fast: false
-      max-parallel: 1
+      
+      max-parallel: 2
       matrix:
        script:
          [himawari.ps1,bing-wallpaper.ps1]
