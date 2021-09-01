@@ -91,7 +91,7 @@ jobs:
       - id: step1
         run: |
          $dd  = $(date)
-         echo "::set-output name=test::${dd}"
+         echo "::set-output name=test::$dd"
 
   job2:
     runs-on: ubuntu-latest
