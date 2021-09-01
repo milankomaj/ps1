@@ -19,12 +19,14 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ matrix.script }}
     strategy:
       matrix:
        script:
          [himawari.ps1]
     steps:
-      - run: echo ${{matrix.outputs.script}}
+      - run: echo ${{outputs.output1}}
       - uses: actions/checkout@v2			 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -79,14 +81,6 @@ jobs:
       - name: dry_run
         run: |
          ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
-         
-      - name: Set the value
-        id: step_one
-        run: |
-          echo "action_state=yellow" >> $GITHUB_ENV
-      - name: Use the value
-        id: step_two
-        run: |
-          echo "${{ env.action_state }}" 
+
          
          
