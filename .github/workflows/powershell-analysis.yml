@@ -80,6 +80,5 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - shell: pwsh
     - name: tests
       run: ./bing-wallpaper.ps1
