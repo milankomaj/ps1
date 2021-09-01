@@ -89,7 +89,9 @@ jobs:
  
     steps:
       - id: step1
-        run: echo "::set-output name=test::hello"
+        run: |
+         $test = "22"
+         echo $test 
 
   job2:
     runs-on: ubuntu-latest
