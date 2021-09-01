@@ -29,7 +29,7 @@ jobs:
          [himawari.ps1]
     steps:
       - id: step1
-        run: echo "::set-output name=test::${KEY}"      
+        run: echo "::set-output name=test::${{ matrix.script }}"      
       - uses: actions/checkout@v2			 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -83,8 +83,8 @@ jobs:
      # dry_run
       - name: dry_run
         run: |
-         ${{needs.build.outputs.output1}} = cc
-         ${{steps.download.outputs.download-path}}/prebuild/${cc}
+         echo ${{needs.build.outputs.output1}}
+         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
 
          
 
