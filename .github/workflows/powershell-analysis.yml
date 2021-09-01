@@ -90,7 +90,7 @@ jobs:
     steps:
       - id: step1
         run: |
-         $dd  = $(date)
+         dd  = $(date)
          echo "::set-output name=test::$dd"
 
   job2:
