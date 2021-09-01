@@ -61,8 +61,7 @@ jobs:
          path: |
           ./*.sarif
           ./${{ matrix.script }}  
-      - name: echo                                                                                       
-        run: echo $SKRIPT
+
 
              
 
