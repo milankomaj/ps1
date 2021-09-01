@@ -78,4 +78,6 @@ jobs:
         run: echo ${{steps.download.outputs.download-path}}
      # dry_run
       - name: dry_run
-        run: ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
+        run:  |
+         chmod +x ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
+         ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
