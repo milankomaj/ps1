@@ -84,10 +84,16 @@ jobs:
         run: echo ${{steps.download.outputs.download-path}}
      # dry_run
       - name: dry_run
+        id: dry_run
         run: |
          echo ${{needs.build.outputs.output1}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-
+     # dry_run2
+      - name: dry_run2
+        if: failure() && steps.dry_run.outcome == 'failure'
+        run: |
+         echo ${{needs.build.outputs.output1}}
+         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
          
 
  
