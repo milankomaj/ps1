@@ -26,12 +26,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
      # upload artifact (.ps1.bak)
-      - name: .bak_files
+      - name: Create .bak files
         run: |
          cp ${{ matrix.script }} ${{ matrix.script }}.bak
       - uses: actions/upload-artifact@v2 
         with:
-         name: .ps1.bak
+         name: ps1.bak
          path: |       
           ./${{ matrix.script }}.bak
 
