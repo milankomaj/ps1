@@ -39,7 +39,7 @@ jobs:
         env: 
          SKRIPT: ${{ matrix.script }}
       - name: jj
-        run: echo $SCRIPT
+        run: $SCRIPT
          
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
