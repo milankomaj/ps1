@@ -90,7 +90,7 @@ jobs:
     steps:
       - id: step1
         run: |
-         
+         $test = date
          echo $test 
 
   job2:
