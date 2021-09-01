@@ -90,8 +90,8 @@ jobs:
     steps:
       - id: step1
         run: |
-         $test  = $(date)
-         echo $test 
+         $dd  = $(date)
+         echo "::set-output name=test::${dd}"
 
   job2:
     runs-on: ubuntu-latest
