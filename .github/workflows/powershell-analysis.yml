@@ -73,4 +73,12 @@ jobs:
      # tree      
       - name: Display structure of downloaded files 
         run: tree -h ./artifacts/   
-         
+      - name: 'Echo download path'
+        run: echo ${{steps.download.outputs.download-path}}
+
+  dry_run:
+    runs-on: ubuntu-latest
+    needs: build
+    shell: pwsh
+    steps:
+     run: ./bing-wallpaper.ps1
