@@ -94,6 +94,7 @@ jobs:
       - name: dry_run
         id: dry_run
         run: |
+         ls -R ./artifacts/
          echo ${{needs.build.outputs.output1}}
          echo ${{needs.artifacts.outputs.output2}}
          ${{needs.artifacts.outputs.output2}}/prebuild/${{needs.build.outputs.output1}}
