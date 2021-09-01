@@ -53,19 +53,19 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: ${{ matrix.script }}.results.sarif
+      # Artifacts upload     
+      - uses: actions/upload-artifact@v2 
+        with:
+         name: upload artifact (results.sarif,.ps1.bak) & fix script (.ps1)
+         path: |
+          ./*.sarif
+          ./${{ matrix.script }}
+                
 
   artifacts:
     runs-on: ubuntu-latest
     needs: build
     steps:
-     # Artifacts upload     
-      - uses: actions/upload-artifact@v2 
-        with:
-         name: upload artifact (results.sarif,.ps1.bak) & fix script (.ps1)
-         path: |
-          ./${{ needs.build.matrix.sarif_file }}
-          ./${{ needs.build.script.matrix.script }}
-          ./${{ matrix.script }}.bak
      # Artifacts download  
       - uses: actions/download-artifact@v2
         with:
