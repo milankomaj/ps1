@@ -80,4 +80,4 @@ jobs:
       - name: dry_run
         run:  |
          cp ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1 ./dry_run
-         ./dry_run
+         ./dry_run.ps1
