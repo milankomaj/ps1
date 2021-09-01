@@ -81,5 +81,4 @@ jobs:
     needs: build
     steps:
     - name: tests
-    - shell: pwsh
       run: ./bing-wallpaper.ps1
