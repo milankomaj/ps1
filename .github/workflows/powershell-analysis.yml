@@ -19,6 +19,8 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}    
     env:
       KEY: ${{ matrix.script }}
     strategy:
@@ -26,6 +28,8 @@ jobs:
        script:
          [himawari.ps1]
     steps:
+      - id: step1
+        run: echo "::set-output name=test::${KEY}"      
       - uses: actions/checkout@v2			 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -80,22 +84,7 @@ jobs:
       - name: dry_run
         run: |
          ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
+         echo ${{needs.build.outputs.output1}} 
 
-  job1:
-    runs-on: ubuntu-latest
-    # Map a step output to a job output
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
  
-    steps:
-      - id: step1
-        run: |
-         dd=$(date)
-         echo "::set-output name=test::${dd}"
-
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - run: echo ${{needs.job1.outputs.output1}}  
          
