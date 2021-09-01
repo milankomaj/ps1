@@ -79,5 +79,5 @@ jobs:
      # dry_run
       - name: dry_run
         run:  |
-         bash -c chmod +x ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
-         ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1
+         cp ${{steps.download.outputs.download-path}}/prebuild/himawari.ps1 ./dry_run
+         ./dry_run
