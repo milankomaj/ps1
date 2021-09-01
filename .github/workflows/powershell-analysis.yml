@@ -69,7 +69,7 @@ jobs:
           ./${{ matrix.script }}             
 
   artifacts:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
     steps:
      # Artifacts download  
