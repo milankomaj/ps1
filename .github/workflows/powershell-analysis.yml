@@ -94,16 +94,18 @@ jobs:
         id: download
         with:
          path: ./artifacts/     
+         
+      - if: ${{ matrix.os == 'windows-latest' }}
+        run: ls -R ./artifacts/
+      - if: ${{ matrix.os != 'windows-latest' }}
+        run: |
+         tree -h ./artifacts/
+         run: chmod +x ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
+
+
       - name: dry_run
         id: dry_run
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-
-
-      - if: ${{ matrix.os == 'windows-latest' }}
-        run: ls -R ./artifacts/
-      - if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: tree -h ./artifacts/
-         
