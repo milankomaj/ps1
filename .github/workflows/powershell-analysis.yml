@@ -99,7 +99,8 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
-         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
+         ./bing-wallpaper.ps1
+         ./himawari.ps1
 
      
      
