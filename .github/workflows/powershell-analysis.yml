@@ -94,7 +94,8 @@ jobs:
         id: download
         with:
          path: ./artifacts/   
-     # dry_run2  
+     # dry_run2 
+      - uses: actions/checkout@v2
       - name: dry run  
         run: |
          echo ${{needs.build.outputs.output1}}
