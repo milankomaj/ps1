@@ -87,7 +87,9 @@ jobs:
     strategy:
      fail-fast: false 
      matrix:
-      CC: ${{needs.build.outputs.output1}}
+      CC: 
+       - ${{needs.build.outputs.output1}}
+       - ${{needs.build.outputs.output1}}
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
