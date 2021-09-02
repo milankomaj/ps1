@@ -100,7 +100,7 @@ jobs:
       - if: ${{ matrix.os != 'windows-latest' }}
         run: |
          tree -h ./artifacts/
-         run: chmod +x ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
+         run: chmod +x ./${{needs.build.outputs.output1}}
 
 
       - name: dry_run
@@ -108,4 +108,5 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
+         ./${{needs.build.outputs.output1}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
