@@ -87,21 +87,20 @@ jobs:
     strategy:
      fail-fast: false 
      matrix:
-      os: [windows-latest]
+      os: [windows-latest,ubuntu-latest]
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         id: download
         with:
-         name: prebuild/${{needs.build.outputs.output1}}
+         name: prebuild
          path: ~/
      # dry_run2  
       - name: dry run  
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
-         ls -R ~/
          ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output1}}
 
      
