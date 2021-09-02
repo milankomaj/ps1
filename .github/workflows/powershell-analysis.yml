@@ -73,7 +73,7 @@ jobs:
       - uses: actions/download-artifact@v2
         id: download
         with:
-         path: ./artifacts/ 
+         path: ./artifacts/
      # tree      
       - name: Display structure of downloaded files 
         run: tree -h ./artifacts/   
@@ -93,14 +93,15 @@ jobs:
       - uses: actions/download-artifact@v2
         id: download
         with:
-         path: ./artifacts/   
+         path: ./artifacts/
+         working-directory: ./artifacts/
      # dry_run2 
       - uses: actions/checkout@v2
       - name: dry run  
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
-         ./artifacts/${{needs.build.outputs.output1}}
+         ${{needs.build.outputs.output1}}
 
      
      
