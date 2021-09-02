@@ -99,7 +99,7 @@ jobs:
      # dry_run2  
       - name: dry run  
         run: |
-         echo ${{needs.build.outputs.output1}
+         echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{needs.build.outputs.output1}}
 
