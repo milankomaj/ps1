@@ -94,21 +94,21 @@ jobs:
         id: download
         with:
          path: ./artifacts/     
-         
-      - if: ${{ matrix.os == 'windows-latest' }}
+      - name: windowsDisplay   
+        if: ${{ matrix.os == 'windows-latest' }}
         run: |
          ls -R ./artifacts/
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-         
-      - if: ${{ matrix.os == 'macos-latest' }}
+      - name: macos   
+        if: ${{ matrix.os == 'macos-latest' }}
         run: |  
           echo ${{needs.build.outputs.output1}}
           chmod +x ./${{needs.build.outputs.output1}}
           ./${{needs.build.outputs.output1}}
-     
-      - if: ${{ matrix.os == 'ubuntu-latest]' }}
+      - name: ubuntu
+        if: ${{ matrix.os == 'ubuntu-latest]' }}
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
