@@ -88,6 +88,7 @@ jobs:
      fail-fast: false 
      matrix:
       PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
+      
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
@@ -97,11 +98,13 @@ jobs:
          name: prebuild
          path: ~/
      # dry_run2  
-      - name: dry run  
+      - name: dry run 
+        shell: powershell
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
+         Write-Warning "This is prebuild {{ matrix.PrebuildScript }}"
          type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
      
      
