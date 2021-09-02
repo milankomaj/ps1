@@ -76,7 +76,7 @@ jobs:
          path: ~/
      # tree      
       - name: Display structure of downloaded files 
-        run: tree -h ./artifacts/   
+        run: tree -h ~/  
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}   
         
