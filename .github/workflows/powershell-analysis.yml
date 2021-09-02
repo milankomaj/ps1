@@ -87,9 +87,7 @@ jobs:
     strategy:
      fail-fast: false 
      matrix:
-      CC: 
-       - ${{needs.build.outputs.output1}}
-       - ${{needs.build.outputs.output1}}
+      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
@@ -103,7 +101,7 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
-         ${{steps.download.outputs.download-path}}/${{ matrix.CC }}
+         ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
 
      
      
