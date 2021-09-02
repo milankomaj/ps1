@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
        script:
-         [himawari.ps1,bing-wallpaper.ps1]
+         [himawari.ps1, bing-wallpaper.ps1]
     steps:
       - id: step1
         run: echo "::set-output name=SCRIPT::${{ matrix.script }}"      
@@ -87,32 +87,19 @@ jobs:
     strategy:
      fail-fast: false 
      matrix:
-      os: [macos-latest, windows-latest, ubuntu-latest]
+      os: [windows-latest, ubuntu-latest]
     steps:
      # Artifacts download  
       - uses: actions/download-artifact@v2
         id: download
         with:
-         path: ./artifacts/     
-      - name: windowsDisplay   
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: |
-         ls -R ./artifacts/
-         echo ${{needs.build.outputs.output1}}
-         echo ${{steps.download.outputs.download-path}}
-         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-      - name: macos   
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: |  
-          echo ${{needs.build.outputs.output1}}
-          chmod +x ./${{needs.build.outputs.output1}}
-          ./${{needs.build.outputs.output1}}
-      - name: ubuntu
-        if: ${{ matrix.os == 'ubuntu-latest]' }}
+         path: ./artifacts/   
+     # dry_run2  
+      - name: dry run  
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
-         tree -h ./artifacts/
+
      
      
