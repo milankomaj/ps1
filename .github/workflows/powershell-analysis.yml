@@ -102,7 +102,7 @@ jobs:
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ls -R ~/
-         ${{needs.build.outputs.output1}}\prebuild\${{needs.build.outputs.output1}}
+         ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output1}}
 
      
      
