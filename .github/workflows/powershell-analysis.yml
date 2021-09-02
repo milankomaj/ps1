@@ -95,7 +95,7 @@ jobs:
         id: download
         with:
          name: ${{needs.build.outputs.output1}}
-         path: /artifacts/
+         path: ./artifacts/
      # dry_run2  
       - name: dry run  
         run: |
