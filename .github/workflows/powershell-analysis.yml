@@ -100,7 +100,7 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
-         ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
+         ${{steps.download.outputs.download-path}}\prebuild\${{needs.build.outputs.output1}}
 
      
      
