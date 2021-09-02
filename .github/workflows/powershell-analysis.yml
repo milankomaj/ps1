@@ -76,7 +76,7 @@ jobs:
          path: ./artifacts/
      # tree      
       - name: Display structure of downloaded files 
-        run: tree -h himawari  
+        run: tree -h ./artifacts/  
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}   
         
@@ -102,6 +102,6 @@ jobs:
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
-
+         type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
      
      
