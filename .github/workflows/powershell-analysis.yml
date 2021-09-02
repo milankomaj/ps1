@@ -82,12 +82,12 @@ jobs:
         
   # dry_run 🔄🔄     
   dry_run:
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     needs: [build]
     strategy:
      fail-fast: false 
      matrix:
-      os: [windows-latest,ubuntu-latest]
+      CC: ${{needs.build.outputs.output1}}
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
@@ -101,7 +101,7 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
-         ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output1}}
+         ${{steps.download.outputs.download-path}}/${{ matrix.CC }}
 
      
      
