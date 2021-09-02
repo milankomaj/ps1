@@ -87,7 +87,7 @@ jobs:
     strategy:
      fail-fast: false 
      matrix:
-      os: [windows-latest, ubuntu-latest]
+      os: [windows-latest]
     steps:
      # Artifacts download  
       - uses: actions/download-artifact@v2
