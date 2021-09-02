@@ -104,7 +104,7 @@ jobs:
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
-         Write-Output "This is prebuild 🔻🔻🔻" {{ matrix.PrebuildScript }}
+         Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
      
      
