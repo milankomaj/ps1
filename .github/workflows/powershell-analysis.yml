@@ -80,10 +80,14 @@ jobs:
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}   
         
-  # dry_run      
+  # dry_run 🔄🔄     
   dry_run:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     needs: [build]
+    strategy:
+     fail-fast: false 
+     matrix:
+      os: [macos-latest, windows-latest, ubuntu-latest]
     steps:
      # Artifacts download  
       - uses: actions/download-artifact@v2
@@ -93,12 +97,13 @@ jobs:
       - name: dry_run
         id: dry_run
         run: |
-         ls -R ./artifacts/
          echo ${{needs.build.outputs.output1}}
          echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/prebuild/${{needs.build.outputs.output1}}
 
-         
 
- 
+      - if: ${{ matrix.os == 'windows-latest' }}
+        run: ls -R ./artifacts/
+      - if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: tree -h ./artifacts/
          
