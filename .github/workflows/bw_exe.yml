@@ -27,7 +27,7 @@ jobs:
       with:
        repo_token: "${{ secrets.GITHUB_TOKEN }}"
        prerelease: false
-       title: BingWallpaper "${{ version }}"
+       title: "BingWallpaper $version"
        automatic_release_tag: bing-wallpaper
        files: |           
             ./executables/BING/bing-wallpaper.exe
