@@ -27,7 +27,7 @@ jobs:
       with:
        repo_token: "${{ secrets.GITHUB_TOKEN }}"
        prerelease: false
-       title: "BingWallpaper $version"
+       title: "BingWallpaper"
        automatic_release_tag: bing-wallpaper
        files: |           
             ./executables/BING/bing-wallpaper.exe
@@ -37,5 +37,5 @@ jobs:
         git config --global user.email ${{ secrets.EMAIL }}
         git config --global user.name ${{ secrets.NAME }}
         git add .
-        git commit -m "Generate windows executable" || echo
+        git commit -m "$version" || echo
         git push
