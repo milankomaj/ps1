@@ -17,7 +17,7 @@ jobs:
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
        ./executables/ps2exe.ps1 -inputFile ./executables/BING/bing-wallpaper.ps1 -outputFile ./executables/BING/bing-wallpaper.exe -noConsole -title "Bing Wallpaper" -iconFile ./executables/BING/bing-wallpaper.ico -version $version       
-      shell: powershell  
+      shell: pwsh  
     - name: "Build & test"
       run: |
        echo "done!"
