@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Version
       run: |
-       [string]$version = ((Get-Content bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join '')
+       $version = ((Get-Content bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join '')
        Write-Output $version
        echo $version
        echo ----------------------
@@ -32,7 +32,7 @@ jobs:
             ./executables/BING/SettingsBw.xml
     - name: Deploy
       run: |
-        [string]$version = ((Get-Content bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join '')
+        $version = ((Get-Content bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join '')
         echo $version
         git config --global user.email ${{ secrets.EMAIL }}
         git config --global user.name ${{ secrets.NAME }}
