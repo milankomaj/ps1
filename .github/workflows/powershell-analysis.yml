@@ -83,7 +83,7 @@ jobs:
   # dry_run 🔄🔄     
   dry_run:
     runs-on: windows-latest
-    needs: [build,artifacts]
+    needs: [artifacts]
     strategy:
      fail-fast: false 
      matrix:
@@ -105,7 +105,22 @@ jobs:
          ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
-     
+ 
+  push:
+    runs-on: windows-latest
+    needs: [artifacts,dry_run]   
+    steps:
+     # Artifacts download  
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+         name: prebuild
+         path: ./
+     # tree 
+      - name: Display structure of downloaded files 
+        run: dir -r ./ 
+      - name: 'Echo download path'
+        run: echo ${{steps.download.outputs.download-path}}  
       - name: Update scripts
         run: |
          $timestamp= (Get-Date -UFormat "%A %d/%m/%Y %T %Z")
