@@ -12,8 +12,8 @@
 
 
 $ts = New-TimeSpan -Hours -2 -Minutes -20 #Number of hours and minutes to add/subtract to the date. Adjust this to offset your system date to around about GMT (I think?)
-$now = ((Get-Date -Second 00) + $ts)
-$now = $now.AddMinutes(-($now.minute % 10))
+$now = ((Get-Date -Second 00) + $ts)  
+$now = $now.AddMinutes(-($now.minute % 10))  
 
 
 
