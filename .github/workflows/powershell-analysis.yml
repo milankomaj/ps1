@@ -96,8 +96,10 @@ jobs:
       - name: dry run 
         shell: pwsh
         run: |
-         ./${{ matrix.PrebuildScript }}
+         echo ${{needs.build.outputs.output1}}
+         echo ${{needs.artifacts.steps.download.outputs.download-path}}       
+         ${{needs.artifacts.steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
-         type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
+         type ${{needs.artifacts.steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
      
      
