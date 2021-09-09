@@ -108,7 +108,7 @@ jobs:
      
       - name: Update scripts
         run: |
-         $timeatamp = Get-Date -UFormat "%A %d/%m/%Y %T %Z"
+         $timeatamp = $(Get-Date -UFormat "%A %d/%m/%Y %T %Z")
          echo $timeatamp
          dir -r ./ 
          git config --global user.email ${{ secrets.EMAIL }}
