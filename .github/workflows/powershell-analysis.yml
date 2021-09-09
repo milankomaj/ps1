@@ -84,6 +84,7 @@ jobs:
   dry_run:
     runs-on: windows-latest
     needs: [build]
+    concurrency: build-${{ github.ref }}
     strategy:
      fail-fast: false 
      matrix:
@@ -91,8 +92,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
      # dry_run 
-      - name: The job has succeeded
-        if: ${{ success() }} 
       - name: dry run 
         shell: pwsh
         run: |
