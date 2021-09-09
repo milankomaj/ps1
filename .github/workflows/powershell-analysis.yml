@@ -68,6 +68,8 @@ jobs:
   artifacts:
     runs-on: windows-latest
     needs: build
+    outputs:
+      output2: ${{ steps.step2.outputs.PATH }}       
     steps:
      # Artifacts download  
       - uses: actions/download-artifact@v2
@@ -75,11 +77,13 @@ jobs:
         with:
          name: prebuild
          path: ./
-     # tree      
+     # tree 
       - name: Display structure of downloaded files 
         run: dir -r ./ 
       - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}   
+        run: echo ${{steps.download.outputs.download-path}}
+      - id: step2
+        run: echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"         
         
   # dry_run 🔄🔄     
   dry_run:
@@ -97,7 +101,7 @@ jobs:
         shell: pwsh
         run: |
          echo ${{needs.build.outputs.output1}}
-         echo ${{needs.artifacts.steps.download.outputs.download-path}}
+         echo ${{needs.artifacts.outputs.output2}}
          ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
