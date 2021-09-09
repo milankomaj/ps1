@@ -76,9 +76,17 @@ jobs:
          path: ./
      # tree 
       - name: Display structure of downloaded files 
-        run: dir -r ./ 
+        run: tree -h ./ 
       - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}       
+        run: echo ${{steps.download.outputs.download-path}}
+     # virustotal
+      - name: virustotal
+        run: |
+         echo ${{needs.build.outputs.output1}}
+         curl --request POST \
+          --url https://www.virustotal.com/api/v3/files \
+          --header 'x-apikey: 57c27e6e6bea07efc3a1f705732a19cd01d3202802bb0bdac5ede642b139a371' \
+          --form file=${{steps.download.outputs.download-path}}/${{needs.build.outputs.output1}}
         
   # dry_run 🔄🔄     
   dry_run:
