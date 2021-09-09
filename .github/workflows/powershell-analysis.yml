@@ -66,9 +66,7 @@ jobs:
           
   artifacts:
     runs-on: windows-latest
-    needs: build
-    outputs:
-      output2: ${{ steps.step2.outputs.PATH }}       
+    needs: build    
     steps:
      # Artifacts download  
       - uses: actions/download-artifact@v2
@@ -80,9 +78,7 @@ jobs:
       - name: Display structure of downloaded files 
         run: dir -r ./ 
       - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}
-      - id: step2
-        run: echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"         
+        run: echo ${{steps.download.outputs.download-path}}       
         
   # dry_run 🔄🔄     
   dry_run:
@@ -91,33 +87,31 @@ jobs:
     strategy:
      fail-fast: false 
      matrix:
-      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
-      
+      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]    
     steps:
+     # Artifacts download
       - uses: actions/checkout@v2
-     # dry_run  
-      - name: dry run 
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+         name: prebuild
+         path: ./      
+     # Run script
+      - name: run script
         shell: pwsh
         run: |
          echo ${{needs.build.outputs.output1}}
-         echo ${{needs.artifacts.outputs.output2}}
-         ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
+         ${{steps.download.outputs.download-path}}
+         ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
-         type ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
+         type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
      
-  update:
-    runs-on: windows-latest
-    needs: [artifacts,dry_run]
-    steps:
-      - uses: actions/checkout@v2
-     # Update scripts 
       - name: Update scripts
         run: |
-         echo ${{ github.workspace }}
          dir -r ./ 
          git config --global user.email ${{ secrets.EMAIL }}
          git config --global user.name ${{ secrets.NAME }}
-         git add -u ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
+         git add -u ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
          git commit -m "update"
          git pull --rebase
          git push          
