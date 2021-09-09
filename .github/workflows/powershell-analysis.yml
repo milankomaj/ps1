@@ -84,6 +84,7 @@ jobs:
   dry_run:
     runs-on: windows-latest
     needs: [build]
+    if: ${{ github.jobs.build == 'success' }}
     strategy:
      fail-fast: false 
      matrix:
