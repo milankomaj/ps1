@@ -90,10 +90,11 @@ jobs:
       PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]  
     steps:
       - uses: actions/checkout@v2
-     # dry_run  
+     # dry_run 
+      - name: The job has succeeded
+        if: ${{ success() }} 
       - name: dry run 
         shell: pwsh
-        if: ${{ success() }}
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{ github.workspace }}
