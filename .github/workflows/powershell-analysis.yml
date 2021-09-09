@@ -32,7 +32,6 @@ jobs:
      # upload artifact (.ps1.bak)
       - name: Create .bak files
         run: |
-
          cp ${{ matrix.script }}{,.bak}
       - uses: actions/upload-artifact@v2 
         with:
@@ -83,7 +82,9 @@ jobs:
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
       - id: step2
-        run: echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"         
+        run: |
+         echo ${{ github.workspace }}
+         echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"         
         
   # dry_run 🔄🔄     
   dry_run:
@@ -102,6 +103,7 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{needs.artifacts.outputs.output2}}
+         echo ${{ github.workspace }}
          ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
