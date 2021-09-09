@@ -98,7 +98,6 @@ jobs:
       - name: dry run 
         shell: pwsh
         run: |
-         dir -r ./
          echo ${{needs.build.outputs.output1}}
          echo ${{needs.artifacts.outputs.output2}}
          ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
