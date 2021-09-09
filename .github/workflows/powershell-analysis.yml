@@ -101,7 +101,7 @@ jobs:
         shell: pwsh
         run: |
          echo ${{needs.build.outputs.output1}}
-         ${{steps.download.outputs.download-path}}
+         echo ${{steps.download.outputs.download-path}}
          ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
