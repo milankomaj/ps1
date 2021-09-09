@@ -97,7 +97,7 @@ jobs:
         id: download
         with:
          name: prebuild
-         path: ~/
+         path: ./
      # dry_run2  
       - name: dry run 
         shell: pwsh
