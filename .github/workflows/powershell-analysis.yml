@@ -105,7 +105,22 @@ jobs:
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
      
-
+  update:
+    runs-on: windows-latest
+    needs: [artifacts,dry_run]
+    steps:
+      - uses: actions/checkout@v2
+     # Update scripts 
+      - name: Update scripts
+        run: |
+         echo ${{ github.workspace }}
+         dir -r ./ 
+         git config --global user.email ${{ secrets.EMAIL }}
+         git config --global user.name ${{ secrets.NAME }}
+         git add -u ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
+         git commit -m "update"
+         git pull --rebase
+         git push          
     
 
 
