@@ -87,7 +87,7 @@ jobs:
       - name: virustotal
         run: |
          echo ${{needs.build.outputs.output1}}
-         sha256sum {{ matrix.script }}
+         sha256sum ./{{ matrix.script }}
          echo UPLOAD
          curl --request POST \
           --url https://www.virustotal.com/api/v3/files \
