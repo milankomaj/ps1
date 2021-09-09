@@ -84,7 +84,6 @@ jobs:
   dry_run:
     runs-on: windows-latest
     needs: [build]
-    if: ${{ github.jobs.build == 'success' }}
     strategy:
      fail-fast: false 
      matrix:
@@ -101,4 +100,18 @@ jobs:
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{ github.workspace }}/${{ matrix.PrebuildScript }}
      
-     
+  update:
+    runs-on: windows-latest
+    needs: [artifacts,dry_run]
+    steps:
+     # Update scripts 
+      - name: Update scripts
+        run: |
+         git config --global user.email ${{ secrets.EMAIL }}
+         git config --global user.name ${{ secrets.NAME }}
+         git add -u
+         git commit -m "update"
+         git pull --rebase
+         git push          
+
+
