@@ -73,6 +73,7 @@ jobs:
       - uses: actions/download-artifact@v2
         id: download
         with:
+         name: ${{ matrix.script }}
          path: ./
      # tree      
       - name: Display structure of downloaded files 
