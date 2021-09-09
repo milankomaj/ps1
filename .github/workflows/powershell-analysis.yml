@@ -113,7 +113,6 @@ jobs:
          git config --global user.name ${{ secrets.NAME }}
          git commit -m "update: ${{ matrix.PrebuildScript }}"         
          git add -u ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
-         git pull --all
          git push          
     
 
