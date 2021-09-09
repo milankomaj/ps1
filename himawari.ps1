@@ -1,4 +1,4 @@
-#
+﻿#
 # Himawari-8 Downloader
 #
 #
@@ -10,7 +10,7 @@
 #
 #
 
- 
+
 $ts = New-TimeSpan -Hours -2 -Minutes -20 #Number of hours and minutes to add/subtract to the date. Adjust this to offset your system date to around about GMT (I think?)
 $now = ((Get-Date -Second 00) + $ts)
 $now = $now.AddMinutes(-($now.minute % 10))
@@ -18,7 +18,7 @@ $now = $now.AddMinutes(-($now.minute % 10))
 
 
 $width = 550
-$level = "4d" #Level can be 4d, 8d, 16d, 20d 
+$level = "4d" #Level can be 4d, 8d, 16d, 20d
 $numblocks = 4 #this apparently corresponds directly with the level, keep this exactly the same as level without the 'd'
 $time = $now.ToString("HHmmss")
 $year = $now.ToString("yyyy")
@@ -34,9 +34,9 @@ if(!(Test-Path -Path $outpath ))
 
 #The filename that will be saved:
 #Uncomment this to have the files accumulate in the directory:
-#$outfile = "$year$month$day"+"_" + $time + ".jpg" 
+#$outfile = "$year$month$day"+"_" + $time + ".jpg"
 #Use this to have the script just store the latest file only:
-$outfile = "latest.jpg" 
+$outfile = "latest.jpg"
 
 
 $url = "https://himawari8-dl.nict.go.jp/himawari8/img/D531106/$level/$width/$year/$month/$day/$time"
@@ -53,17 +53,17 @@ for ($x = 0; $x -lt $numblocks; $x++)
 {
     $thisurl = $url + "_" + [String]$x + "_" + [String]$y + ".png"
     Write-Output "Downloading: $thisurl"
-    
+
     try
     {
-    
+
         $request = [System.Net.WebRequest]::create($thisurl)
         $response = $request.getResponse()
         $HTTP_Status = [int]$response.StatusCode
         If ($HTTP_Status -eq 200)
-        { 
+        {
             $imgblock = [System.Drawing.Image]::fromStream($response.getResponseStream())
-            $graphics.DrawImage($imgblock,($x*$width),($y*$width) , $width, $width)   
+            $graphics.DrawImage($imgblock,($x*$width),($y*$width) , $width, $width)
             $imgblock.dispose()
             $response.Close()
         }
@@ -83,33 +83,33 @@ $encoderParams = New-Object System.Drawing.Imaging.EncoderParameters(1)
 
 # Set JPEG quality level here: 0 - 100 (inclusive bounds)
 $encoderParams.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter($qualityEncoder, 90)
-$jpegCodecInfo = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | where {$_.MimeType -eq 'image/jpeg'}
+$jpegCodecInfo = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object {$_.MimeType -eq 'image/jpeg'}
 
 $image.save(($outpath + $outfile), $jpegCodecInfo, $encoderParams)
 $image.Dispose()
 
 <#
  Different settings for the wallpaper:
- 
+
                             Tile :
-                                key.SetValue(@"WallpaperStyle", "0") ; 
-                                key.SetValue(@"TileWallpaper", "1") ; 
+                                key.SetValue(@"WallpaperStyle", "0") ;
+                                key.SetValue(@"TileWallpaper", "1") ;
                                 break;
                             Center :
-                                key.SetValue(@"WallpaperStyle", "0") ; 
-                                key.SetValue(@"TileWallpaper", "0") ; 
+                                key.SetValue(@"WallpaperStyle", "0") ;
+                                key.SetValue(@"TileWallpaper", "0") ;
                                 break;
                             Stretch :
-                                key.SetValue(@"WallpaperStyle", "2") ; 
+                                key.SetValue(@"WallpaperStyle", "2") ;
                                 key.SetValue(@"TileWallpaper", "0") ;
                                 break;
                             Fill :
-                                key.SetValue(@"WallpaperStyle", "10") ; 
-                                key.SetValue(@"TileWallpaper", "0") ; 
+                                key.SetValue(@"WallpaperStyle", "10") ;
+                                key.SetValue(@"TileWallpaper", "0") ;
                                 break;
                             Fit :
-                                key.SetValue(@"WallpaperStyle", "6") ; 
-                                key.SetValue(@"TileWallpaper", "0") ; 
+                                key.SetValue(@"WallpaperStyle", "6") ;
+                                key.SetValue(@"TileWallpaper", "0") ;
                                 break;
 #>
 
@@ -136,8 +136,8 @@ Add-Type -TypeDefinition $setwallpapersource
 
 
 Write-Output "Done"
-      
-        
 
-      
-        
+
+
+
+
