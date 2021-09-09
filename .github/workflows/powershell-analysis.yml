@@ -113,9 +113,9 @@ jobs:
          dir -r ./ 
          git config --global user.email ${{ secrets.EMAIL }}
          git config --global user.name ${{ secrets.NAME }}
+         git pull         
          git add -u         
          git commit -m "$timestamp update: ${{ matrix.PrebuildScript }}" 
-         git pull
          git push          
     
 
