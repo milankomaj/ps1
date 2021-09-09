@@ -103,7 +103,6 @@ jobs:
          dir -r ./
          echo ${{needs.build.outputs.output1}}
          echo ${{needs.artifacts.outputs.output2}}
-         echo ${{ github.workspace }}
          ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
