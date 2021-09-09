@@ -82,7 +82,7 @@ jobs:
       - name: 'Echo download path'
         run: |
          echo ${{steps.download.outputs.download-path}} 
-         run: echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"
+         echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"
         
   # dry_run 🔄🔄     
   dry_run:
