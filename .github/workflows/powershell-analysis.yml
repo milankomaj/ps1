@@ -84,7 +84,7 @@ jobs:
   dry_run:
     runs-on: windows-latest
     needs: [build]
-    concurrency: build-${{ github.ref }}
+    concurrency: ci-${{ github.ref }}
     strategy:
      fail-fast: false 
      matrix:
@@ -97,6 +97,8 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{ github.workspace }}
+         echo ${{ github.ref }}
+         echo ci-${{ github.ref }}
          ${{ github.workspace }}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{ github.workspace }}/${{ matrix.PrebuildScript }}
