@@ -80,9 +80,7 @@ jobs:
       - name: Display structure of downloaded files 
         run: dir -r ./ 
       - name: 'Echo download path'
-        run: |
-         echo ${{steps.download.outputs.download-path}} 
-         echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"
+        run: echo ${{steps.download.outputs.download-path}} 
       - id: step2
         run: echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"  
         
