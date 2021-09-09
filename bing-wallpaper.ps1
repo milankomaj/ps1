@@ -1,4 +1,4 @@
-Add-Type @"
+﻿Add-Type @"
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
@@ -20,10 +20,10 @@ $url = 'https://www.bing.com{0}_1920x1080.jpg' -f $json.images.urlbase
 
 Write-Host ("`n {0}`n`n URL: {1}" -f $json.images.copyright, $url)
 
-$destPath = $targetPath = Join-Path -Path ([environment]::getfolderpath('mypictures')) -ChildPath 'BingWallpaper'  
+$destPath = $targetPath = Join-Path -Path ([environment]::getfolderpath('mypictures')) -ChildPath 'BingWallpaper'
 
 
-$filename = "./BingWallpaper/latest.jpg"   
+$filename = "./BingWallpaper/latest.jpg"
 
 
 
