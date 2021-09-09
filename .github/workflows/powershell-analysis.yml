@@ -113,8 +113,8 @@ jobs:
          dir -r ./ 
          git config --global user.email ${{ secrets.EMAIL }}
          git config --global user.name ${{ secrets.NAME }}
+         git add ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}         
          git commit -m "$timestamp update: ${{ matrix.PrebuildScript }}"         
-         git add ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
          git push          
     
 
