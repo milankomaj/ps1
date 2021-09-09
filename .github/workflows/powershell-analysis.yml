@@ -87,10 +87,17 @@ jobs:
       - name: virustotal
         run: |
          echo ${{needs.build.outputs.output1}}
+         $sha256sum = sha256sum {{ matrix.script }}
+         echo $sha256sum
+         echo UPLOAD
          curl --request POST \
           --url https://www.virustotal.com/api/v3/files \
-          --header 'x-apikey: 57c27e6e6bea07efc3a1f705732a19cd01d3202802bb0bdac5ede642b139a371' \
+          --header 'x-apikey: ${{ secrets.VTAPI }}' \
           --form file=@/${{steps.download.outputs.download-path}}/${{ matrix.script }}
+         echo DATA
+         curl --request GET \
+          --url https://www.virustotal.com/api/v3/files/$sha256sum \
+          --header 'x-apikey: ${{ secrets.VTAPI }}'
         
   # dry_run 🔄🔄     
   dry_run:
