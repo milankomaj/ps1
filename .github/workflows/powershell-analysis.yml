@@ -95,7 +95,14 @@ jobs:
         id: download
         with:
          name: prebuild
-         path: ./      
+         path: ./
+     # tree 
+      - name: Display structure of downloaded files 
+        run: dir -r ./ 
+      - name: 'Echo download path'
+        run: echo ${{steps.download.outputs.download-path}}       
+
+        
      # Run script
       - name: run script
         shell: pwsh
