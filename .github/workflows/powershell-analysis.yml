@@ -102,8 +102,8 @@ jobs:
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{needs.artifacts.outputs.output2}}
-         ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
+         ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
-         type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
+         type ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
      
      
