@@ -94,6 +94,7 @@ jobs:
       - name: dry run 
         shell: pwsh
         run: |
+         dir -r ./
          echo ${{needs.build.outputs.output1}}
          echo ${{ github.workspace }}
          ${{ github.workspace }}/${{ matrix.PrebuildScript }}
