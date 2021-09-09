@@ -68,7 +68,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     outputs:
-      output2: ${{ steps.step1.outputs.PATH }}     
+      output2: ${{ steps.download.outputs.PATH }}     
     steps:
      # Artifacts download  
       - uses: actions/download-artifact@v2
