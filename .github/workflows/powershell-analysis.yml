@@ -93,6 +93,7 @@ jobs:
      # dry_run  
       - name: dry run 
         shell: pwsh
+        if: ${{ success() }}
         run: |
          echo ${{needs.build.outputs.output1}}
          echo ${{ github.workspace }}
