@@ -98,6 +98,6 @@ jobs:
          echo ${{ github.workspace }}
          ${{ github.workspace }}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
-         type $${{ github.workspace }}/${{ matrix.PrebuildScript }}
+         type ${{ github.workspace }}/${{ matrix.PrebuildScript }}
      
      
