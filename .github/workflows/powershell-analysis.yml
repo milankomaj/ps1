@@ -95,8 +95,8 @@ jobs:
       PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
       
     steps:
-
-     # dry_run2  
+      - uses: actions/checkout@v2
+     # dry_run  
       - name: dry run 
         shell: pwsh
         run: |
