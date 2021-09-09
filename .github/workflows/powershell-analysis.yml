@@ -104,9 +104,12 @@ jobs:
     runs-on: windows-latest
     needs: [artifacts,dry_run]
     steps:
+      - uses: actions/checkout@v2
      # Update scripts 
       - name: Update scripts
         run: |
+         echo ${{ github.workspace }}
+         dir -r ./ 
          git config --global user.email ${{ secrets.EMAIL }}
          git config --global user.name ${{ secrets.NAME }}
          git add -u
