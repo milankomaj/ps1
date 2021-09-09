@@ -62,7 +62,8 @@ jobs:
          name: prebuild
          path: |
           ./*.sarif
-          ./${{ matrix.script }}             
+          ./${{ matrix.script }}  
+          
   artifacts:
     runs-on: windows-latest
     needs: build
@@ -81,19 +82,20 @@ jobs:
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
       - id: step2
-        run: echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"       
+        run: echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"         
         
   # dry_run 🔄🔄     
   dry_run:
     runs-on: windows-latest
-    needs: [build]
+    needs: [build,artifacts]
     strategy:
      fail-fast: false 
      matrix:
-      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]  
+      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
+      
     steps:
       - uses: actions/checkout@v2
-     # dry_run 
+     # dry_run  
       - name: dry run 
         shell: pwsh
         run: |
@@ -103,21 +105,7 @@ jobs:
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
          type ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
      
-  update:
-    runs-on: windows-latest
-    needs: [artifacts,dry_run]
-    steps:
-      - uses: actions/checkout@v2
-     # Update scripts 
-      - name: Update scripts
-        run: |
-         echo ${{ github.workspace }}
-         dir -r ./ 
-         git config --global user.email ${{ secrets.EMAIL }}
-         git config --global user.name ${{ secrets.NAME }}
-         git add -u ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
-         git commit -m "update"
-         git pull --rebase
-         git push          
+
+    
 
 
