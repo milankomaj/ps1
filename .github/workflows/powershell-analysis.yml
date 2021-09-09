@@ -66,9 +66,7 @@ jobs:
 
   artifacts:
     runs-on: windows-latest
-    needs: build
-    outputs:
-      output2: ${{ steps.step2.outputs.PATH }}       
+    needs: build 
     steps:
      # Artifacts download  
       - uses: actions/download-artifact@v2
@@ -80,21 +78,16 @@ jobs:
       - name: Display structure of downloaded files 
         run: dir -r ./ 
       - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}
-      - id: step2
-        run: |
-         echo ${{ github.workspace }}
-         echo "::set-output name=PATH::${{steps.download.outputs.download-path}}"         
+        run: echo ${{steps.download.outputs.download-path}}     
         
   # dry_run 🔄🔄     
   dry_run:
     runs-on: windows-latest
-    needs: [build,artifacts]
+    needs: [build]
     strategy:
      fail-fast: false 
      matrix:
-      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
-      
+      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]  
     steps:
       - uses: actions/checkout@v2
      # dry_run  
@@ -102,10 +95,9 @@ jobs:
         shell: pwsh
         run: |
          echo ${{needs.build.outputs.output1}}
-         echo ${{needs.artifacts.outputs.output2}}
          echo ${{ github.workspace }}
-         ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
+         ${{ github.workspace }}/${{ matrix.PrebuildScript }}
          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
-         type ${{needs.artifacts.outputs.output2}}/${{ matrix.PrebuildScript }}
+         type $${{ github.workspace }}/${{ matrix.PrebuildScript }}
      
      
