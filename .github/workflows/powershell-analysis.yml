@@ -63,7 +63,6 @@ jobs:
          path: |
           ./*.sarif
           ./${{ matrix.script }}             
-
   artifacts:
     runs-on: windows-latest
     needs: build
