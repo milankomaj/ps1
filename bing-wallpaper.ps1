@@ -23,7 +23,7 @@ Write-Host ("`n {0}`n`n URL: {1}" -f $json.images.copyright, $url)
 $destPath = $targetPath = Join-Path -Path ([environment]::getfolderpath('mypictures')) -ChildPath 'BingWallpaper'
 
 
-$filename = "./BingWallpaper/latest.jpg"  
+$filename = "./BingWallpaper/latest.jpg"
 
 
 
