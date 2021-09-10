@@ -18,8 +18,6 @@ jobs:
       shell: powershell  
     - name: "Build & test"
       run: |
-       $version = (Get-Content ./executables/BING/bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
-       Write-Output $version
        echo $version       
        echo "done!"
       shell: powershell   
@@ -27,7 +25,7 @@ jobs:
       with:
        repo_token: "${{ secrets.GITHUB_TOKEN }}"
        prerelease: false
-       title: BingWallpaper $version 
+       title: BingWallpaper
        automatic_release_tag: bing-wallpaper
        files: |           
             ./executables/BING/bing-wallpaper.exe
