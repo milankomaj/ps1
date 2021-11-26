@@ -1,12 +1,12 @@
 # ps1
 
 - ### BingWallpaper
-- ##### Thursday 25/11/2021 03:11:48 +00
+- ##### Friday 26/11/2021 03:12:03 +00
 <img src="BingWallpaper/latest.jpg" width="700" height="auto" title="👉  BingWallpaper  👈">
 
 
 - ### Himawari 
-- ##### Thursday 25/11/2021 03:11:35 +00
+- ##### Friday 26/11/2021 03:11:55 +00
 <img src="Himawari/latest.jpg" width="auto" height="371" title="👉  Himawari  👈">
 
 
