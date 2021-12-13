@@ -38,4 +38,5 @@ jobs:
           git pull        
           git add ./Himawari/himawari.webp
           git add ./Himawari/himawari.gif
-          git commit -m "$date + $zone" 
+          git commit -m "$date + $zone"
+          git push
