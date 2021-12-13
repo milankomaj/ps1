@@ -24,7 +24,7 @@ jobs:
           echo date=$date
           echo -e "\033[5;31;1m Download: \033[0m"
           url=$(curl -s -L -o ./Himawari/himawari.mp4 https://himawari8.nict.go.jp/movie/720/$(echo $date)_pifd.mp4)
-          echo url=$url
+          echo $url
           echo -e "\033[5;31;1m FFmpeg: \033[0m"
           ffmpeg -i -y ./Himawari/himawari.mp4 -ss 1 -t 12 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf "fps=30, scale=680:720" -qscale 70 ./Himawari/himawari.webp
           echo -e "\033[5;31;1m Push: \033[0m" 
