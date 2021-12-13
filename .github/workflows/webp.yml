@@ -38,7 +38,7 @@ jobs:
           echo -e "\033[5;31;1m Push: \033[0m" 
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}        
-          #git add ./Himawari/himawari.webp
-          #git add ./Himawari/himawari.gif
+ #        git add ./Himawari/himawari.webp
+ #        git add ./Himawari/himawari.gif
           git add -u
           git commit -m "$date + $zone" 
