@@ -67,7 +67,7 @@ $HTTP_Status = [int]$response.StatusCode.value__
  Write-Output("description: $description")
  Write-Output("tag: $tag")
  Write-Output("title: $title")
- 
+ Write-Output("notification: " + [string]$Config.Configuration.notification)
 
 [string]$host.ui.RawUI.ForegroundColor = $t
 [string]$host.ui.RawUI.ForegroundColor
