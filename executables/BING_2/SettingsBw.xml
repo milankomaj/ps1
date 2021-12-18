@@ -6,7 +6,7 @@
  <foldername>BingWallpaper</foldername>
  <notification>true</notification> 
  <timeout>30000</timeout> 
- <metadata>true</metadata>
+ <metadata>false</metadata>
  <rating>0</rating>
  <debug>false</debug>
 </Configuration>
