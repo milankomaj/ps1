@@ -67,7 +67,7 @@ $HTTP_Status = [int]$response.StatusCode.value__
  Write-Output("description: $description")
  Write-Output("tag: $tag")
  Write-Output("title: $title")
- Write-Output("notification: $Config.Configuration.notification")
+ 
 
 [string]$host.ui.RawUI.ForegroundColor = $t
 [string]$host.ui.RawUI.ForegroundColor
@@ -87,7 +87,7 @@ $adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileNam
 $adapter.Metadata.Title = ${copyright}
 $adapter.Metadata.Subject = ${author}
 $adapter.Metadata.Rating = $Config.Configuration.rating;
-$adapter.Metadata.Keywords.Add("${shortname}, ${tag}")
+$adapter.Metadata.Keywords.Add("${tag}"+", ${shortname}");
 $adapter.Metadata.Comments = ${url}
 $adapter.Save() = "SilentlyContinue"
 }else {}
