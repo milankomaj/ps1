@@ -23,7 +23,7 @@ jobs:
           date=$(date +'%Y%m%d');
           SK-zone=$(TZ='Europe/Bratislava' date)
           JP-zone=$(TZ='Asia/Tokyo' date)
-          echo GITHUB-date=$date
+          echo date=$date
           echo SK-zone=$SK-zone
           echo JP-zone=$JP-zone
           date
