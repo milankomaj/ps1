@@ -21,9 +21,11 @@ jobs:
         shell: bash
         run: | 
           date=$(date +'%Y%m%d');
-          echo date=$date
-          zone=$(TZ='Europe/Bratislava' date)
-          echo zone=$zone
+          SK-zone=$(TZ='Europe/Bratislava' date)
+          JP-zone=$(TZ='Asia/Tokyo' date)
+          echo GITHUB-date=$date
+          echo SK-zone=$SK-zone
+          echo JP-zone=$JP-zone
           date
           echo -e "\033[5;31;1m Download: \033[0m"
           url=$(curl -s -L -o ./Himawari/himawari.mp4 https://himawari8.nict.go.jp/movie/720/$(echo $date)_pifd.mp4)
