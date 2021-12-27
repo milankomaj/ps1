@@ -44,7 +44,7 @@ jobs:
           then
           sudo apt-get install -y ffmpeg
           echo "++++"
-          curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }}
+          url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
           ffmpeg -y -i ./Himawari/
           ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vf fps=10,scale=680:-1:flags=lanczos,palettegen palette.png
@@ -61,7 +61,7 @@ jobs:
           then
           sudo apt-get install -y ffmpeg
           echo "++++"
-          curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }}      
+          url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})      
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf "fps=30, scale=680:720" -qscale 70 -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.webp  
           ffmpeg -y -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf fps=10,scale=716:-1:flags=lanczos,palettegen ./Himawari/palette.png
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -i ./Himawari/palette.png -filter_complex "fps=10,scale=716:-1:flags=lanczos[x];[x][1:v]paletteuse" -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.gif
@@ -76,7 +76,7 @@ jobs:
           then
           sudo apt-get install -y ffmpeg
           echo "++++"
-          curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }}
+          url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
           ffmpeg -y -i ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4 -vf fps=10,scale=680:-1:flags=lanczos,palettegen palette.png
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4 -i palette.png -filter_complex "fps=10,scale=680:-1:flags=lanczos[x];[x][1:v]paletteuse" -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.gif
