@@ -7,7 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.step1.outputs.SCALE }} 
+      output1: ${{ steps.step1.outputs.SCALE }}
+      output2: ${{ steps.step1.outputs. PREFIX }} 
     timeout-minutes: 10 
     strategy:
       matrix: 
@@ -27,19 +28,19 @@ jobs:
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
          echo "::set-output name=SCALE::$(echo $scale)" 
-         echo ${{steps.step1.outputs.SCALE}}
+         echo "::set-output name=SCALE::${{ matrix.prefix }}" 
 
   video:
     runs-on: ubuntu-latest
     needs: [build] 
-    steps: 
+    steps:
+      - uses: actions/checkout@v2 
       - name: script
         run: | 
-         echo ${{ matrix.prefix }}
-         echo ${{steps.step1.outputs.SCALE}}
+         echo ${{needs.build.outputs.output2}}
          echo ${{needs.build.outputs.output1}}
         
-         if [ ${{steps.step1.outputs.SCALE}} -ge 1 ]
+         if [ ${{needs.build.outputs.output1}} -ge 1 ]
          then
          echo "++++"
          else
