@@ -47,5 +47,5 @@ jobs:
          echo '::set-output name=CHECK::FALSE'
          CHECK=${{steps.step2.outputs.CHECK}}
          fi
-         echo $CHECK
- 
+         echo check=$CHECK
+         echo $check
