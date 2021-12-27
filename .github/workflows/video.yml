@@ -39,14 +39,10 @@ jobs:
          if [ ${{steps.step1.outputs.SCALE}} -ge 1 ]
          then
          echo "++++"
-         stav=(TRUE)
-         echo $stav
-         echo "::set-output name=CHECK::$(echo $stav)"
+         echo "::set-output name=CHECK::TRUE"
          else
-         echo "----"
-         stav=(FALSE)
-         echo $stav        
-         echo "::set-output name=CHECK::$(echo $stav)" 
+         echo "----"      
+         echo "::set-output name=CHECK::FALSE" 
          fi
          echo ${{steps.step1.outputs.CHECK}}
 
