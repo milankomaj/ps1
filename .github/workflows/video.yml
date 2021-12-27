@@ -111,18 +111,17 @@ jobs:
       - uses: actions/checkout@v2     
       - uses: actions/download-artifact@v2
         with:
-         path: ./artifacts/
+         path: ./Himawari/
       - name: Display structure of downloaded files 
         run: |
-         tree -h ./artifacts/ 
-         echo ${{needs.build.outputs.output2}}
+         tree -h ./Himawari/ 
          echo ${{needs.build.outputs.output4}}
       - name: Update
         run: |
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
           git pull        
-          git add ./artifacts/**/himawari_*.*
+          git add ./Himawari/**/himawari_*.*
           git commit -m ${{needs.build.outputs.output4}}
           git push    
                                 
