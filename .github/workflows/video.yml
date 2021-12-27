@@ -14,7 +14,7 @@ jobs:
       matrix: 
        prefix: [pir3]
     outputs:
-      output1: ${{ steps.step1.outputs.SCALE }} 
+      output1: ${{ steps.step1.outputs.prefix }} 
       
        
          
