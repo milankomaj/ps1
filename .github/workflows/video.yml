@@ -37,7 +37,7 @@ jobs:
     strategy:
       max-parallel: 3
       matrix: 
-       zz: [${{needs.build.outputs.output2}}]   
+       prefix: [pir3, pifd, pijp] 
     needs: [build] 
     steps:
       - uses: actions/checkout@v2 
@@ -46,7 +46,7 @@ jobs:
          echo ${{needs.build.outputs.output2}}
          echo ${{needs.build.outputs.output1}}
         
-         if [ ${{ matrix.zz }} -ge 1 ]
+         if [ ${{needs.build.outputs.output1}} -ge 1 ]
          then
          echo "++++"
          else
