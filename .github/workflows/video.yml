@@ -4,7 +4,7 @@ on:
   
  
 jobs:
-  url:
+  urls:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     
@@ -16,12 +16,9 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }} 
   
-    steps:
-      - name: output
+    steps:          
+      - name: output 
         id: step1
-        run: echo "::set-output name=SCALE::$scale" 
-        
-      - name: url 
         run: | 
          date=$(date +'%Y%m%d')
          echo date=$date
@@ -31,6 +28,7 @@ jobs:
          echo size=$size
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
+         run: echo "::set-output name=SCALE::${{ matrix.prefix }}" 
          echo ${{steps.step1.outputs.SCALE}}
         
       - name: output
