@@ -9,6 +9,7 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }}
       output2: ${{ steps.step1.outputs.PREFIX }} 
+      output3: ${{ steps.step2.outputs.CHECK }}
     timeout-minutes: 10 
     strategy:
       max-parallel: 3
@@ -31,16 +32,17 @@ jobs:
          echo "::set-output name=SCALE::$(echo $scale)"
          echo "::set-output name=PREFIX::${{ matrix.prefix }}" 
 
-
-
       - name: script
+        id: step2
         run: | 
          echo ${{steps.step1.outputs.SCALE}}
-         echo ${{steps.step1.outputs.PREFIX}}
-        
+         echo ${{steps.step1.outputs.PREFIX}}     
          if [ ${{steps.step1.outputs.SCALE}} -ge 1 ]
          then
          echo "++++"
+         echo "::set-output name=CHECK::TRUE"
          else
          echo "-----"
+         echo "::set-output name=CHECK::FALSE"
          fi
+         echo ${{steps.step2.outputs.CHECK}} 
