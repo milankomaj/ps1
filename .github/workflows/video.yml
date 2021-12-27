@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: output
         id: step1
-        run: echo "::set-output name=SCALE::${{ matrix.prefix }}" 
+        run: echo "::set-output name=SCALE::$scale" 
         
       - name: url 
         run: | 
@@ -36,8 +36,8 @@ jobs:
       - name: output
         run: | 
          echo ${{ matrix.prefix }}
-         echo ${{needs.url.outputs.output1}}
-         if [ ${{needs.step1.outputs.output1}} -ge 1 ]
+         echo ${{steps.step1.outputs.SCALE}}
+         if [ ${{steps.step1.outputs.SCALE}} -ge 1 ]
          then
          echo "++++"
          else
