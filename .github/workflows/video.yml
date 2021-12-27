@@ -31,7 +31,8 @@ jobs:
 
    video:
     runs-on: ubuntu-latest
-    needs: [build]       
+    needs: [build] 
+    steps: 
       - name: script
         run: | 
          echo ${{ matrix.prefix }}
