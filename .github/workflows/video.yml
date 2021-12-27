@@ -34,19 +34,40 @@ jobs:
          echo "::set-output name=PREFIX::${{ matrix.prefix }}" 
          echo "::set-output name=URL::$(echo $url)"
          
-         sudo apt-get install -y ffmpeg
 
       - name: Generate pir3
         if: ${{ matrix.prefix == 'pir3' }}
         run: |
-         echo pir3
-
+          echo pir3
+          if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
+          then
+          echo "++++"
+          curl -s -L -o ${{ steps.step1.outputs.PREFIX }}.mp4 $url
+          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ${{ steps.step1.outputs.PREFIX }}_out.mp4
+          ffmpeg -y -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vf fps=10,scale=680:-1:flags=lanczos,palettegen palette.png
+          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -i palette.png -filter_complex "fps=10,scale=680:-1:flags=lanczos[x];[x][1:v]paletteuse" -y himawari_${{ steps.step1.outputs.PREFIX }}.gif
+          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf fps=10,scale=680:-1 -qscale:v 70 -y himawari_${{ steps.step1.outputs.PREFIX }}.webp
+          else
+          echo "-----"
+          fi 
       - name: Generate pifd
         if: ${{ matrix.prefix == 'pifd' }}
         run: |
-         echo pifd
+          echo pifd
+       
  
       - name: Generate pijp
         if: ${{ matrix.prefix == 'pijp' }}
         run: |
-         echo pijp        
+          echo pijp 
+          if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
+          then
+          echo "++++"
+          curl -s -L -o ${{ steps.step1.outputs.PREFIX }}.mp4 $url
+          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ${{ steps.step1.outputs.PREFIX }}_ out.mp4
+          ffmpeg -y -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vf fps=10,scale=680:-1:flags=lanczos,palettegen palette.png
+          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -i palette.png -filter_complex "fps=10,scale=680:-1:flags=lanczos[x];[x][1:v]paletteuse" -y himawari_${{ steps.step1.outputs.PREFIX }}.gif
+          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf fps=10,scale=680:-1 -qscale:v 70 -y himawari_${{ steps.step1.outputs.PREFIX }}_.webp
+          else
+          echo "-----"
+          fi                  
