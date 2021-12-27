@@ -5,7 +5,7 @@ on:
  
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }}
       output2: ${{ steps.step1.outputs. PREFIX }} 
@@ -31,7 +31,7 @@ jobs:
          echo "::set-output name=SCALE::${{ matrix.prefix }}" 
 
   video:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [build] 
     steps:
       - uses: actions/checkout@v2 
