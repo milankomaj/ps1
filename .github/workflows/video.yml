@@ -40,7 +40,7 @@ jobs:
          then
          echo '++++'
          echo '::set-output name=CHECK::TRUE'
-         echo '::echo::on'
+         echo '::echo::off'
          else
          echo '-----'
          echo '::set-output name=CHECK::FALSE'
