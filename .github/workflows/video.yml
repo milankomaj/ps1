@@ -1,0 +1,47 @@
+name: Video 
+on:
+  workflow_dispatch:
+  
+ 
+jobs:
+  url:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    strategy:
+      fail-fast: true
+      max-parallel: 2
+    outputs:
+      output1: ${{ steps.step1.outputs.SCALE }} 
+    strategy:
+      matrix:
+       prefix: [pir3, pifd, pijp]
+         
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Curl & Size
+        shell: bash
+        run: | 
+         date=$(date +'%Y%m%d')
+         echo date=$date
+         url=(https://himawari8.nict.go.jp/movie/720/$(echo $date)_${{ matrix.prefix }}.mp4) # pir3.mp4, pifd.mp4, pijp.mp4
+         echo url=$url
+         size=$(curl -s $url | wc -c)
+         echo size=$size
+         scale=$(echo "scale=0; $size /1024/1024" | bc -l)
+         echo scale=$scale
+
+      - id: step1
+        run: echo "::set-output name=SCALE::$scale" 
+      - name: 'output'
+        run: | 
+         echo ${{needs.url.outputs.output1}}
+         if [ ${{needs.url.outputs.output1}} -ge 1 ]
+         then
+         echo "++++"
+         else
+         echo "-----"
+         fi
