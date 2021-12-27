@@ -35,6 +35,8 @@ jobs:
         run: | 
          echo ${{ matrix.prefix }}
          echo ${{steps.step1.outputs.SCALE}}
+         echo ${{needs.urls.outputs.output1}}
+         
          if [ ${{steps.step1.outputs.SCALE}} -ge 1 ]
          then
          echo "++++"
