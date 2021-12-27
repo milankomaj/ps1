@@ -36,7 +36,7 @@ jobs:
          echo scale=$scale
 
       - id: step1
-        run: echo "::set-output name=SCALE::${{ scale }}" 
+        run: echo "::set-output name=SCALE::$(echo $scale)" 
       - name: 'output'
         run: | 
          echo ${{ matrix.prefix }}
