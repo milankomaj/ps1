@@ -41,10 +41,11 @@ jobs:
          then
          echo '++++'
          echo '::set-output name=CHECK::TRUE'
-         echo "${{steps.step2.outputs.CHECK}}"
+         CHECK=${{steps.step2.outputs.CHECK}}
          else
          echo '-----'
          echo '::set-output name=CHECK::FALSE'
-         echo "${{steps.step2.outputs.CHECK}}"
+         CHECK=${{steps.step2.outputs.CHECK}}
          fi
-         echo "${{steps.step2.outputs.CHECK}}" 
+         echo $CHECK
+ 
