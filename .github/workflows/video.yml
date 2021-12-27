@@ -5,14 +5,8 @@ on:
  
 jobs:
 
-  download:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Dependencies
-        run: sudo apt-get install -y ffmpeg && sudo apt-get install -y curl
-        shell: bash   
+   
   build:
-    needs: [download]
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }}
@@ -39,8 +33,8 @@ jobs:
          echo "::set-output name=SCALE::$(echo $scale)"
          echo "::set-output name=PREFIX::${{ matrix.prefix }}" 
          echo "::set-output name=URL::$(echo $url)"
-
-
+         
+         sudo apt-get install -y ffmpeg
 
       - name: script
         run: | 
