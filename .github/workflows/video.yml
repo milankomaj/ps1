@@ -31,7 +31,7 @@ jobs:
          echo size=$size
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
-         echo ${{steps.url.outputs.SCALE}}
+         echo ${{steps.step1.outputs.SCALE}}
         
       - name: output
         run: | 
