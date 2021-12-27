@@ -14,14 +14,9 @@ jobs:
       matrix: 
        prefix: [pir3]
     outputs:
-      output1: ${{ steps.step1.outputs.prefix }} 
-      
-       
-         
-
+      output1: ${{ steps.step1.outputs.SCALE }} 
+  
     steps:
-
-
       - name: Curl & Size
         shell: bash
         id: step1
@@ -34,7 +29,7 @@ jobs:
          echo size=$size
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
-         echo "::set-output name=SCALE::${{ matrix.script }}"
+         echo "::set-output name=SCALE::${{ matrix.prefix }}"
          echo "The selected color is ${{ steps.step1.outputs.SCALE}}"
         
         
