@@ -48,6 +48,6 @@ jobs:
          echo $stav        
          echo "::set-output name=CHECK::$(echo $stav)" 
          fi
-         echo "${{steps.step1.outputs.CHECK}}"
+         echo ${{steps.step1.outputs.CHECK}}
 
       
