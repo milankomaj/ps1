@@ -9,7 +9,7 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }}
       output2: ${{ steps.step1.outputs.PREFIX }} 
-      output3: ${{ steps.step2.outputs.CHECK }}
+      output3: ${{ steps.step1.outputs.CHECK }}
     timeout-minutes: 10 
     strategy:
       max-parallel: 3
@@ -33,7 +33,6 @@ jobs:
          echo "::set-output name=PREFIX::${{ matrix.prefix }}" 
 
       - name: script
-        id: step2
         run: | 
          echo ${{steps.step1.outputs.SCALE}}
          echo ${{steps.step1.outputs.PREFIX}}     
@@ -45,6 +44,9 @@ jobs:
          else
          echo '-----'
          echo '::set-output name=CHECK::FALSE'
-         echo '::echo::on'
+         echo '::echo::off'
          fi
-         echo "${{ steps.step2.outputs.CHECK }}"
+         echo "${{ steps.step1.outputs.CHECK }}"
+
+      - name: Print 
+        run: echo "${{ steps.step1.outputs.CHECK }}"        
