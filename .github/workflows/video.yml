@@ -39,6 +39,7 @@ jobs:
         run: echo "::set-output name=SCALE::$scale" 
       - name: 'output'
         run: | 
+         echo ${{ matrix.prefix }}
          echo ${{needs.url.outputs.output1}}
          if [ ${{needs.url.outputs.output1}} -ge 1 ]
          then
