@@ -41,6 +41,7 @@ jobs:
           echo pir3
           if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
           then
+          sudo apt-get install -y ffmpeg
           echo "++++"
           curl -s -L -o ${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }}
           ffmpeg -i ${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ${{ steps.step1.outputs.PREFIX }}_out.mp4
@@ -62,6 +63,7 @@ jobs:
           echo pijp 
           if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
           then
+          sudo apt-get install -y ffmpeg
           echo "++++"
           curl -s -L -o ${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }}
           ffmpeg -i ${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ${{ steps.step1.outputs.PREFIX }}_ out.mp4
