@@ -4,6 +4,13 @@ on:
   
  
 jobs:
+
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        run: sudo apt-get install -y ffmpeg && sudo apt-get install -y curl
+        shell: bash   
   build:
     runs-on: ubuntu-latest
     outputs:
@@ -16,10 +23,7 @@ jobs:
       matrix: 
        prefix: [pir3, pifd, pijp]
   
-    steps:
-      - name: Install Dependencies
-        run: sudo apt-get install -y ffmpeg && sudo apt-get install -y curl
-        shell: bash        
+    steps:     
       - name: himawari video prefix 
         id: step1
         run: | 
