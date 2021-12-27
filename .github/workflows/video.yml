@@ -12,7 +12,8 @@ jobs:
       output1: ${{ steps.step1.outputs.SCALE }}
       output2: ${{ steps.step1.outputs.PREFIX }} 
       output3: ${{ steps.step1.outputs.URL }}
-    timeout-minutes: 10 
+    timeout-minutes: 10
+    continue-on-error: true
     strategy:
       max-parallel: 3
       matrix: 
@@ -69,7 +70,7 @@ jobs:
           ffmpeg -i ${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ${{ steps.step1.outputs.PREFIX }}_ out.mp4
           ffmpeg -y -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vf fps=10,scale=680:-1:flags=lanczos,palettegen palette.png
           ffmpeg -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -i palette.png -filter_complex "fps=10,scale=680:-1:flags=lanczos[x];[x][1:v]paletteuse" -y himawari_${{ steps.step1.outputs.PREFIX }}.gif
-          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf fps=10,scale=680:-1 -qscale:v 70 -y himawari_${{ steps.step1.outputs.PREFIX }}_.webp
+          ffmpeg -i ${{ steps.step1.outputs.PREFIX }}_out.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf fps=10,scale=680:-1 -qscale:v 70 -y himawari_${{ steps.step1.outputs.PREFIX }}.webp
           else
           echo "-----"
           fi                  
