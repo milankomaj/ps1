@@ -7,9 +7,9 @@ jobs:
   url:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    continue-on-error: true
+    
     strategy:
-      fail-fast: true
+      
       max-parallel: 2
       matrix: 
        prefix: [pir3]
