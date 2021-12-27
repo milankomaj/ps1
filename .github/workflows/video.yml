@@ -44,7 +44,7 @@ jobs:
          echo '-----'
          echo '::set-output name=CHECK::$(echo FALSE)' 
          fi
-         echo "${{ steps.step1.outputs.CHECK }}"
+         echo "${{steps.step1.outputs.CHECK}}"
 
       - name: Print 
-        run: echo "${{ steps.step1.outputs.CHECK }}"        
+        run: echo "${{steps.step1.outputs.CHECK}}"        
