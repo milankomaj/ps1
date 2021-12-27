@@ -9,15 +9,13 @@ jobs:
     timeout-minutes: 10
     
     strategy:
-      
-      max-parallel: 2
       matrix: 
        prefix: [pir3]
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }} 
   
     steps:          
-      - name: output 
+      - name: himawari video prefix 
         id: step1
         run: | 
          date=$(date +'%Y%m%d')
