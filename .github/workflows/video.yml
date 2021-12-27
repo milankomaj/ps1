@@ -9,7 +9,7 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }}
       output2: ${{ steps.step1.outputs.PREFIX }} 
-      output3: ${{ steps.step1.outputs.CHECK }}
+      output3: ${{ steps.step1.outputs.URL }}
     timeout-minutes: 10 
     strategy:
       max-parallel: 3
@@ -31,19 +31,33 @@ jobs:
          echo scale=$scale
          echo "::set-output name=SCALE::$(echo $scale)"
          echo "::set-output name=PREFIX::${{ matrix.prefix }}" 
+         echo "::set-output name=URL::$(echo $url)"
 
       - name: script
         run: | 
          echo ${{steps.step1.outputs.SCALE}}
-         echo ${{steps.step1.outputs.PREFIX}}     
+         echo ${{steps.step1.outputs.PREFIX}}
+         echo ${{steps.step1.outputs.URL}}
+
          if [ ${{steps.step1.outputs.SCALE}} -ge 1 ]
          then
          echo "++++"
-         echo "::set-output name=CHECK::TRUE"
+         sudo apt-get install -y ffmpeg
+         elif [ ${{steps.step1.outputs.PREFIX}} = pifd ]
+         then
+         curl -s -L -o pir3.mp4 ${{steps.step1.outputs.URL}}
+         echo -e "\033[1;31;1m FFmpeg webp: \033[0m"
+         ffmpeg -i ./Himawari/himawari.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf "fps=10, scale=680:720" -qscale 70 -y ./Himawari/himawari.webp  
+         echo -e "\033[1;31;1m FFmpeg gif: \033[0m"
+         ffmpeg -y -i ./Himawari/himawari.mp4 -vf fps=10,scale=716:-1:flags=lanczos,palettegen ./Himawari/palette.png
+         ffmpeg -i ./Himawari/himawari.mp4 -i ./Himawari/palette.png -filter_complex "fps=10,scale=716:-1:flags=lanczos[x];[x][1:v]paletteuse" -y ./Himawari/himawari.gif
+        
+        
+        
+        
          else
          echo "----"      
-         echo "::set-output name=CHECK::FALSE" 
          fi
-         echo ${{steps.step1.outputs.CHECK}}
+         
 
       
