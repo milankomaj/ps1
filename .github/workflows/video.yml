@@ -11,11 +11,11 @@ jobs:
     strategy:
       fail-fast: true
       max-parallel: 2
+      matrix: prefix: [pir3, pifd, pijp]
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }} 
-    strategy:
-      matrix:
-       prefix: [pir3, pifd, pijp]
+      
+       
          
 
     steps:
