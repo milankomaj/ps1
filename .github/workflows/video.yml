@@ -20,13 +20,16 @@ jobs:
        prefix: [pir3, pifd, pijp]
   
     steps:
-      - name: Checkout 
-        uses: actions/checkout@v2 
       - name: himawari video prefix
         id: step1
         run: | 
-         date=$(date +'%Y%m%d')
+         date=$(date +'%Y%m%d');
+         SKzone=$(TZ='Europe/Bratislava' date)
+         JPzone=$(TZ='Asia/Tokyo' date)
          echo date=$date
+         echo SK-zone=$SKzone
+         echo JP-zone=$JPzone
+         echo GH-zone=$(date)
          url=(https://himawari8.nict.go.jp/movie/720/$(echo $date)_${{ matrix.prefix }}.mp4) # pir3.mp4, pifd.mp4, pijp.mp4
          echo url=$url
          size=$(curl -s $url | wc -c)
