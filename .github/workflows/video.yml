@@ -13,7 +13,8 @@ jobs:
       matrix: 
        prefix: [pir3]
   
-    steps:          
+    steps:
+      - uses: actions/checkout@v2     
       - name: himawari video prefix 
         id: step1
         run: | 
@@ -27,7 +28,10 @@ jobs:
          echo scale=$scale
          echo "::set-output name=SCALE::$(echo $scale)" 
          echo ${{steps.step1.outputs.SCALE}}
-        
+
+   video:
+    runs-on: ubuntu-latest
+    needs: [build]       
       - name: script
         run: | 
          echo ${{ matrix.prefix }}
