@@ -23,7 +23,6 @@ jobs:
 
 
       - name: Curl & Size
-        id: step1
         shell: bash
         run: | 
          date=$(date +'%Y%m%d')
@@ -36,7 +35,8 @@ jobs:
          echo scale=$scale
          echo '::set-output name=SELECTED_COLOR::green' 
          echo "The selected color is ${{ steps.step1.outputs.SELECTED_COLOR }}"
-     
+        id: step1
+        
       - name: output
         run: | 
          echo ${{ matrix.prefix }}
