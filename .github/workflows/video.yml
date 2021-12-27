@@ -8,10 +8,12 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2 
       - name: Install Dependencies
         run: sudo apt-get install -y ffmpeg && sudo apt-get install -y curl
         shell: bash   
   build:
+    needs: [download]
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.SCALE }}
