@@ -31,13 +31,13 @@ jobs:
          echo size=$size
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
-         echo ${{needs.url.outputs.output1}}
+         echo ${{steps.url.outputs.SCALE}}
         
       - name: output
         run: | 
          echo ${{ matrix.prefix }}
          echo ${{needs.url.outputs.output1}}
-         if [ ${{needs.url.outputs.output1}} -ge 1 ]
+         if [ ${{needs.step1.outputs.output1}} -ge 1 ]
          then
          echo "++++"
          else
