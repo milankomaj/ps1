@@ -34,7 +34,7 @@ jobs:
          echo size=$size
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
-         echo "::set-output name=SCALE::$(echo $scale)" 
+         echo "::set-output name=SCALE::$($scale)" 
          echo ${{needs.url.outputs.output1}}
       - name: 'output'
         run: | 
