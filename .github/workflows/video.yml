@@ -28,10 +28,10 @@ jobs:
          echo size=$size
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
-         run: echo "::set-output name=SCALE::${{ matrix.prefix }}" 
+         echo "::set-output name=SCALE::${{ matrix.prefix }}" 
          echo ${{steps.step1.outputs.SCALE}}
         
-      - name: output
+      - name: script
         run: | 
          echo ${{ matrix.prefix }}
          echo ${{steps.step1.outputs.SCALE}}
