@@ -20,6 +20,8 @@ jobs:
        prefix: [pir3, pifd, pijp]
   
     steps:
+      - name: Checkout 
+        uses: actions/checkout@v2 
       - name: himawari video prefix
         id: step1
         run: | 
@@ -96,4 +98,10 @@ jobs:
           fi                  
       - name: tree
         run: |
-         tree -h ./Himawari/         
+         tree -h ./Himawari/
+      - name: upload-artifacts
+        uses: actions/upload-artifact@v2 
+        with:
+         name: ${{ steps.step1.outputs.PREFIX }}
+         path: |
+          ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.*                  
