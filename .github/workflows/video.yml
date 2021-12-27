@@ -4,15 +4,14 @@ on:
   
  
 jobs:
-  urls:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    
+    outputs:
+      output1: ${{ steps.step1.outputs.SCALE }} 
+    timeout-minutes: 10 
     strategy:
       matrix: 
        prefix: [pir3]
-    outputs:
-      output1: ${{ steps.step1.outputs.SCALE }} 
   
     steps:          
       - name: himawari video prefix 
@@ -33,8 +32,8 @@ jobs:
         run: | 
          echo ${{ matrix.prefix }}
          echo ${{steps.step1.outputs.SCALE}}
-         echo ${{needs.urls.outputs.output1}}
-         
+         echo ${{needs.build.outputs.output1}}
+        
          if [ ${{steps.step1.outputs.SCALE}} -ge 1 ]
          then
          echo "++++"
