@@ -48,11 +48,12 @@ jobs:
        $fileContent | Set-Content ./executables/Himawari/himawari.ps1
        
        Write-Output pred
-       dir -r ./Himawari | Select-Object Name,Length,LastWriteTime
+       dir ./Himawari | Select-Object Name,Length,LastWriteTime
+       Remove-Item ./Himawari/latest.jpg
        ./executables/Himawari/himawari.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
-       dir -r ./Himawari | Select-Object Name,Length,LastWriteTime   
+       dir ./Himawari | Select-Object Name,Length,LastWriteTime   
 
     - name: timestamp to readme   
       run: |
