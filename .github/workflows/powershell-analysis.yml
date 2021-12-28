@@ -90,3 +90,4 @@ jobs:
          sum=$(sha256sum ${{ matrix.path }} | cut -f 1 -d " ")
          echo $sum
          echo UPLOAD
+         echo $path $script
