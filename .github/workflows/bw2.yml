@@ -26,7 +26,7 @@ jobs:
        $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
        
        
-       
+       cd ./executables/BING_2/
        Write-Output pred
        dir -r ./BingWallpaper | Select-Object Name,Length,LastWriteTime
        ./executables/BING_2/bing-wallpaper.ps1
