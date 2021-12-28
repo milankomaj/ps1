@@ -159,6 +159,8 @@ jobs:
       
       - name: Update scripts
         run: |
+         tree -h ./prebuild/
+         tree -h
          echo "GITHUB_WORKSPACE: ${{ github.workspace }}"
          cp ${{ github.workspace }}/prebuild/bing-wallpaper.ps1 ./executables/BING_2/
          cp ${{ github.workspace }}/prebuild/himawari.ps1 ./executables/Himawari/ 
