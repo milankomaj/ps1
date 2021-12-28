@@ -39,7 +39,7 @@ jobs:
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
             
     - name: Generate Wallpaper Himawari
-      shell: pwsh
+      shell: powershell
       run: |
        $textToAdd = '$outpath = "./Himawari/"'
        $HimawariLineNumber = 30
