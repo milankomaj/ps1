@@ -33,7 +33,8 @@ jobs:
       - name: copy
         run: |
           echo "GITHUB_WORKSPACE: ${{ github.workspace }}"
-          cp ./executables/*/${{ matrix.script }} ${{ github.workspace }}
+          cp ./executables/BING_2/${{ matrix.script }} ${{ github.workspace }}/
+          cp ./executables/Himawari/${{ matrix.script }} ${{ github.workspace }}/
           ls
      # upload artifact (.ps1.bak)
       - name: Create .bak files
