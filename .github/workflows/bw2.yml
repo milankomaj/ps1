@@ -25,10 +25,10 @@ jobs:
        $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
        
        
-       cd ./executables/BING_2/
+       
        Write-Output pred
        dir -r | Select-Object Name,Length,LastWriteTime
-       bing-wallpaper.ps1
+       ./executables/BING_2/bing-wallpaper.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
        dir -r | Select-Object Name,Length,LastWriteTime
@@ -43,10 +43,10 @@ jobs:
        $fileContent[$HimawariLineNumber-1] = $textToAdd
        $fileContent | Set-Content ./executables/Himawari/himawari.ps1
 
-       cd ./executables/Himawari
+       
        Write-Output pred
        dir -r | Select-Object Name,Length,LastWriteTime
-       himawari.ps1
+       ./executables/Himawari/himawari.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
        dir -r | Select-Object Name,Length,LastWriteTime       
