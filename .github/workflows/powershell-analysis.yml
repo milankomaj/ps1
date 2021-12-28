@@ -128,7 +128,7 @@ jobs:
         
      # Run script
       - name: run script
-        shell: powershell
+        shell: pwsh
         run: |
          echo ${{steps.download.outputs.download-path}}
          cp ./executables/*/*.xml ${{ github.workspace }}/
