@@ -22,10 +22,18 @@ jobs:
     strategy:
       matrix:
         include:
+<<<<<<< HEAD
            - path: ./executables/BING_2/bing-wallpaper.ps1
              script: bing-wallpaper.ps1
            - path: ./executables/Himawari/himawari.ps1
              script: himawari.ps1
+=======
+          -  path: ./executables/BING_2/himawari.ps1
+             script: himawari.ps1
+ 
+          -  path: ./executables/Himawari/bing-wallpaper.ps1
+             script: bing-wallpaper.ps1
+>>>>>>> 86ad859978608b32967d67a70eb32a0082224941
            
     steps:
       - name: Echo site details
