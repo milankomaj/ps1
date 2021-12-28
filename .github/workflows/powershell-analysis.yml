@@ -160,8 +160,7 @@ jobs:
       
       - name: Update scripts
         run: |
-         date=$(date +'%Y%m%d')
-         $timestamp= $(TZ='Europe/Bratislava' date)
+         timestamp = $(TZ='Europe/Bratislava' date)
          echo $timestamp
          cp ./prebuild/bing-wallpaper.ps1 ./executables/BING_2/
          cp ./prebuild/himawari.ps1 ./executables/Himawari/ 
