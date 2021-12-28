@@ -23,10 +23,8 @@ jobs:
       output1: ${{ steps.step1.outputs.SCRIPT }}    
     strategy:
       matrix:
-       script:
-         [himawari.ps1, bing-wallpaper.ps1]
-       path:
-         [./executables/BING_2/himawari.ps1, ./executables/Himawari/bing-wallpaper.ps1]
+       script: [himawari.ps1, bing-wallpaper.ps1]
+       path: [./executables/BING_2/himawari.ps1, ./executables/Himawari/bing-wallpaper.ps1]
 
     steps:
       - id: step1
