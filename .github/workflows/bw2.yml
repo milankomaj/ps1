@@ -28,10 +28,11 @@ jobs:
        cd ./BingWallpaper
        dir -r | Select-Object Name,Length,LastWriteTime
 
-       cd ./
+       cd ..
        cd ./executables/BING_2/
        ./bing-wallpaper.ps1
-       cd ./
+       cd ..
+       cd ..
        cd ./BingWallpaper
        Write-Output po
        dir -r  | Select-Object Name,Length,LastWriteTime
