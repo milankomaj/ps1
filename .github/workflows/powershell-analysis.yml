@@ -128,9 +128,10 @@ jobs:
         
      # Run script
       - name: run script
-        shell: pwsh
+        shell: powershell
         run: |
          echo ${{steps.download.outputs.download-path}}
+         cp ./executables/*/*.xml ${{ github.workspace }}/
          cd ${{steps.download.outputs.download-path}}/
          ./${{ matrix.PrebuildScript }}
          Write-Output "This is prebuild ${{ matrix.PrebuildScript }}  script."
