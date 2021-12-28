@@ -1,4 +1,4 @@
-#(v0.0.3)
+#(v0.0.3)      
 Add-Type @"
 using System.Runtime.InteropServices;
 public class Wallpaper {
