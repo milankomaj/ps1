@@ -128,10 +128,10 @@ jobs:
         
      # Run script
       - name: run script
-        shell: powershell
+        shell: pwsh
         run: |
          echo ${{steps.download.outputs.download-path}}
-         cd ${{steps.download.outputs.download-path}}
+         cd ${{steps.download.outputs.download-path}}/
          ./${{ matrix.PrebuildScript }}
          Write-Output "This is prebuild ${{ matrix.PrebuildScript }}  script."
          type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
