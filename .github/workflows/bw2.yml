@@ -12,7 +12,7 @@ jobs:
     - name: Generate Wallpaper Bing
       shell: powershell
       run: |
-       $textToAdd = '$outpath = "./executables/BING_2"'
+       $textToAdd = '$outpath = "./BingWallpaper"'
        $BingLineNumber = 42
        $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
        $fileContent[$BingLineNumber-1] = $textToAdd
