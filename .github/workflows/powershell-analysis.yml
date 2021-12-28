@@ -33,7 +33,7 @@ jobs:
       - name: copy
         run: |
           echo "GITHUB_WORKSPACE: ${{ github.workspace }}"
-          cp ./executables/*/${{ matrix.script }} ${{ github.workspace }}/
+          cp ./executables/*/*.* ${{ github.workspace }}/
           ls
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -130,7 +130,7 @@ jobs:
         shell: powershell
         run: |
          echo ${{steps.download.outputs.download-path}}
-         cd ${{steps.download.outputs.download-path}}/
+         cd ${{steps.download.outputs.download-path}}
          ./${{ matrix.PrebuildScript }}
          Write-Output "This is prebuild ${{ matrix.PrebuildScript }}  script."
          type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
