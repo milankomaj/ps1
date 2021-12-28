@@ -19,6 +19,9 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.SCRIPT }}
+      output2: ${{ steps.step1.outputs.PATH }} 
     strategy:
       max-parallel: 3
       matrix:
@@ -34,7 +37,10 @@ jobs:
         env:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
-        run: echo $path $script
+        run: |
+         echo $path $script
+         echo "::set-output name=SCRIPT::${{ matrix.script }}"
+         echo "::set-output name=PATH::${{ matrix.script }}"
 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -99,3 +105,44 @@ jobs:
          curl --request GET \
           --url https://www.virustotal.com/api/v3/files/$sum \
           --header 'x-apikey: ${{ secrets.VTAPI }}'
+
+  # dry_run 🔄🔄
+  dry_run:
+    runs-on: windows-latest
+    needs: [build]
+    strategy:
+     fail-fast: false
+     matrix:
+      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
+    steps:
+     # Artifacts download
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+         name: prebuild
+         path: ./
+      - name: 'Echo download path'
+        run: echo ${{steps.download.outputs.download-path}}
+
+     # Run script
+      - name: run script
+        shell: powershell
+        run: |
+          $textToAdd = '$outpath = "./BingWallpaper"'
+          $BingLineNumber = 42
+          $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
+          $fileContent[$BingLineNumber-1] = $textToAdd
+          $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
+
+          $textToAdd2 = ' <debug>true</debug>'
+          $BingLineNumber2 = 11
+          $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
+          $fileContent2[$BingLineNumber2-1] = $textToAdd2
+          $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
+
+
+          echo ${{steps.download.outputs.download-path}}
+          ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
+          Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}  script."
+          type ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
