@@ -25,11 +25,11 @@ jobs:
 
       matrix:
         include:
-            path: ./executables/BING_2/himawari.ps1
-            script: himawari.ps1
+          -  path: ./executables/BING_2/himawari.ps1
+             script: himawari.ps1
  
-            path: ./executables/Himawari/bing-wallpaper.ps1
-            script: bing-wallpaper.ps1
+          -  path: ./executables/Himawari/bing-wallpaper.ps1
+             script: bing-wallpaper.ps1
            
 
 
