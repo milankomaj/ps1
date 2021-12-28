@@ -83,12 +83,12 @@ $BW.DownloadFile($url,$ImageFileName)
 
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
-$adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileName})`
-$adapter.Metadata.Title = ${copyright}
-$adapter.Metadata.Subject = ${author}
+$adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileName})` 
+$adapter.Metadata.Title = ${copyright};
+$adapter.Metadata.Subject = ${author};
 $adapter.Metadata.Rating = $Config.Configuration.rating;
 $adapter.Metadata.Keywords.Add("${tag}"+", ${shortname}");
-$adapter.Metadata.Comments = ${url}
+$adapter.Metadata.Comments = ${url};
 $adapter.Save() = "SilentlyContinue"
 }else {}
 
@@ -101,8 +101,8 @@ $notification.BalloonTipTitle = if (!$TestPath) {"Wallpaper was downloaded and c
 $notification.ShowBalloonTip($timeout)
 [void][System.Threading.Thread]::Sleep($timeout)
 $notification.Dispose()
-
 }
+
 catch
 {
 #$_.Exception.Message.split(':')[2] -eq $null
