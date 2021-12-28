@@ -159,8 +159,9 @@ jobs:
       
       - name: Update scripts
         run: |
-         cp ./prebuild/bing-wallpaper.ps1 ./executables/BING_2/
-         cp ./prebuild/himawari.ps1 ./executables/Himawari/ 
+        echo "GITHUB_WORKSPACE: ${{ github.workspace }}"
+         cp ${{ github.workspace }}/prebuild/bing-wallpaper.ps1 ./executables/BING_2/
+         cp ${{ github.workspace }}/prebuild/himawari.ps1 ./executables/Himawari/ 
          git config --global user.email ${{ secrets.EMAIL }}
          git config --global user.name ${{ secrets.NAME }}     
          git add ./executables/BING_2/bing-wallpaper.ps1  
