@@ -33,6 +33,7 @@ jobs:
       - name: copy
         run: |
           echo "GITHUB_WORKSPACE: ${{ github.workspace }}"
+          rm -r /executables/BING/
           cp ./executables/*/*.* ${{ github.workspace }}/
           ls
      # upload artifact (.ps1.bak)
