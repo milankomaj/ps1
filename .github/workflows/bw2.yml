@@ -24,14 +24,18 @@ jobs:
        $fileContent2[$BingLineNumber2-1] = $textToAdd2
        $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
        
-       
-       cd ./executables/BING_2/
        Write-Output pred
-       dir -r ./BingWallpaper | Select-Object Name,Length,LastWriteTime
+       cd ./BingWallpaper
+       dir -r | Select-Object Name,Length,LastWriteTime
+
+       cd ./
+       cd ./executables/BING_2/
        ./bing-wallpaper.ps1
+       cd ./BingWallpaper
        Write-Output po
+       dir -r  | Select-Object Name,Length,LastWriteTime
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
-       dir -r ./BingWallpaper | Select-Object Name,Length,LastWriteTime
+       
        
        
     - name: Generate Wallpaper Himawari
@@ -45,8 +49,8 @@ jobs:
 
        
        Write-Output pred
-       dir -r | Select-Object Name,Length,LastWriteTime
+       dir -r ./Himawari | Select-Object Name,Length,LastWriteTime
        ./executables/Himawari/himawari.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
-       dir -r | Select-Object Name,Length,LastWriteTime       
+       dir -r ./Himawari | Select-Object Name,Length,LastWriteTime       
