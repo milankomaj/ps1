@@ -69,10 +69,11 @@ jobs:
          name: prebuild
          path: |
           ./*.sarif
-          ./${{ matrix.path }}/*.ps1 
+          ./${{ matrix.path }}/${{ matrix.script }}
 
    
      # Artifacts download  
+      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         id: download
         with:
