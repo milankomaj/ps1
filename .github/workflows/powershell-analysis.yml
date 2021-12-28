@@ -22,147 +22,24 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.SCRIPT }}    
     strategy:
-      matrix:
-       script: [himawari.ps1, bing-wallpaper.ps1]
-       path: [./executables/BING_2/himawari.ps1, ./executables/Himawari/bing-wallpaper.ps1]
 
-    steps:
-      - id: step1
-        run: echo "::set-output name=SCRIPT::${{ matrix.script }}"      
-      - uses: actions/checkout@v2	
-
-     # upload artifact (.ps1.bak)
-      - name: Create .bak files
-        run: |
-         cp ${{ matrix.path }}{,.bak}
-      - uses: actions/upload-artifact@v2 
-        with:
-         name: prebuild
-         path: |       
-          ${{ matrix.path }}.bak
-             
-      - name: Run PSScriptAnalyzer
-        uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
-        with:
-          # Check https://github.com/microsoft/action-psscriptanalyzer for more info about the options.
-          # The below set up runs PSScriptAnalyzer to your entire repository and runs some basic security rules.
-          # Include your own basic security rules. Removing this option will run all the rules 
-          # includeRule: ''
-          # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
-          output: ${{ matrix.script }}.results.sarif
-          path: ${{ matrix.path }}       
-          recurse: true
-          fix: true
-      # Upload the SARIF file generated in the previous step
-      - name: Upload SARIF results file
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: ${{ matrix.path }}.results.sarif
-      # Artifacts upload     
-      - uses: actions/upload-artifact@v2 
-        with:
-         name: prebuild
-         path: |
-          ${{ matrix.path }}.results.sarif
-          ${{ matrix.path }}  
-          
-  artifacts:
-    runs-on: ubuntu-latest
-    needs: build
-    strategy:
       matrix:
-       script:
-         [himawari.ps1,bing-wallpaper.ps1]    
-    steps:
-     # Artifacts download  
-      - uses: actions/download-artifact@v2
-        id: download
-        with:
-         name: prebuild
-         path: ./
-     # tree 
-      - name: Display structure of downloaded files 
-        run: tree -h ./ 
-      - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}
-     # virustotal
-      - name: virustotal
-        run: |
-         echo ${{needs.build.outputs.output1}}
-         sha256sum ${{steps.download.outputs.download-path}}/${{ matrix.script }} | cut -f 1 -d " "       
-         sum=$(sha256sum ${{steps.download.outputs.download-path}}/${{ matrix.script }} | cut -f 1 -d " ")
-         echo $sum
-         echo UPLOAD
-         curl --request POST \
-          --url https://www.virustotal.com/api/v3/files \
-          --header 'x-apikey: ${{ secrets.VTAPI }}' \
-          --form file=@/${{steps.download.outputs.download-path}}/${{ matrix.script }}
-         echo DATA
-         curl --request GET \
-          --url https://www.virustotal.com/api/v3/files/$sum \
-          --header 'x-apikey: ${{ secrets.VTAPI }}'
-        
-  # dry_run 🔄🔄     
-  dry_run:
-    runs-on: windows-latest
-    needs: [build]
-    strategy:
-     fail-fast: false 
-     matrix:
-      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]    
-    steps:
-     # Artifacts download
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        id: download
-        with:
-         name: prebuild
-         path: ./
-      - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}       
-        
-     # Run script
-      - name: run script
-        shell: powershell
-        run: |
-         echo ${{steps.download.outputs.download-path}}
-         $textToAdd = '$outpath = "./BingWallpaper"'
-         $BingLineNumber = 42
-         $fileContent = Get-Content ./bing-wallpaper.ps1
-         $fileContent[$BingLineNumber-1] = $textToAdd
-         $fileContent | Set-Content ./bing-wallpaper.ps1      
-         $textToAdd2 = ' <debug>true</debug>'
-         $BingLineNumber2 = 11
-         $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
-         $fileContent2[$BingLineNumber2-1] = $textToAdd2
-         $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
-         
-         echo ${{steps.download.outputs.download-path}}
-         ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
-         Write-Output "🤖 This is prebuild 🔻🔻🔻  ${{ matrix.PrebuildScript }}  script."
-         type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
+        include:
+            path: ./executables/BING_2/himawari.ps1
+            script: himawari.ps1
  
-  push:
-    runs-on: windows-latest
-    needs: [artifacts,dry_run]   
-    steps:
-     # Artifacts download  
-      - uses: actions/checkout@v2     
-      - uses: actions/download-artifact@v2
-        with:
-         name: prebuild
-         path: ./
-      - name: Update scripts
-        run: |
-         $timestamp= (Get-Date -UFormat "%A %d/%m/%Y %T %Z")
-         echo $timestamp
-         dir -r ./ 
-         git config --global user.email ${{ secrets.EMAIL }}
-         git config --global user.name ${{ secrets.NAME }}
-         git pull         
-         git add -u      
-         git commit -m "$timestamp" 
-         git push       
-    
+            path: ./executables/Himawari/bing-wallpaper.ps1
+            script: bing-wallpaper.ps1
+           
 
+
+
+
+    steps:
+
+      - name: Echo site details
+        env:
+          path: ${{ matrix.path }}
+          script: ${{ matrix.script }}
+        run: echo $path $script
 
