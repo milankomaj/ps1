@@ -9,12 +9,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Version
       run: |
-       $version = (Get-Content ./executables/BING/bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
+       $version = (Get-Content ./executables/BING/bing-wallpaper-xml.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
        Write-Output $version
        echo $version
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
-       ./executables/ps2exe.ps1 -inputFile ./executables/BING/bing-wallpaper.ps1 -outputFile ./executables/BING/bing-wallpaper.exe -noConsole -title "Bing Wallpaper" -iconFile ./executables/BING/bing-wallpaper.ico -version $version       
+       ./executables/ps2exe.ps1 -inputFile ./executables/BING/bing-wallpaper-xml.ps1 -outputFile ./executables/BING/bing-wallpaper.exe -noConsole -title "Bing Wallpaper" -iconFile ./executables/BING/bing-wallpaper.ico -version $version       
       shell: powershell  
     - name: "Build & test"
       run: |
@@ -30,7 +30,7 @@ jobs:
             ./executables/BING/SettingsBw.xml
     - name: Deploy
       run: |
-        $version = (Get-Content ./executables/BING/bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
+        $version = (Get-Content ./executables/BING/bing-wallpaper-xml.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
         Write-Output $version
         echo $version      
         git config --global user.email ${{ secrets.EMAIL }}
