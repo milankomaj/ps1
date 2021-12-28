@@ -144,8 +144,8 @@ jobs:
          
          cp ./executables/*/*.xml ${{ github.workspace }}/
          ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
-         Write-Output "This is prebuild ${{ matrix.PrebuildScript }}  script."
-         type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
+         # Write-Output "This is prebuild ${{ matrix.PrebuildScript }}  script."
+         # type ${{steps.download.outputs.download-path}}/${{ matrix.PrebuildScript }}
  
   push:
     runs-on: windows-latest
