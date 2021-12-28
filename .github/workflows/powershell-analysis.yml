@@ -23,9 +23,9 @@ jobs:
       max-parallel: 3
       matrix:
         include:
-           - path: ./executables/BING_2/bing-wallpaper.ps1
+           - path: executables/BING_2/bing-wallpaper.ps1
              script: bing-wallpaper.ps1
-           - path: ./executables/Himawari/himawari.ps1
+           - path: executables/Himawari/himawari.ps1
              script: himawari.ps1
            
     steps:
@@ -44,7 +44,7 @@ jobs:
         with:
          name: prebuild
          path: |       
-          ${{ matrix.path }}.bak
+          ./${{ matrix.path }}.bak
           
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
@@ -55,7 +55,7 @@ jobs:
           # includeRule: ''
           # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: ${{ matrix.script }}.results.sarif
-          path: ${{ matrix.path }}       
+          path: ./${{ matrix.path }}       
           recurse: true
           fix: true
       # Upload the SARIF file generated in the previous step
@@ -86,8 +86,8 @@ jobs:
      # virustotal
       - name: virustotal
         run: |
-         sha256sum ${{ matrix.path }} | cut -f 1 -d " "       
-         sum=$(sha256sum ${{ matrix.path }} | cut -f 1 -d " ")
+         sha256sum ${{steps.download.outputs.download-path}}/${{ matrix.script }} | cut -f 1 -d " "       
+         sum=$(sha256sum ${{steps.download.outputs.download-path}}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
          echo UPLOAD
          echo $path $script
