@@ -128,14 +128,14 @@ jobs:
         
      # Run script
       - name: run script
-        shell: pwsh
+        shell: powershell
         run: |
          echo ${{steps.download.outputs.download-path}}
          $textToAdd = '$outpath = "./BingWallpaper"'
          $BingLineNumber = 42
-         $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
+         $fileContent = Get-Content ./bing-wallpaper.ps1
          $fileContent[$BingLineNumber-1] = $textToAdd
-         $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1      
+         $fileContent | Set-Content ./bing-wallpaper.ps1      
          $textToAdd2 = ' <debug>true</debug>'
          $BingLineNumber2 = 11
          $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
