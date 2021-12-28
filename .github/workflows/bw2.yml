@@ -26,4 +26,6 @@ jobs:
        cd ./executables/BING_2
        ./bing-wallpaper.ps1
        dir -r
+       Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
+       dir -r
        
