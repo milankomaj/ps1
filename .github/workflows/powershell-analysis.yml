@@ -28,6 +28,7 @@ jobs:
              script: himawari.ps1
            
     steps:
+      - uses: actions/checkout@v2
       - name: Echo site details
         env:
           path: ${{ matrix.path }}
