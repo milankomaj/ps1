@@ -169,7 +169,7 @@ jobs:
          git config --global user.name ${{ secrets.NAME }}     
          git add ./executables/BING_2/bing-wallpaper.ps1  
          git add ./executables/Himawari/himawari.ps1   
-         git commit -m "$timestamp" 
+         git commit -m "Update scripts $timestamp" 
          git push       
     
 
