@@ -161,12 +161,10 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-         name: prebuild
          path: ./executables/BING_2/bing-wallpaper.ps1
       
       - uses: actions/download-artifact@v2
         with:
-         name: prebuild
          path: ./executables/Himawari/himawari.ps1  
       
       - name: Update scripts
