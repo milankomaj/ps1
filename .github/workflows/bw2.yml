@@ -27,7 +27,6 @@ jobs:
        Write-Output pred
        cd ./BingWallpaper
        dir -r | Select-Object Name,Length,LastWriteTime
-
        cd ..
        cd ./executables/BING_2/
        ./bing-wallpaper.ps1
@@ -35,12 +34,10 @@ jobs:
        cd ..
        cd ./BingWallpaper
        Write-Output po
-       dir -r  | Select-Object Name,Length,LastWriteTime
        Remove-Item latest.jpg
+       dir -r  | Select-Object Name,Length,LastWriteTime
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
-       
-       
-       
+            
     - name: Generate Wallpaper Himawari
       shell: pwsh
       run: |
@@ -49,11 +46,37 @@ jobs:
        $fileContent = Get-Content ./executables/Himawari/himawari.ps1
        $fileContent[$HimawariLineNumber-1] = $textToAdd
        $fileContent | Set-Content ./executables/Himawari/himawari.ps1
-
        
        Write-Output pred
        dir -r ./Himawari | Select-Object Name,Length,LastWriteTime
        ./executables/Himawari/himawari.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
-       dir -r ./Himawari | Select-Object Name,Length,LastWriteTime       
+       dir -r ./Himawari | Select-Object Name,Length,LastWriteTime   
+
+    - name: timestamp to readme   
+      run: |
+       $prefix = "- ##### "
+       $bingdate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %d/%m/%Y %T %Z"
+       $HimawariDate = Get-ChildItem ./Himawari/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %d/%m/%Y %T %Z"
+       $textToAdd = "$($prefix)$($bingdate)"
+       $textToAdd2 = "$($prefix)$($HimawariDate)"
+       $BingLineNumber = 4
+       $HimawariLineNumber = 9
+       $fileContent = Get-Content ./README.md
+       $fileContent[$BingLineNumber-1] = $textToAdd
+       $fileContent[$HimawariLineNumber-1] = $textToAdd2
+       $fileContent | Set-Content ./README.md
+
+    - name: Deploy
+      run: |
+       Get-TimeZone
+       $stamp = Get-Date -UFormat "%A %m/%d/%Y %R %Z"
+       git config --global user.email ${{ secrets.EMAIL }}
+       git config --global user.name ${{ secrets.NAME }}
+       git pull 
+       git add ./BingWallpaper/latest.jpg
+       git add ./Himawari/latest.jpg
+       git add ./README.md
+       git commit -m "$stamp"
+       git push
