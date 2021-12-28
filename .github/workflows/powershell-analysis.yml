@@ -69,7 +69,7 @@ jobs:
          name: prebuild
          path: |
           ./*.sarif
-          ./${{ matrix.script }}
+          ${{ matrix.path }}
 
 
      # Artifacts download  
