@@ -20,7 +20,7 @@ jobs:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest 
     strategy:
-      max-parallel: 1
+      max-parallel: 3
       matrix:
         include:
            - path: ./executables/BING_2/bing-wallpaper.ps1
@@ -71,12 +71,7 @@ jobs:
           ./*.sarif
           ./${{ matrix.script }}
 
-  artifacts:
-    runs-on: ubuntu-latest
-    needs: build
-    strategy:
-        max-parallel: 3
-    steps:
+
      # Artifacts download  
       - uses: actions/download-artifact@v2
         id: download
