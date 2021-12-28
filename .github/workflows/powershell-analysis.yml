@@ -28,7 +28,13 @@ jobs:
     steps:
       - id: step1
         run: echo "::set-output name=SCRIPT::${{ matrix.script }}"      
-      - uses: actions/checkout@v2			 
+      - uses: actions/checkout@v2	
+     # copy files
+      - name: copy
+        run: |
+          echo "GITHUB_WORKSPACE: ${{ github.workspace }}"
+          cp ./executables/*/${{ matrix.script }} ${{ github.workspace }}
+          ls
      # upload artifact (.ps1.bak)
       - name: Create .bak files
         run: |
