@@ -28,7 +28,7 @@ jobs:
        cd ./executables/BING_2/
        Write-Output pred
        dir -r ./BingWallpaper | Select-Object Name,Length,LastWriteTime
-       bing-wallpaper.ps1
+       ./bing-wallpaper.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
        dir -r ./BingWallpaper | Select-Object Name,Length,LastWriteTime
