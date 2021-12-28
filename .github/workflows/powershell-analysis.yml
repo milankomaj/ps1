@@ -69,9 +69,9 @@ jobs:
          name: prebuild
          path: |
           ./*.sarif
-          ${{ matrix.path }}
+          ./${{ matrix.path }} 
 
-
+   
      # Artifacts download  
       - uses: actions/download-artifact@v2
         id: download
