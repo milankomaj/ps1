@@ -24,7 +24,7 @@ jobs:
        $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
        $fileContent2[$BingLineNumber2-1] = $textToAdd2
        $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
-       
+
        Write-Output pred
        cd ./BingWallpaper
        dir -r | Select-Object Name,Length,LastWriteTime
@@ -38,7 +38,7 @@ jobs:
        Remove-Item latest.jpg
        dir -r  | Select-Object Name,Length,LastWriteTime
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
-            
+
     - name: Generate Wallpaper Himawari
       shell: powershell
       run: |
@@ -47,15 +47,15 @@ jobs:
        $fileContent = Get-Content ./executables/Himawari/himawari.ps1
        $fileContent[$HimawariLineNumber-1] = $textToAdd
        $fileContent | Set-Content ./executables/Himawari/himawari.ps1
-       
+
        Write-Output pred
-       dir ./Himawari | Select-Object Name,Length,LastWriteTime 
+       dir ./Himawari | Select-Object Name,Length,LastWriteTime
        ./executables/Himawari/himawari.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
-       dir ./Himawari | Select-Object Name,Length,LastWriteTime   
+       dir ./Himawari | Select-Object Name,Length,LastWriteTime
 
-    - name: timestamp to readme   
+    - name: timestamp to readme
       run: |
        $prefix = "- ##### "
        $bingdate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %d/%m/%Y %T %Z"
@@ -75,7 +75,7 @@ jobs:
        $stamp = Get-Date -UFormat "%A %m/%d/%Y %R %Z"
        git config --global user.email ${{ secrets.EMAIL }}
        git config --global user.name ${{ secrets.NAME }}
-       git pull 
+       git pull
        git add ./BingWallpaper/latest.jpg
        git add ./Himawari/latest.jpg
        git add ./README.md
