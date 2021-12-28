@@ -31,6 +31,7 @@ jobs:
        cd ./
        cd ./executables/BING_2/
        ./bing-wallpaper.ps1
+       cd ./
        cd ./BingWallpaper
        Write-Output po
        dir -r  | Select-Object Name,Length,LastWriteTime
