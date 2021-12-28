@@ -126,7 +126,7 @@ jobs:
         run: echo ${{steps.download.outputs.download-path}}
 
      # Run script
-      - name: run script
+      - name: run script if
         shell: powershell
         if: ${{ matrix.PrebuildScript == 'bing-wallpaper.ps1' }}
         run: |
@@ -139,9 +139,9 @@ jobs:
           $textToAdd2 = ' <debug>true</debug>'
           $BingLineNumber2 = 11
           $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
-          $fileContent2[$BingLineNumber2-1] = $textToAdd2    
+          $fileContent2[$BingLineNumber2-1] = $textToAdd2
           $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
-     
+
       - name: run script
         shell: powershell
         run: |
