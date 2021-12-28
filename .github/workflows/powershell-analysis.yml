@@ -173,7 +173,6 @@ jobs:
          echo $timestamp
          git config --global user.email ${{ secrets.EMAIL }}
          git config --global user.name ${{ secrets.NAME }}
-         git pull         
          git add ./executables/BING_2/bing-wallpaper.ps1  
          git add ./executables/Himawari/himawari.ps1   
          git commit -m "$timestamp" 
