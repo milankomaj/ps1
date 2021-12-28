@@ -1,4 +1,4 @@
-name: Generate Wallpaper Github README.md
+name: bw
 
 on:
   workflow_dispatch:
