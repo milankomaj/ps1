@@ -49,7 +49,7 @@ jobs:
        
        Write-Output pred
        dir ./Himawari | Select-Object Name,Length,LastWriteTime
-       Remove-Item ./Himawari/latest.jpg
+       
        ./executables/Himawari/himawari.ps1
        Write-Output po
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }

@@ -35,9 +35,9 @@ if(!(Test-Path -Path $outpath ))
 
 #The filename that will be saved:
 #Uncomment this to have the files accumulate in the directory:
-$outfile = "$year$month$day"+"_" + $time + ".jpg"
+#$outfile = "$year$month$day"+"_" + $time + ".jpg"
 #Use this to have the script just store the latest file only:
-#$outfile = "latest.jpg"
+$outfile = "latest.jpg"
 
 
 $url = "https://himawari8-dl.nict.go.jp/himawari8/img/D531106/$level/$width/$year/$month/$day/$time"
