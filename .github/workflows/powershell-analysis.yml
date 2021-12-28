@@ -18,28 +18,28 @@ on:
 jobs:
   build:
     name: PSScriptAnalyzer
-    runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.SCRIPT }}    
+    runs-on: ubuntu-latest 
     strategy:
-
       matrix:
         include:
-            path: ./executables/BING_2/himawari.ps1
-            script: himawari.ps1
- 
-            path: ./executables/Himawari/bing-wallpaper.ps1
-            script: bing-wallpaper.ps1
+           - path: ./executables/BING_2/bing-wallpaper.ps1
+             script: bing-wallpaper.ps1
+           - path: ./executables/Himawari/himawari.ps1
+             script: himawari.ps1
            
-
-
-
-
     steps:
-
       - name: Echo site details
         env:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
         run: echo $path $script
 
+     # upload artifact (.ps1.bak)
+      - name: Create .bak files
+        run: |
+         cp ${{ matrix.path }}{,.bak}
+      - uses: actions/upload-artifact@v2 
+        with:
+         name: prebuild
+         path: |       
+          ${{ matrix.path }}.bak
