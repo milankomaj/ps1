@@ -7,10 +7,11 @@ jobs:
  Generate_Wallpapers :
     runs-on: windows-latest
     timeout-minutes: 10
+    continue-on-error: true
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper Bing
-      shell: powershell
+      shell: pwsh
       run: |
        $textToAdd = '$outpath = "./executables/BING_2"'
        $BingLineNumber = 42
@@ -34,7 +35,7 @@ jobs:
        
        
     - name: Generate Wallpaper Himawari
-      shell: powershell
+      shell: pwsh
       run: |
        $textToAdd = '$outpath = "./Himawari/"'
        $HimawariLineNumber = 30
