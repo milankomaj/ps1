@@ -11,13 +11,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Generate Wallpaper Bing
-      shell: pwsh
+      
       run: |
        $textToAdd = '$outpath = "./executables/BING_2"'
        $BingLineNumber = 42
        $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
        $fileContent[$BingLineNumber-1] = $textToAdd
        $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
+
        $textToAdd2 = ' <debug>true</debug>'
        $BingLineNumber2 = 11
        $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
