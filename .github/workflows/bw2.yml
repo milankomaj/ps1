@@ -36,7 +36,7 @@ jobs:
        cd ./BingWallpaper
        Write-Output po
        dir -r  | Select-Object Name,Length,LastWriteTime
-       Remove-Item ./BingWallpaper/latest.jpg
+       Remove-Item latest.jpg
        Get-ChildItem *.jpg | Rename-Item -NewName { $_.Name -replace '.*.jpg','latest.jpg' }
        
        
