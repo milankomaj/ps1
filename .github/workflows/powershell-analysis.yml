@@ -19,6 +19,9 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.HimawariSum }}
+      output2: ${{ steps.step1.outputs.BingSum }}     
     strategy:
       max-parallel: 3
       matrix:
@@ -31,7 +34,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Echo matrix details
-        id: step1
         env:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
@@ -73,10 +75,19 @@ jobs:
 
      # virustotal
       - name: virustotal
+        id: SUM
         run: |
+         echo sha256sum    
          sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " "
          sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
+         if [ ${{ matrix.script }} == 'himawari.ps1' ]
+         then
+         echo "::set-output name=HimawariSum::$(echo $sum)"
+         else
+         echo "::set-output name=BingSum::$(echo $sum)"
+         fi
+
          echo UPLOAD
          curl -s --request POST \
           --url https://www.virustotal.com/api/v3/files \
@@ -90,6 +101,9 @@ jobs:
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
          | jq .data.attributes.last_analysis_stats
 
+     # metadefender
+      - name: metadefender
+        run: |
          echo meta test
          downloadurl=(https://raw.githubusercontent.com/milankomaj/ps1/main/${{ matrix.path }}/${{ matrix.script }})
          echo downloadurl=$downloadurl
@@ -111,5 +125,7 @@ jobs:
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
          | jq '"total scan: \(.scan_results.total_avs),detected: \(.scan_results.total_detected_avs)"' 
-
-  
+          
+         echo outputs
+         echo ${{ steps.SUM.outputs.HimawariSum }}
+         echo ${{ steps.SUM.outputs.BingSum }}
