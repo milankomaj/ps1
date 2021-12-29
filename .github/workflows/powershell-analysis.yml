@@ -19,9 +19,6 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.SCRIPT }}
-      output2: ${{ steps.step1.outputs.PATH }}
     strategy:
       max-parallel: 3
       matrix:
@@ -40,8 +37,6 @@ jobs:
           script: ${{ matrix.script }}
         run: |
          echo $path $script
-         echo "::set-output name=SCRIPT::${{ matrix.script }}"
-         echo "::set-output name=PATH::${{ matrix.path }}"
 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
@@ -62,7 +57,7 @@ jobs:
           # includeRule: ''
           # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: ${{ matrix.script }}.results.sarif
-          path: ./
+          path: ./${{ matrix.path }}
           recurse: true
           fix: true
       # Upload the SARIF file generated in the previous step
@@ -76,7 +71,7 @@ jobs:
          name: prebuild
          path: |
           ./*.sarif
-          ./${{ matrix.path }}/${{ matrix.script }}
+          ./${{ matrix.script }}
 
 
      # Artifacts download
@@ -152,7 +147,6 @@ jobs:
         shell: powershell
         run: |
           echo ${{steps.download.outputs.download-path}}
-          echo ${{needs.build.outputs.output2}}
           echo ${{ matrix.script }}
           cd ${{ matrix.path }}
           dir -r  | Select-Object Name,Length,LastWriteTime
