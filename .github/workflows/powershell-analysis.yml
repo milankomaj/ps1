@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Echo site details
+      - name: Echo matrix details
         id: step1
         env:
           path: ${{ matrix.path }}
@@ -71,18 +71,6 @@ jobs:
           ./${{ matrix.path }}/*.sarif
           ./${{ matrix.path }}/${{ matrix.script }}
 
-
-     # Artifacts download
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        id: download
-        with:
-         path: ./
-     # tree
-      - name: Display structure of downloaded files
-        run: tree -h ./
-      - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}
      # virustotal
       - name: virustotal
         run: |
@@ -93,11 +81,14 @@ jobs:
          curl --request POST \
           --url https://www.virustotal.com/api/v3/files \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
-          --form file=@/${{steps.download.outputs.download-path}}/${{ matrix.path }}/${{ matrix.script }}
+          --form file=@/${{steps.download.outputs.download-path}}/${{ matrix.path }}/${{ matrix.script }} \
+         | jq 
+
          echo DATA
          curl --request GET \
           --url https://www.virustotal.com/api/v3/files/$sum \
-          --header 'x-apikey: ${{ secrets.VTAPI }}'
+          --header 'x-apikey: ${{ secrets.VTAPI }}' \
+         | jq .data[0].attributes.last_analysis_stat
 
   # dry_run 🔄🔄
   dry_run:
@@ -142,7 +133,7 @@ jobs:
       - name: run script
         shell: powershell
         run: |
-          echo ${{steps.download.outputs.download-path}}
+          echo ${{ github.workspace }}
           echo ${{ matrix.script }}
           cd ${{ matrix.path }}
           dir -r  | Select-Object Name,Length,LastWriteTime
