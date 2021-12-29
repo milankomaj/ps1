@@ -37,16 +37,15 @@ jobs:
         env:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
-        run: echo $path $script
-         
-
+        run: |
+         echo $path $script
+         echo "::set-output name=SCRIPT::${{ matrix.script }}"
+         echo "::set-output name=PATH::${{ matrix.path }}"
 
      # upload artifact (.ps1.bak)
       - name: Create .bak files
         run: |
          cp ./${{ matrix.path }}/${{ matrix.script }}{,.bak}
-         echo "::set-output name=SCRIPT::${{ matrix.script }}"
-         echo "::set-output name=PATH::${{ matrix.path }}"
       - uses: actions/upload-artifact@v2
         with:
          name: prebuild
@@ -128,7 +127,7 @@ jobs:
 
      # Run script
       - name: run script if
-        shell: powershell
+        shell: pwsh
         if: ${{ matrix.PrebuildScript == 'bing-wallpaper.ps1' }}
         run: |
           $textToAdd = '$outpath = "./BingWallpaper"'
@@ -144,7 +143,7 @@ jobs:
           $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
 
       - name: run script
-        shell: powershell
+        shell: pwsh
         run: |
           echo ${{steps.download.outputs.download-path}}
           echo ${{needs.build.outputs.output2}}
