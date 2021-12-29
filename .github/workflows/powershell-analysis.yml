@@ -34,6 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Echo site details
+        id: step1
         env:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
