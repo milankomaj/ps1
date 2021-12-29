@@ -110,8 +110,9 @@ jobs:
         with:
          path: ./
       - name: 'Echo download path'
-        run: echo ${{steps.download.outputs.download-path}}
-
+        run: |
+         echo ${{steps.download.outputs.download-path}}
+         dir -r  | Select-Object Name,Length,LastWriteTime
      # Run script
       - name: run script if
         shell: pwsh
