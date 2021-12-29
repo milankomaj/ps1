@@ -114,7 +114,11 @@ jobs:
     strategy:
      fail-fast: false
      matrix:
-      PrebuildScript: [himawari.ps1, bing-wallpaper.ps1]
+      include:
+           - path: executables/BING_2
+             script: bing-wallpaper.ps1
+           - path: executables/Himawari
+             script: himawari.ps1
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
@@ -148,7 +152,7 @@ jobs:
         run: |
           echo ${{steps.download.outputs.download-path}}
           echo ${{needs.build.outputs.output2}}
-          echo ${{ matrix.PrebuildScript }}
-          ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
-          Write-Output "This is prebuild ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}  script."
-          type ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
+          echo ${{ matrix.script }}
+          ${{steps.download.outputs.download-path}}/${{ matrix.path }}/${{ matrix.script }}
+          Write-Output "This is prebuild ${{ matrix.script }}  script."
+          type ${{steps.download.outputs.download-path}}/${{ matrix.path }}/${{ matrix.script }}
