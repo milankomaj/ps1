@@ -154,6 +154,6 @@ jobs:
           echo ${{needs.build.outputs.output2}}
           echo ${{ matrix.script }}
           cd ${{ matrix.path }}
-          ${{steps.download.outputs.download-path}}/${{ matrix.path }}/${{ matrix.script }}
+          ${{ matrix.script }}
           Write-Output "This is prebuild ${{ matrix.script }}  script."
-          type ${{steps.download.outputs.download-path}}/${{ matrix.path }}/${{ matrix.script }}
+          type ${{ matrix.script }}
