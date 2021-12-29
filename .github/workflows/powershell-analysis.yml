@@ -73,8 +73,8 @@ jobs:
           ./${{ matrix.path }}/*.sarif
           ./${{ matrix.path }}/${{ matrix.script }}
 
-     # virustotal
-      - name: virustotal
+     # virustotal && metadefender
+      - name: virustotal && metadefender
         id: SUM
         run: |
          echo sha256sum    
@@ -101,9 +101,7 @@ jobs:
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
          | jq .data.attributes.last_analysis_stats
 
-     # metadefender
-      - name: metadefender
-        run: |
+
          echo meta test
          downloadurl=(https://raw.githubusercontent.com/milankomaj/ps1/main/${{ matrix.path }}/${{ matrix.script }})
          echo downloadurl=$downloadurl
