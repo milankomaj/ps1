@@ -102,7 +102,7 @@ jobs:
          | jq .data.attributes.last_analysis_stats
 
          echo meta test
-         downloadurl=(https://raw.githubusercontent.com$/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }})
+         downloadurl=(https://raw.githubusercontent.com/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }})
          echo downloadurl=$downloadurl
          curl -s --request POST \
           --url https://api.metadefender.com/v4/file \
@@ -170,7 +170,7 @@ jobs:
           cd ${{ matrix.path }}
           dir -r  | Select-Object Name,Length,LastWriteTime
           ./${{ matrix.script }}
-          Write-Output "This is prebuild ${{ matrix.script }}  script."
+          Write-Output "This is ${{ matrix.script }}  script."
           type ${{ matrix.script }}
 
 
@@ -187,9 +187,9 @@ jobs:
       - name: 'download path && dir && Copy-Item'
         run: |
          echo ${{steps.download.outputs.download-path}}
-         dir -r  | Select-Object Name,Length,LastWriteTime
-         Copy-Item "${{steps.download.outputs.download-path}}/bing-wallpaper.ps1" -Destination "./executables/BING_2"
-         Copy-Item "${{steps.download.outputs.download-path}}/himawari.ps1" -Destination "./executables/Himawari"
+         dir | Select-Object Name,Length,LastWriteTime
+         Copy-Item "${{ github.workspace }}/bing-wallpaper.ps1" -Destination "./executables/BING_2"
+         Copy-Item "${{ github.workspace }}/himawari.ps1" -Destination "./executables/Himawari"
         
       - name: Update scripts
         run: |
