@@ -75,7 +75,7 @@ jobs:
       - name: virustotal
         run: |
          sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " "
-         sum=$(sha256sum ${{steps.download.outputs.download-path}}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
+         sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
          echo UPLOAD
          curl --request POST \
