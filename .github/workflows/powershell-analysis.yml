@@ -146,7 +146,8 @@ jobs:
           $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
           $fileContent2[$BingLineNumber2-1] = $textToAdd2
           $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
-
+          
+          Copy-Item "./executables/BING_2/SettingsBw.xml" -Destination "./${{ matrix.path }}"
       - name: run script
         shell: powershell
         run: |
