@@ -94,9 +94,9 @@ jobs:
          curl --request POST \
           --url https://api.metadefender.com/v4/file \
           -F "data=${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }}" \
-          --header "apikey: {apikey}" \
+          --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
-          --header "filename: {filename}" \
+          --header "filename: ${{ matrix.script }}" \
          | jq  
 
 
