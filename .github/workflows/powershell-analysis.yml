@@ -93,7 +93,7 @@ jobs:
          echo meta test
          downloadurl=(https://raw.githubusercontent.com/milankomaj/ps1/main/${{ matrix.path }}/${{ matrix.script }})
          echo downloadurl=$downloadurl
-         curl --request POST \
+         curl -s --request POST \
           --url https://api.metadefender.com/v4/file \
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
@@ -105,7 +105,7 @@ jobs:
          | jq
 
          echo DATA
-         curl --request GET \
+         curl -s --request GET \
           --url https://api.metadefender.com/v4/hash/$sum \
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
