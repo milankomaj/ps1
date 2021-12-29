@@ -144,11 +144,11 @@ jobs:
           $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
 
       - name: run script
-        shell: pwsh
+        shell: powershell
         run: |
           echo ${{steps.download.outputs.download-path}}
           echo ${{needs.build.outputs.output2}}
           echo ${{ matrix.PrebuildScript }}
-          ${{steps.download.outputs.download-path}}${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
-          Write-Output "This is prebuild ${{steps.download.outputs.download-path}}${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}  script."
-          type ${{steps.download.outputs.download-path}}${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
+          ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
+          Write-Output "This is prebuild ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}  script."
+          type ${{steps.download.outputs.download-path}}/${{needs.build.outputs.output2}}/${{ matrix.PrebuildScript }}
