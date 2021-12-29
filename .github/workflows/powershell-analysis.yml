@@ -188,8 +188,8 @@ jobs:
         run: |
          echo ${{steps.download.outputs.download-path}}
          dir | Select-Object Name,Length,LastWriteTime
-         Copy-Item "${{ github.workspace }}/bing-wallpaper.ps1" -Destination "./executables/BING_2"
-         Copy-Item "${{ github.workspace }}/himawari.ps1" -Destination "./executables/Himawari"
+         Copy-Item "${{ github.workspace }}/artifact/bing-wallpaper.ps1" -Destination "./executables/BING_2"
+         Copy-Item "${{ github.workspace }}/artifact/himawari.ps1" -Destination "./executables/Himawari"
         
       - name: Update scripts
         run: |
