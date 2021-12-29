@@ -91,11 +91,9 @@ jobs:
          | jq .data.attributes.last_analysis_stats
 
          echo meta test
-         downloadurl=(https://raw.githubusercontent.com/milankomaj/ps1/main/${{ matrix.path }}/${{ matrix.script }})
-         echo downloadurl=$downloadurl
          curl --request POST \
           --url https://api.metadefender.com/v4/file \
-          --header "downloadfrom: $downloadurl" \
+          -F "data=./${{ matrix.path }}/${{ matrix.script }}" \
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
           --header "filename: ${{ matrix.script }}" \
