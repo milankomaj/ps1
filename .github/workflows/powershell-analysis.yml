@@ -99,8 +99,18 @@ jobs:
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
           --header "filename: ${{ matrix.script }}" \
-         | jq  
+          --header "sandbox: windows10" \
+          --header "sandbox_timeout: long" \
+          --header "rescan_count: 100" \
+          --header "rescan_interval: {rescan_interval}" \
+         | jq
 
-
+         echo DATA
+         curl --request GET \
+          --url https://api.metadefender.com/v4/hash/$sum \
+          --header "downloadfrom: $downloadurl" \
+          --header "apikey: ${{ secrets.META }}" \
+          --header "Content-Type: application/octet-stream" \
+         | jq '"total scan: \(.scan_results.total_avs),detected: \(.scan_results.total_detected_avs)"' 
 
   
