@@ -188,7 +188,7 @@ jobs:
         run: |
          echo ${{steps.download.outputs.download-path}}
          dir -r  | Select-Object Name,Length,LastWriteTime
-         Copy-Item "${{steps.download.outputs.download-path}}/bing-wallpaper.ps1" -Destination "./executables/BING_2
+         Copy-Item "${{steps.download.outputs.download-path}}/bing-wallpaper.ps1" -Destination "./executables/BING_2"
          Copy-Item "${{steps.download.outputs.download-path}}/himawari.ps1" -Destination "./executables/Himawari"
         
       - name: Update scripts
