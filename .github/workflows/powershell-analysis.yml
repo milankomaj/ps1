@@ -44,10 +44,9 @@ jobs:
          cp ./${{ matrix.path }}/${{ matrix.script }}{,.bak}
       - uses: actions/upload-artifact@v2
         with:
-         name: prebuild
          path: |
           ./${{ matrix.path }}/${{ matrix.script }}.bak
-          ./*.sarif
+          ./${{ matrix.path }}/*.sarif
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
         with:
@@ -56,22 +55,21 @@ jobs:
           # Include your own basic security rules. Removing this option will run all the rules
           # includeRule: ''
           # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
-          output: ${{ matrix.script }}.results.sarif
+          output: ./${{ matrix.path }}/${{ matrix.script }}.results.sarif
           path: ./${{ matrix.path }}
-          recurse: true
+          recurse: false
           fix: true
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: ${{ matrix.script }}.results.sarif
+          sarif_file: ./${{ matrix.path }}/${{ matrix.script }}.results.sarif
       # Artifacts upload
       - uses: actions/upload-artifact@v2
         with:
-         name: prebuild
          path: |
-          ./*.sarif
-          ./${{ matrix.script }}
+          ./${{ matrix.path }}/*.sarif
+          ./${{ matrix.path }}/${{ matrix.script }}
 
 
      # Artifacts download
@@ -79,7 +77,6 @@ jobs:
       - uses: actions/download-artifact@v2
         id: download
         with:
-         name: prebuild
          path: ./
      # tree
       - name: Display structure of downloaded files
@@ -120,7 +117,6 @@ jobs:
       - uses: actions/download-artifact@v2
         id: download
         with:
-         name: prebuild
          path: ./
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}
