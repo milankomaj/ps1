@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.HimawariSum }}
-      output2: ${{ steps.step1.outputs.BingSum }}     
+      output2: ${{ steps.step1.outputs.BingSum }}
     strategy:
       max-parallel: 3
       matrix:
@@ -77,7 +77,7 @@ jobs:
       - name: virustotal && metadefender
         id: SUM
         run: |
-         echo sha256sum    
+         echo sha256sum
          sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " "
          sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
@@ -93,7 +93,7 @@ jobs:
           --url https://www.virustotal.com/api/v3/files \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
           --form file=@/${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} \
-         | jq 
+         | jq
 
          echo DATA
          curl -s --request GET \
@@ -122,8 +122,63 @@ jobs:
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
-         | jq '"total scan: \(.scan_results.total_avs),detected: \(.scan_results.total_detected_avs)"' 
-          
+         | jq '"total scan: \(.scan_results.total_avs),detected: \(.scan_results.total_detected_avs)"'
+
+     # outputs
+      - name: outputs
+        run: |
          echo outputs
          echo ${{ steps.SUM.outputs.HimawariSum }}
          echo ${{ steps.SUM.outputs.BingSum }}
+
+  # dry_run 🔄🔄
+  dry_run:
+    runs-on: windows-latest
+    needs: [build]
+    strategy:
+     fail-fast: false
+     matrix:
+      include:
+           - path: executables/BING_2
+             script: bing-wallpaper.ps1
+           - path: executables/Himawari
+             script: himawari.ps1
+    steps:
+     # Artifacts download
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+         path: ./
+      - name: 'Echo download path'
+        run: |
+         echo ${{steps.download.outputs.download-path}}
+         dir -r  | Select-Object Name,Length,LastWriteTime
+     # Run script
+      - name: run script if
+        shell: pwsh
+        if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
+        run: |
+          $textToAdd = '$outpath = "./BingWallpaper"'
+          $BingLineNumber = 42
+          $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
+          $fileContent[$BingLineNumber-1] = $textToAdd
+          $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
+
+          $textToAdd2 = ' <debug>true</debug>'
+          $BingLineNumber2 = 11
+          $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
+          $fileContent2[$BingLineNumber2-1] = $textToAdd2
+          $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
+
+
+      - name: run script
+        shell: powershell
+        run: |
+          echo ${{ github.workspace }}
+          echo ${{ matrix.script }}
+          cd ${{ matrix.path }}
+          dir -r  | Select-Object Name,Length,LastWriteTime
+          ./${{ matrix.script }}
+          Write-Output "This is prebuild ${{ matrix.script }}  script."
+          type ${{ matrix.script }}
