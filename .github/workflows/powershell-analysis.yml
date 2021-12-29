@@ -133,7 +133,7 @@ jobs:
      # Run script
       - name: run script if
         shell: pwsh
-        if: ${{ matrix.PrebuildScript == 'bing-wallpaper.ps1' }}
+        if: ${{ ${{ matrix.script }} == 'bing-wallpaper.ps1' }}
         run: |
           $textToAdd = '$outpath = "./BingWallpaper"'
           $BingLineNumber = 42
@@ -147,7 +147,7 @@ jobs:
           $fileContent2[$BingLineNumber2-1] = $textToAdd2
           $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
           
-          Copy-Item "./executables/BING_2/SettingsBw.xml" -Destination "./${{ matrix.path }}"
+      
       - name: run script
         shell: powershell
         run: |
