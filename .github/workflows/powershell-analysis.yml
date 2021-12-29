@@ -101,9 +101,8 @@ jobs:
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
          | jq .data.attributes.last_analysis_stats
 
-
          echo meta test
-         downloadurl=(https://raw.githubusercontent.com/milankomaj/ps1/main/${{ matrix.path }}/${{ matrix.script }})
+         downloadurl=(https://raw.githubusercontent.com$/{{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }})
          echo downloadurl=$downloadurl
          curl -s --request POST \
           --url https://api.metadefender.com/v4/file \
@@ -144,16 +143,6 @@ jobs:
            - path: executables/Himawari
              script: himawari.ps1
     steps:
-     # Artifacts download
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        id: download
-        with:
-         path: ./
-      - name: 'Echo download path'
-        run: |
-         echo ${{steps.download.outputs.download-path}}
-         dir -r  | Select-Object Name,Length,LastWriteTime
      # Run script
       - name: run script if
         shell: pwsh
@@ -182,3 +171,31 @@ jobs:
           ./${{ matrix.script }}
           Write-Output "This is prebuild ${{ matrix.script }}  script."
           type ${{ matrix.script }}
+
+
+  push:
+    runs-on: windows-latest
+    needs: [build,dry_run]   
+    steps:
+     # Artifacts download
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+         path: ./
+      - name: 'download path && dir && Copy-Item'
+        run: |
+         echo ${{steps.download.outputs.download-path}}
+         dir -r  | Select-Object Name,Length,LastWriteTime
+         Copy-Item "${{steps.download.outputs.download-path}}/bing-wallpaper.ps1" -Destination "./executables/BING_2
+         Copy-Item "${{steps.download.outputs.download-path}}/himawari.ps1" -Destination "./executables/Himawari"
+        
+      - name: Update scripts
+        run: |
+         $timestamp= (Get-Date -UFormat "%A %d/%m/%Y %T %Z")
+         echo $timestamp
+         git config --global user.email ${{ secrets.EMAIL }}
+         git config --global user.name ${{ secrets.NAME }}      
+         git add -u      
+         git commit -m "PSScriptAnalyzer $timestamp" 
+         git push   
