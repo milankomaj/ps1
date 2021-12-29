@@ -102,7 +102,6 @@ jobs:
           --header "sandbox: windows10" \
           --header "sandbox_timeout: long" \
           --header "rescan_count: 100" \
-          --header "rescan_interval: {rescan_interval}" \
          | jq
 
          echo DATA
