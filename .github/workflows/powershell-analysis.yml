@@ -133,7 +133,7 @@ jobs:
      # Run script
       - name: run script if
         shell: pwsh
-        if: ${{ ${{ matrix.script }} == 'bing-wallpaper.ps1' }}
+        if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
         run: |
           $textToAdd = '$outpath = "./BingWallpaper"'
           $BingLineNumber = 42
