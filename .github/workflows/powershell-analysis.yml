@@ -154,6 +154,7 @@ jobs:
           echo ${{needs.build.outputs.output2}}
           echo ${{ matrix.script }}
           cd ${{ matrix.path }}
-          ${{ matrix.script }}
+          dir -r  | Select-Object Name,Length,LastWriteTime
+          ./${{ matrix.script }}
           Write-Output "This is prebuild ${{ matrix.script }}  script."
           type ${{ matrix.script }}
