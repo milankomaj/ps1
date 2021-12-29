@@ -102,7 +102,7 @@ jobs:
          | jq .data.attributes.last_analysis_stats
 
          echo meta test
-         downloadurl=(https://raw.githubusercontent.com$/{{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }})
+         downloadurl=(https://raw.githubusercontent.com$/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }})
          echo downloadurl=$downloadurl
          curl -s --request POST \
           --url https://api.metadefender.com/v4/file \
@@ -144,6 +144,7 @@ jobs:
              script: himawari.ps1
     steps:
      # Run script
+      - uses: actions/checkout@v2
       - name: run script if
         shell: pwsh
         if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
