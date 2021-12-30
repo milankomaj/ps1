@@ -39,7 +39,7 @@ jobs:
           script: ${{ matrix.script }}
         run: |
          echo $path $script
-         echo artifact (.ps1.bak)
+         echo 'artifact (.ps1.bak)'
          cp ./${{ matrix.path }}/${{ matrix.script }}{,.bak}
 
 
