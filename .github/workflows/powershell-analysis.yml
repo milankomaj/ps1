@@ -23,7 +23,7 @@ jobs:
       output1: ${{ steps.step1.outputs.HimawariSum }}
       output2: ${{ steps.step1.outputs.BingSum }}
     strategy:
-      max-parallel: 3
+      max-parallel: 1
       matrix:
         include:
            - path: executables/BING_2
