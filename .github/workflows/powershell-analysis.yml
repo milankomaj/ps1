@@ -39,16 +39,10 @@ jobs:
           script: ${{ matrix.script }}
         run: |
          echo $path $script
-
-     # upload artifact (.ps1.bak)
-      - name: Create .bak files
-        run: |
+         echo artifact (.ps1.bak)
          cp ./${{ matrix.path }}/${{ matrix.script }}{,.bak}
-      - uses: actions/upload-artifact@v2
-        with:
-         path: |
-          ./${{ matrix.path }}/${{ matrix.script }}.bak
-          ./${{ matrix.path }}/*.sarif
+
+
       - name: Run PSScriptAnalyzer
         uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
         with:
@@ -58,7 +52,7 @@ jobs:
           # includeRule: ''
           # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
           output: ./${{ matrix.path }}/${{ matrix.script }}.results.sarif
-          path: ./${{ matrix.path }}
+          path: ./${{ matrix.path }}/${{ matrix.script }}
           recurse: false
           fix: true
 
@@ -73,6 +67,7 @@ jobs:
          path: |
           ./${{ matrix.path }}/*.sarif
           ./${{ matrix.path }}/${{ matrix.script }}
+          ./${{ matrix.path }}/${{ matrix.script }}.bak
 
      # virustotal && metadefender
       - name: virustotal && metadefender
