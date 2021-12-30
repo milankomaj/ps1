@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Echo matrix details
+      - name: details
         env:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
