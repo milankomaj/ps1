@@ -49,9 +49,8 @@ jobs:
          path: |
           ./${{ matrix.path }}/${{ matrix.script }}.bak
           ./${{ matrix.path }}/*.sarif
-          
       - name: Run PSScriptAnalyzer
-        uses: microsoft/psscriptanalyzer-action@v@2044ae068e37d0161fa2127de04c19633882f061
+        uses: microsoft/psscriptanalyzer-action@2044ae068e37d0161fa2127de04c19633882f061
         with:
           # Check https://github.com/microsoft/action-psscriptanalyzer for more info about the options.
           # The below set up runs PSScriptAnalyzer to your entire repository and runs some basic security rules.
@@ -62,7 +61,7 @@ jobs:
           path: ./${{ matrix.path }}
           recurse: false
           fix: true
-          
+
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v1
@@ -178,7 +177,7 @@ jobs:
 
   push:
     runs-on: windows-latest
-    needs: [build,dry_run]   
+    needs: [build,dry_run]
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
@@ -190,13 +189,13 @@ jobs:
         run: |
          echo ${{steps.download.outputs.download-path}}
          dir ./artifact | Select-Object Name,Length,LastWriteTime
-        
+
       - name: Update scripts
         run: |
          $timestamp= (Get-Date -UFormat "%A %d/%m/%Y %T %Z")
          echo $timestamp
          git config --global user.email ${{ secrets.EMAIL }}
-         git config --global user.name ${{ secrets.NAME }}      
-         git add -u      
-         git commit -m "PSScriptAnalyzer $timestamp" 
-         git push   
+         git config --global user.name ${{ secrets.NAME }}
+         git add -u
+         git commit -m "PSScriptAnalyzer $timestamp"
+         git push
