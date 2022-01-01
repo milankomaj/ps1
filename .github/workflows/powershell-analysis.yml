@@ -19,11 +19,8 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.HimawariSum }}
-      output2: ${{ steps.step1.outputs.BingSum }}
     strategy:
-      max-parallel: 3
+      max-parallel: 1
       matrix:
         include:
            - path: executables/BING_2
@@ -69,7 +66,22 @@ jobs:
           ./${{ matrix.path }}/${{ matrix.script }}
           ./${{ matrix.path }}/${{ matrix.script }}.bak
 
-     # virustotal && metadefender
+ # virustotal && metadefender
+  scan:
+    runs-on: ubuntu-latest
+    outputs:
+     output1: ${{ steps.step1.outputs.HimawariSum }}
+     output2: ${{ steps.step1.outputs.BingSum }}
+    needs: []
+    strategy:
+     fail-fast: false
+     matrix:
+      include:
+           - path: executables/BING_2
+             script: bing-wallpaper.ps1
+           - path: executables/Himawari
+             script: himawari.ps1
+    steps:  
       - name: virustotal && metadefender
         id: SUM
         run: |
@@ -194,7 +206,7 @@ jobs:
 
   push:
     runs-on: windows-latest
-    needs: [build,dry_run]
+    needs: [build,dry_run,scan]
     steps:
      # Artifacts download
       - uses: actions/checkout@v2
