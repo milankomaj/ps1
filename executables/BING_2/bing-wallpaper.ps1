@@ -1,4 +1,14 @@
 #(v0.0.3)
+Add-Type @"
+using System.Runtime.InteropServices;
+public class Wallpaper {
+   [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+   private static extern int SystemParametersInfo (int uAction, int uParam, string lpvParam, int fuWinIni);
+   public static void SetWallpaper(string path) {
+      SystemParametersInfo( 0x14, 0, path, 3 );
+   }
+}
+"@
 [xml]$Config = Get-Content SettingsBw.xml
 $market = $Config.Configuration.market
 $resolution = $Config.Configuration.resolution
@@ -58,16 +68,6 @@ $HTTP_Status = [int]$response.StatusCode.value__
 }else {}
 if (!$TestPath)
 {
-Add-Type @"
-using System.Runtime.InteropServices;
-public class Wallpaper {
-   [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-   private static extern int SystemParametersInfo (int uAction, int uParam, string lpvParam, int fuWinIni);
-   public static void SetWallpaper(string path) {
-      SystemParametersInfo( 0x14, 0, path, 3 );
-   }
-}
-"@
 $BW.DownloadFile($url,$ImageFileName)
 [Wallpaper]::SetWallpaper($ImageFileName)
 if ($metadata -match 'true') {
