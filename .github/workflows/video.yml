@@ -11,6 +11,8 @@ jobs:
       output2: ${{ steps.step1.outputs.PREFIX }} 
       output3: ${{ steps.step1.outputs.URL }}
       output4: ${{ steps.step1.outputs.SKzone }}
+      output5: ${{ steps.step1.outputs.Tomorrow }}
+      output6: ${{ steps.step1.outputs.TomorrowUrl }}
     timeout-minutes: 20
     continue-on-error: true
     strategy:
@@ -25,14 +27,18 @@ jobs:
         id: step1
         run: | 
          date=$(date +'%Y%m%d');
+         date_plus_1=$(date  +'%Y%m%d' --date='tomorrow')
          SKzone=$(TZ='Europe/Bratislava' date)
          JPzone=$(TZ='Asia/Tokyo' date)
          echo date=$date
+         echo date_plus_1=$date_plus_1
          echo SK-zone=$SKzone
          echo JP-zone=$JPzone
          echo GH-zone=$(date)
          url=(https://himawari8.nict.go.jp/movie/720/$(echo $date)_${{ matrix.prefix }}.mp4) # pir3.mp4, pifd.mp4, pijp.mp4
+         url_plus_1=(https://himawari8.nict.go.jp/movie/720/$(date_plus_1)_${{ matrix.prefix }}.mp4) # pir3.mp4, pifd.mp4, pijp.mp4
          echo url=$url
+         echo url=$url_plus_1
          size=$(curl -s $url | wc -c)
          echo size=$size
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
@@ -41,6 +47,8 @@ jobs:
          echo "::set-output name=PREFIX::${{ matrix.prefix }}" 
          echo "::set-output name=URL::$(echo $url)"
          echo "::set-output name=SKzone::$(echo $SKzone)"
+         echo "::set-output name=Tomorrow::$(echo $date_plus_1)"
+         echo "::set-output name=TomorrowUrl::$(echo $url_plus_1)"
 
       - name: Generate pir3
         shell: bash
@@ -51,7 +59,7 @@ jobs:
           then
           sudo apt-get install -y ffmpeg
           echo "++++"
-          url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
+          url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.TomorrowUrl }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
           ffmpeg -y -i ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4 -vf fps=10,scale=680:-1:flags=lanczos,palettegen palette.png
@@ -86,7 +94,7 @@ jobs:
           then
           sudo apt-get install -y ffmpeg
           echo "++++"
-          url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
+          url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.TomorrowUrl }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
           ffmpeg -y -i ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4 -vf fps=10,scale=680:-1:flags=lanczos,palettegen palette.png
