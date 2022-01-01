@@ -23,8 +23,7 @@ $BW.Encoding = [Text.Encoding]::UTF8
 [void][System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
 $notification = New-Object System.Windows.Forms.NotifyIcon
 $notification.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon((Get-Process -id $pid | Select-Object -ExpandProperty Path))
-if ($notification.Visible = $Config.Configuration.notification -match 'true') {
-$notification.Visible -eq $Config.Configuration.notification}
+$notification.Visible = ($Config.Configuration.notification -match 'true')
 try
 {
 $json = ConvertFrom-Json ($BW.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=$market"))
