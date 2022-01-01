@@ -1,5 +1,4 @@
 #(v0.0.3)
-Add-Type @"
 [xml]$Config = Get-Content SettingsBw.xml
 $market = $Config.Configuration.market
 $resolution = $Config.Configuration.resolution
@@ -59,6 +58,8 @@ $HTTP_Status = [int]$response.StatusCode.value__
 }else {}
 if (!$TestPath)
 {
+$BW.DownloadFile($url,$ImageFileName)
+Add-Type @"
 using System.Runtime.InteropServices;
 public class Wallpaper {
    [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
@@ -68,9 +69,7 @@ public class Wallpaper {
    }
 }
 "@
-$BW.DownloadFile($url,$ImageFileName)
 [Wallpaper]::SetWallpaper($ImageFileName)
-
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
 $adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileName})`
@@ -101,7 +100,6 @@ elseif(!($null -eq ($ErrorMessageFull.split(':')[2])) -and ! ($null -eq ($ErrorM
 elseif(!($null -eq ($ErrorMessageFull.split("''")[1])))
 {$ErrorMessage = $ErrorMessageFull.split("''")[1].split([IO.Path]::GetInvalidFileNameChars()) -join ''}
 else{$ErrorMessage = $ErrorMessageFull.split('.')[0].split([IO.Path]::GetInvalidFileNameChars()) -join ''}
-
 if ($debug -match 'true') {
 Write-Output "Failed! $ErrorMessageFull"
 Write-Output "Failed! $ErrorMessage"
@@ -114,6 +112,3 @@ $notification.ShowBalloonTip($timeout)
 $notification.Dispose()
 exit 1
 }
-
-
-
