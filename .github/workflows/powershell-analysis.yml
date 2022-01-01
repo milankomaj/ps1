@@ -74,6 +74,7 @@ jobs:
      output2: ${{ steps.step1.outputs.BingSum }}
     needs: []
     strategy:
+     max-parallel: 5
      fail-fast: false
      matrix:
       include:
@@ -165,6 +166,7 @@ jobs:
     runs-on: windows-latest
     needs: [build]
     strategy:
+     max-parallel: 5
      fail-fast: false
      matrix:
       include:
