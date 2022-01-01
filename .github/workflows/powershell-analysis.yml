@@ -70,8 +70,8 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     outputs:
-     output1: ${{ steps.step1.outputs.HimawariSum }}
-     output2: ${{ steps.step1.outputs.BingSum }}
+     output1: ${{ steps.SUM.outputs.HimawariSum }}
+     output2: ${{ steps.SUM.outputs.BingSum }}
     needs: []
     strategy:
      max-parallel: 5
