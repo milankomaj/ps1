@@ -118,7 +118,7 @@ jobs:
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
-          --header "filename: ${{ matrix.script }}" \
+          --header "filename: ${{ matrix.script }}_${{ github.workflow }}" \
          | jq
 
          echo DATA
@@ -146,7 +146,7 @@ jobs:
           echo github.head_ref=${{ github.head_ref }}
           echo github.job=${{ github.job }}
           echo github.ref=${{ github.ref }}
-          echo github.ref_name${{ github.ref_name }}
+          echo github.ref_name=${{ github.ref_name }}
           echo github.ref_protected=${{ github.ref_protected }}
           echo github.ref_type=${{ github.ref_type }}
           echo github.repository=${{ github.repository }}
@@ -179,7 +179,7 @@ jobs:
         if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
         run: |
           $textToAdd = '$outpath = "./BingWallpaper"'
-          $BingLineNumber = 42
+          $BingLineNumber = 40
           $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
           $fileContent[$BingLineNumber-1] = $textToAdd
           $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
