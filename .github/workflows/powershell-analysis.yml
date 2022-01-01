@@ -82,7 +82,8 @@ jobs:
              script: bing-wallpaper.ps1
            - path: executables/Himawari
              script: himawari.ps1
-    steps:  
+    steps: 
+      - uses: actions/checkout@v2 
       - name: virustotal && metadefender
         id: SUM
         run: |
