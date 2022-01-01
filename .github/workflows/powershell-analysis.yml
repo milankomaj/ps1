@@ -119,9 +119,6 @@ jobs:
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
           --header "filename: ${{ matrix.script }}" \
-#           --header "sandbox: windows10" \
-#           --header "sandbox_timeout: long" \
-#           --header "rescan_count: 100" \
          | jq
 
          echo DATA
