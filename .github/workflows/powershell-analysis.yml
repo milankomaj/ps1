@@ -106,9 +106,9 @@ jobs:
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
           --header "filename: ${{ matrix.script }}" \
-          --header "sandbox: windows10" \
-          --header "sandbox_timeout: long" \
-          --header "rescan_count: 100" \
+#           --header "sandbox: windows10" \
+#           --header "sandbox_timeout: long" \
+#           --header "rescan_count: 100" \
          | jq
 
          echo DATA
@@ -122,9 +122,31 @@ jobs:
      # outputs
       - name: outputs
         run: |
-         echo outputs
-         echo ${{ steps.SUM.outputs.HimawariSum }}
-         echo ${{ steps.SUM.outputs.BingSum }}
+          echo outputs
+          echo ${{ steps.SUM.outputs.HimawariSum }}
+          echo ${{ steps.SUM.outputs.BingSum }}
+          echo github=${{ github }}
+          echo github.action=${{ github.action }}
+          echo github.action_path=${{ github.action_path }}
+          echo github.actor=${{ github.actor }}
+          echo github.base_ref=${{ github.base_ref }}
+          echo github.event=${{ github.event }}
+          echo github.event_name=${{ github.event_name }}
+          echo github.event_path=${{ github.event_path }}
+          echo github.head_ref=${{ github.head_ref }}
+          echo github.job=${{ github.job }}
+          echo github.ref=${{ github.ref }}
+          echo github.ref_name${{ github.ref_name }}
+          echo github.ref_protected=${{ github.ref_protected }}
+          echo github.ref_type=${{ github.ref_type }}
+          echo github.repository=${{ github.repository }}
+          echo github.run_id=${{ github.run_id }}
+          echo github.run_number=${{ github.run_number }}
+          echo github.run_attempt=${{ github.run_attempt }}
+          echo github.server_url=${{ github.server_url }}
+          echo github.sha=${{ github.sha }}
+          echo github.workflow=${{ github.workflow }}
+          echo github.repository_owner=${{ github.repository_owner }}
 
   # dry_run 🔄🔄
   dry_run:
