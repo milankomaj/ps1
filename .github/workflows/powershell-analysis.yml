@@ -20,7 +20,7 @@ jobs:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 1
+      max-parallel: 3
       matrix:
         include:
            - path: executables/BING_2

@@ -58,7 +58,6 @@ $HTTP_Status = [int]$response.StatusCode.value__
 }else {}
 if (!$TestPath)
 {
-$BW.DownloadFile($url,$ImageFileName)
 Add-Type @"
 using System.Runtime.InteropServices;
 public class Wallpaper {
@@ -69,6 +68,7 @@ public class Wallpaper {
    }
 }
 "@
+$BW.DownloadFile($url,$ImageFileName)
 [Wallpaper]::SetWallpaper($ImageFileName)
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
