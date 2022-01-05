@@ -59,7 +59,7 @@ jobs:
          echo "::set-output name=SKzone::$(echo $SKzone)"
          echo "::set-output name=Tomorrow::$(echo $date_plus_1)"
          echo "::set-output name=TomorrowUrl::$(echo $url_plus_1)"
-         echo "::set-output name=TomorrowUrl::$(echo $date)"
+         echo "::set-output name=DateToday::$(echo $date)"
          echo "::set-output name=first_day_moths::$(echo $first_day_moths)"
          echo "::set-output name=last_day_moths::$(echo $last_day_moths)"
          echo "::set-output name=month_date::$(echo $month_date)"
@@ -148,7 +148,7 @@ jobs:
       - name: upload-artifacts
         uses: actions/upload-artifact@v2 
         with:
-         name: m3u8
+         name: pifd
          path: |
           ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
 
@@ -169,7 +169,7 @@ jobs:
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
           git pull
-          git mv -f -v ./Himawari/*_pifd.m3u8  ./Himawari/m3u8/
+          git mv -f -v ./Himawari/*/*_pifd.m3u8  ./Himawari/m3u8/
           git add ./Himawari/*/himawari_*.*     
           git add ./Himawari/m3u8/*_pifd.m3u8
           git commit -m "${{needs.build.outputs.output4}}"
