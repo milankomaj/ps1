@@ -144,7 +144,7 @@ jobs:
         shell: bash
         run: |
          echo \ >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
-         echo "#EXTINF:-1, ${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
+         echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output3}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
         uses: actions/upload-artifact@v2 
@@ -169,8 +169,7 @@ jobs:
         run: |
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
-          git pull
-          git mv -f -v ./Himawari/pifd/*_pifd.m3u8  ./Himawari/m3u8/
+          git mv -f -v ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8  ${{ github.workspace }}/Himawari/m3u8
           git add ./Himawari/*/himawari_*.*     
           git add ./Himawari/m3u8/*_pifd.m3u8
           git commit -m "${{needs.build.outputs.output4}}"
