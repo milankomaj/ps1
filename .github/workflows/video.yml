@@ -16,6 +16,7 @@ jobs:
       output7: ${{ steps.step1.outputs.DateToday }}
       output8: ${{ steps.step1.outputs.first_day_moths }}
       output9: ${{ steps.step1.outputs.last_day_moths }}
+      output10: ${{ steps.step1.outputs.month_date }}
 
     timeout-minutes: 20
     continue-on-error: true
@@ -49,7 +50,8 @@ jobs:
          echo scale=$scale
          first_day_moths=$(date +'%Y%m%d' -d "-0 month -$(($(date +%d)-1)) days")
          last_day_moths=$(date +'%Y%m%d' -d "-$(date +%d) days +1 month")
-         
+         month_date=$(date +'%Y%m');
+         echo date=$month_date
          
          echo "::set-output name=SCALE::$(echo $scale)"
          echo "::set-output name=PREFIX::${{ matrix.prefix }}" 
@@ -60,7 +62,7 @@ jobs:
          echo "::set-output name=TomorrowUrl::$(echo $date)"
          echo "::set-output name=first_day_moths::$(echo $first_day_moths)"
          echo "::set-output name=last_day_moths::$(echo $last_day_moths)"
-
+         echo "::set-output name=month_date::$(echo $month_date)"
 
       - name: Generate pir3
         shell: bash
@@ -136,21 +138,19 @@ jobs:
         shell: bash
         if: ${{ needs.build.outputs.output8 == needs.build.outputs.output7 }}
         run: |
-         month_date=$(date +'%Y%m');
-         echo date=$month_date
-         echo >> ./Himawari/m3u8/$(echo $month_date)_pifd.m3u8
-         echo "#EXTM3U" >> ./Himawari/m3u8/$(echo $month_date)_pifd.m3u8
+         echo >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
+         echo "#EXTM3U" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: Generate m3u8 dayli
         shell: bash
         run: |
-         echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/$(echo $month_date)_pifd.m3u8
-         echo "${{needs.build.outputs.output3}}" >> ./Himawari/m3u8/$(echo $month_date)_pifd.m3u8
+         echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
+         echo "${{needs.build.outputs.output3}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
         uses: actions/upload-artifact@v2 
         with:
          name: m3u8
          path: |
-          ./Himawari/m3u8/$(echo $month_date)_pifd.m3u8
+          ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
 
   push:
     runs-on: ubuntu-latest
