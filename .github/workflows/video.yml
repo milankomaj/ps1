@@ -143,7 +143,7 @@ jobs:
       - name: Generate m3u8 dayli
         shell: bash
         run: |
-         echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
+         echo "#EXTINF:-1, ${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output3}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
         uses: actions/upload-artifact@v2 
