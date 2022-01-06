@@ -3,7 +3,7 @@ name: Generate Wallpapers Github README.md
 on:
   workflow_dispatch:
   schedule:
-    - cron: "20 20 * * *"
+    - cron: "28 21 * * *"
 jobs:
  Generate_Wallpapers :
     runs-on: windows-latest
