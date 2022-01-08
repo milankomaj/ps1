@@ -40,7 +40,7 @@ jobs:
          echo SK-zone=$SKzone
          echo JP-zone=$JPzone
          echo GH-zone=$(date)
-         url=(https://himawari8.nict.go.jp/movie/720/$(echo $date)_${{ matrix.prefix }}.mp4) # pir3.mp4, pifd.mp4, pijp.mp4
+         url=(https://himawari8.nict.go.jp/movie/720/$(echo $date)_${{ matrix.prefix }}.mp4)
          pifd_url=(https://himawari8.nict.go.jp/movie/720/$(echo $date)_pifd.mp4)
          # url_plus_1=(https://himawari8.nict.go.jp/movie/720/$(date_plus_1)_${{ matrix.prefix }}.mp4) # pir3.mp4, pifd.mp4, pijp.mp4
          echo pifd_url=$pifd_url
