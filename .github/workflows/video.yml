@@ -51,7 +51,9 @@ jobs:
          scale=$(echo "scale=0; $size /1024/1024" | bc -l)
          echo scale=$scale
          first_day_moths=$(date +'%Y%m%d' -d "-0 month -$((10#$(date +%d)-1)) days")
+         echo first_day_moths=$first_day_moths
          last_day_moths=$(date +'%Y%m%d' -d "-$(date +%d) days +1 month")
+         echo last_day_moths=$first_day_moths
          month_date=$(date +'%Y%m');
          echo date=$month_date
          
