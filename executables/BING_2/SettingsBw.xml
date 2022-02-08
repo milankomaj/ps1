@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
  <market>en-GB</market>
- <resolution>1920x1200</resolution>
+ <resolution>1920x1080</resolution>
  <folderpath>MyPictures</folderpath> 
  <foldername>BingWallpaper</foldername>
  <notification>true</notification> 
