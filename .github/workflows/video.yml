@@ -75,6 +75,7 @@ jobs:
           echo pir3
           if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
           then
+          sudo apt-get upgrade -y -f --fix-missing --install-recommends
           sudo apt-get install -y ffmpeg
           echo "++++"
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
