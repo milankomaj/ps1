@@ -76,7 +76,6 @@ jobs:
           if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
           then
           sudo apt -y update
-          sudo apt-get upgrade -y -f --fix-missing --install-recommends
           sudo apt-get install -y ffmpeg
           echo "++++"
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
@@ -95,6 +94,7 @@ jobs:
           echo pifd
           if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
           then
+          sudo apt -y update
           sudo apt-get install -y ffmpeg
           echo "++++"
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})      
@@ -112,6 +112,7 @@ jobs:
           echo pijp 
           if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
           then
+          sudo apt -y update
           sudo apt-get install -y ffmpeg
           echo "++++"
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
