@@ -75,6 +75,7 @@ jobs:
           echo pir3
           if [ ${{ steps.step1.outputs.SCALE }} -ge 1 ]
           then
+          sudo apt -y update
           sudo apt-get upgrade -y -f --fix-missing --install-recommends
           sudo apt-get install -y ffmpeg
           echo "++++"
