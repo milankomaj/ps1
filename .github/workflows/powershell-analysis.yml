@@ -29,7 +29,7 @@ jobs:
              script: himawari.ps1
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: details
         env:
           path: ${{ matrix.path }}
@@ -83,7 +83,7 @@ jobs:
            - path: executables/Himawari
              script: himawari.ps1
     steps: 
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v3 
       - name: virustotal && metadefender
         id: SUM
         run: |
@@ -174,7 +174,7 @@ jobs:
              script: himawari.ps1
     steps:
      # Run script
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: run script if
         shell: pwsh
         if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
@@ -209,7 +209,7 @@ jobs:
     needs: [build,dry_run,scan]
     steps:
      # Artifacts download
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v2
         id: download
         with:
