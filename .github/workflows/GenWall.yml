@@ -9,7 +9,7 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Generate Wallpaper Bing
       shell: powershell
       run: |
