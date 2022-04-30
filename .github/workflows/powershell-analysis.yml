@@ -19,6 +19,10 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     strategy:
       max-parallel: 3
       matrix:
