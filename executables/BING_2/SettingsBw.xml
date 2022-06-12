@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
  <market>en-GB</market>
- <resolution>1920x1080</resolution>
+ <resolution>UHD</resolution>
  <folderpath>MyPictures</folderpath> 
  <foldername>BingWallpaper</foldername>
  <notification>true</notification> 
@@ -13,7 +13,7 @@
 
 <!--
 market : https://docs.microsoft.com/en-us/previous-versions/bing/search/dd251064(v=msdn.10)?redirectedfrom=MSDN;
-resolution : ('auto', '1024x768', '1280x720', '1366x768', '1920x1080', '1920x1200');
+resolution : ('auto', '1024x768', '1280x720', '1366x768', '1920x1080', '1920x1200', 'UHD');
 folderpatht : https://docs.microsoft.com/en-us/dotnet/api/system.environment.specialfolder?view=netcore-3.1
 notification : notification visible (balloon and icon) 'true' or 'false';
 metadata : picture metadata if 'true'(need XperiCode.JpegMetadata.dll) or 'false';
