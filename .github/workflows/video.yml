@@ -136,7 +136,7 @@ jobs:
 
   m3u8:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    if: ${{ success() }}
     needs: [build]   
     steps:
       - name: Checkout 
