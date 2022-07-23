@@ -73,7 +73,7 @@ jobs:
         if: ${{ matrix.prefix == 'pir3' }}
         run: |
           echo pir3
-          if [[ "${{ steps.step1.outputs.SCALE }}" -e "1" ]]
+          if [[ "${{ steps.step1.outputs.SCALE }}" -eq "1" ]]
           then
           echo "++++"
           sudo apt-get install -y ffmpeg
@@ -91,7 +91,7 @@ jobs:
         if: ${{ matrix.prefix == 'pifd' }}
         run: |
           echo pifd
-          if [[ "${{ steps.step1.outputs.SCALE }}" -e "1" ]]
+          if [[ "${{ steps.step1.outputs.SCALE }}" -eq "1" ]]
           then
           echo "++++"
           sudo apt-get install -y ffmpeg
@@ -108,7 +108,7 @@ jobs:
         if: ${{ matrix.prefix == 'pijp' }}
         run: |
           echo pijp
-          if [[ "${{ steps.step1.outputs.SCALE }}" -e "1" ]]
+          if [[ "${{ steps.step1.outputs.SCALE }}" -eq "1" ]]
           then
           echo "++++"
           sudo apt-get install -y ffmpeg
