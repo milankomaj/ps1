@@ -179,7 +179,8 @@ jobs:
           git config --global user.name ${{ secrets.NAME }}
           git status
           git add ./Himawari/*/himawari_*.*
-          m3u8 = ${{ github.workspace }}/Himawari/pifd/{{needs.build.outputs.output10}}_pifd.m3u8
+          m3u8=${{ github.workspace }}/Himawari/pifd/{{needs.build.outputs.output10}}_pifd.m3u8
+          echo $m3u8
           if [[ -e $m3u8 ]]
           then
           mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
