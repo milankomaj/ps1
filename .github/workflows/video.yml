@@ -18,6 +18,7 @@ jobs:
       output9: ${{ steps.step1.outputs.last_day_moths }}
       output10: ${{ steps.step1.outputs.month_date }}
       output11: ${{ steps.step1.outputs.pifd_url }}
+      output12: ${{ steps.step2.outputs.pifd_SUCCESS }}
     timeout-minutes: 20
     continue-on-error: true
     strategy:
@@ -89,11 +90,9 @@ jobs:
       - name: Generate pifd
         id: step2
         shell: bash
-        if: ${{ matrix.prefix == 'pifd' }}
+        if: ${{ matrix.prefix == 'pifd' }} & ${{ steps.step1.outputs.SCALE >= '1'}}
         run: |
           echo pifd
-          if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
-          then
           echo "++++"
           sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
@@ -101,9 +100,8 @@ jobs:
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf "fps=30, scale=680:720" -qscale 70 -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.webp
           ffmpeg -y -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf fps=10,scale=716:-1:flags=lanczos,palettegen ./Himawari/palette.png
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -i ./Himawari/palette.png -filter_complex "fps=10,scale=716:-1:flags=lanczos[x];[x][1:v]paletteuse" -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.gif
-          else
-          echo "-----"
-          fi
+          echo '::set-output name=pifd_SUCCESS::success'
+
       - name: Generate pijp
         shell: bash
         if: ${{ matrix.prefix == 'pijp' }}
@@ -147,12 +145,14 @@ jobs:
          echo "#EXTM3U" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: Generate m3u8 daily
         shell: bash
+        if: ${{ needs.build.outputs.output12 == 'success' }}
         run: |
          echo ${{ needs.build.outputs.output12 }}
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
         uses: actions/upload-artifact@v2
+        if: ${{ needs.build.outputs.output12 == 'success' }}
         with:
          name: pifd
          path: |
@@ -173,6 +173,7 @@ jobs:
       - name: Update
         shell: bash
         run: |
+          echo ${{ needs.build.outputs.output12 }}
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
           mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
