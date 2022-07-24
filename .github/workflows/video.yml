@@ -95,7 +95,8 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          echo "::set-output name=success::(echo success)"
+          echo success=$success
+          echo "::set-output name=success::(echo $success)"
           sudo apt-get install -y ffmpeg
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
