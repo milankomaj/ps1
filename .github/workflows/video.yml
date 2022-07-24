@@ -90,13 +90,14 @@ jobs:
       - name: Generate pifd
         shell: bash
         if: ${{ matrix.prefix == 'pifd' }}
+        id: step2
         run: |
           echo pifd
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
           echo "::set-output name=pifd_SUCCESS::success"
-          ${{ steps.step1.outputs.pifd_SUCCESS }}
+          ${{ steps.step2.outputs.pifd_SUCCESS }}
           sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
@@ -151,6 +152,7 @@ jobs:
         shell: bash
         if: ${{ needs.build.outputs.output12 == 'success' }}
         run: |
+        ${{ needs.build.outputs.output12 }}
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
