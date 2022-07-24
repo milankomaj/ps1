@@ -90,7 +90,7 @@ jobs:
       - name: Generate pifd
         id: step2
         shell: bash
-        if: ${{ matrix.prefix == 'pifd' }} & ${{ steps.step1.outputs.SCALE >= '1'}}
+        if: ${{ matrix.prefix == 'pifd' }} && ${{ steps.step1.outputs.SCALE >= '1'}}
         run: |
           echo pifd
           echo "++++"
