@@ -95,8 +95,7 @@ jobs:
           echo pifd
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
-          echo '${::set-output name="::set-output name=pifd_SUCCESS::success"}'
-          echo '${${{ steps.step2.outputs.pifd_SUCCESS }}}'
+          echo "::set-output name=pifd_SUCCESS::success"
           echo "++++"
           sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
