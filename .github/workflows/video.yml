@@ -18,7 +18,7 @@ jobs:
       output9: ${{ steps.step1.outputs.last_day_moths }}
       output10: ${{ steps.step1.outputs.month_date }}
       output11: ${{ steps.step1.outputs.pifd_url }}
-      output12: ${{ steps.step1.outputs.success }}
+      output12: ${{ steps.step2.outputs.success }}
     timeout-minutes: 20
     continue-on-error: true
     strategy:
@@ -88,6 +88,7 @@ jobs:
           echo "-----"
           fi
       - name: Generate pifd
+        id: step2
         shell: bash
         if: ${{ matrix.prefix == 'pifd' }}
         run: |
@@ -95,8 +96,8 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          echo success=$success
-          echo "::set-output name=success::(echo $success)"
+          echo "::set-output name=success::success"
+          echo ${{ needs.build.outputs.output12 }}
           sudo apt-get install -y ffmpeg
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
