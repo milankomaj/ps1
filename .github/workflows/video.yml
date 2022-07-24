@@ -18,7 +18,7 @@ jobs:
       output9: ${{ steps.step1.outputs.last_day_moths }}
       output10: ${{ steps.step1.outputs.month_date }}
       output11: ${{ steps.step1.outputs.pifd_url }}
-      output12: ${{ steps.step2.outputs.success }}
+      output12: ${{ steps.step2.outputs.SUCCESS }}
     timeout-minutes: 20
     continue-on-error: true
     strategy:
@@ -77,7 +77,7 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
@@ -96,9 +96,11 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          echo "::set-output name=success::success"
-          echo ${{ steps.step2.outputs.success }}
-          sudo apt-get install -y ffmpeg
+          success_w="success"
+          echo $success_w
+          echo "::set-output name=SUCCESS::$(echo $success_w)"
+          echo ${{ steps.step2.outputs.SUCCESS }}
+          sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf "fps=30, scale=680:720" -qscale 70 -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.webp
@@ -115,7 +117,7 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
