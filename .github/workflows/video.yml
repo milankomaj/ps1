@@ -181,7 +181,7 @@ jobs:
           git add ./Himawari/*/himawari_*.*
           m3u8=${{ github.workspace }}/Himawari/pifd/${{needs.build.outputs.output10}}_pifd.m3u8
           echo m3u8_file=$m3u8
-          if [[ -e "$m3u8_file" ]]
+          if [[ -e $(echo $m3u8_file) ]]
           then
           mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
           git add ./Himawari/m3u8/*_pifd.m3u8
