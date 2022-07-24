@@ -149,7 +149,7 @@ jobs:
       - name: Generate m3u8 daily
         shell: bash
         run: |
-         if [[ ${{ needs.build.outputs.output12 }} == "succes" ]]
+         if [[ "${{ needs.build.outputs.output12 }}" == succes ]]
          then
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
