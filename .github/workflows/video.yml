@@ -95,7 +95,7 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          echo "::set-output name=success::succes"
+          echo "::set-output name=success::success"
           sudo apt-get install -y ffmpeg
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
@@ -148,10 +148,12 @@ jobs:
          echo "#EXTM3U" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: Generate m3u8 daily
         shell: bash
-        if: ${{ needs.build.outputs.output12 }} == "success"
         run: |
+         if [[ ${{ needs.build.outputs.output12 }} == "succes" ]]
+         then
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
+         fi
       - name: upload-artifacts
         uses: actions/upload-artifact@v2
         if: ${{ needs.build.outputs.output12 }} == "success"
