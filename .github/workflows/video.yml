@@ -69,6 +69,7 @@ jobs:
          echo "::set-output name=last_day_moths::$(echo $last_day_moths)"
          echo "::set-output name=month_date::$(echo $month_date)"
          echo "::set-output name=pifd_url::$(echo $pifd_url)"
+         echo "::set-output name=pifd_SUCCESS::success"
       - name: Generate pir3
         shell: bash
         if: ${{ matrix.prefix == 'pir3' }}
@@ -95,7 +96,6 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          echo "::set-output name=pifd_SUCCESS::success"
           echo ${{ steps.step1.outputs.pifd_SUCCESS }}
           ${{ steps.step1.outputs.pifd_SUCCESS }}
           sudo apt-get install -y ffmpeg --fix-missing
