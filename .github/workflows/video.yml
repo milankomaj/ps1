@@ -174,14 +174,14 @@ jobs:
          tree -h ./Himawari/
          echo ${{needs.build.outputs.output4}}
       - name: Update
+        shell: bash
         run: |
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
           git status
           git add ./Himawari/*/himawari_*.*
-          m3u8=$(${{ github.workspace }}/Himawari/pifd/${{needs.build.outputs.output10}}_pifd.m3u8)
-          echo m3u8_file=$m3u8
-          if [[ -e $m3u8_file ]]
+          m3u8=${{ github.workspace }}/Himawari/pifd/${{needs.build.outputs.output10}}_pifd.m3u8
+          if [[ -e $m3u8 ]]
           then
           mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
           git add ./Himawari/m3u8/*_pifd.m3u8
