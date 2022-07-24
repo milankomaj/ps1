@@ -90,7 +90,7 @@ jobs:
       - name: Generate pifd
         id: step2
         shell: bash
-        if: ${{ matrix.prefix == 'pifd' }} & ${{ steps.step1.outputs.SCALE >= '1'}}
+        if: ${{ matrix.prefix == 'pifd' && [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]}}
         run: |
           echo pifd
           echo "++++"
@@ -100,7 +100,7 @@ jobs:
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf "fps=30, scale=680:720" -qscale 70 -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.webp
           ffmpeg -y -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf fps=10,scale=716:-1:flags=lanczos,palettegen ./Himawari/palette.png
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -i ./Himawari/palette.png -filter_complex "fps=10,scale=716:-1:flags=lanczos[x];[x][1:v]paletteuse" -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.gif
-          echo '::set-output name=pifd_SUCCESS::success'
+          echo "::set-output name=pifd_SUCCESS::success"
 
       - name: Generate pijp
         shell: bash
