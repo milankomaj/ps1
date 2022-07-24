@@ -96,7 +96,7 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          success_w="success"
+          success_w=$(echo "success")
           echo $success_w
           echo "::set-output name=SUCCESS::$(echo $success_w)"
           echo ${{ steps.step2.outputs.SUCCESS }}
@@ -152,12 +152,10 @@ jobs:
          echo "#EXTM3U" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: Generate m3u8 daily
         shell: bash
+        if: ${{ needs.build.outputs.output12 }} == "success"
         run: |
-         if [[ "${{ needs.build.outputs.output12 }}" == "success" ]]
-         then
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
-         fi
       - name: upload-artifacts
         uses: actions/upload-artifact@v2
         if: ${{ needs.build.outputs.output12 }} == "success"
@@ -181,10 +179,10 @@ jobs:
       - name: Update
         shell: bash
         run: |
-          mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
           echo ${{ needs.build.outputs.output12 }}
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
+          mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
           git status
           git add ./Himawari/*/himawari_*.*
           git add ./Himawari/m3u8/*_pifd.m3u8
