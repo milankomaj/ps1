@@ -182,6 +182,5 @@ jobs:
           mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
           git add ./Himawari/*/himawari_*.*
           git add ./Himawari/m3u8/*_pifd.m3u8
-          fi
           git commit -m "${{needs.build.outputs.output4}}"
           git push
