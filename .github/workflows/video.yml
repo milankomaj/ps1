@@ -92,7 +92,7 @@ jobs:
         shell: bash
         if: ${{ matrix.prefix == 'pifd' }} & ${{ steps.step1.outputs.SCALE >= '1'}}
         run: |
-          echo pifd
+          echo "pifd"
           echo "++++"
           sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
