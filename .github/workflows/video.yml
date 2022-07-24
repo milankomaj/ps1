@@ -18,7 +18,7 @@ jobs:
       output9: ${{ steps.step1.outputs.last_day_moths }}
       output10: ${{ steps.step1.outputs.month_date }}
       output11: ${{ steps.step1.outputs.pifd_url }}
-      output12: ${{ steps.step2.outputs.pifd_SUCCESS }}
+      output12: ${{ steps.step1.outputs.pifd_SUCCESS }}
     timeout-minutes: 20
     continue-on-error: true
     strategy:
