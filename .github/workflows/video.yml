@@ -147,7 +147,6 @@ jobs:
       - name: Generate m3u8 daily
         shell: bash
         run: |
-         echo ${{ needs.build.outputs.output12 }}
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
@@ -172,7 +171,6 @@ jobs:
       - name: Update
         shell: bash
         run: |
-          echo ${{ needs.build.outputs.output12 }}
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
           mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
