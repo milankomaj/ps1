@@ -134,7 +134,7 @@ jobs:
   m3u8:
     runs-on: ubuntu-latest
     continue-on-error: true
-    needs: [Generate pifd]
+    needs: [ build ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
