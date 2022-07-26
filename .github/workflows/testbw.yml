@@ -13,7 +13,7 @@ jobs:
 
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Generate Wallpaper Himawari
       run: ./himawari.ps1
       shell: pwsh

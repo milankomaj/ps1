@@ -6,7 +6,7 @@ jobs:
  windows_executable:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Version
       run: |
        $version = (Get-Content ./executables/BING/bing-wallpaper.ps1 -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''

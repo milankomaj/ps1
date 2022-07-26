@@ -19,6 +19,10 @@ jobs:
   build:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     strategy:
       max-parallel: 3
       matrix:
@@ -29,7 +33,7 @@ jobs:
              script: himawari.ps1
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: details
         env:
           path: ${{ matrix.path }}
@@ -55,11 +59,11 @@ jobs:
 
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: ./${{ matrix.path }}/${{ matrix.script }}.results.sarif
       # Artifacts upload
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
          path: |
           ./${{ matrix.path }}/*.sarif
@@ -83,7 +87,7 @@ jobs:
            - path: executables/Himawari
              script: himawari.ps1
     steps: 
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v3 
       - name: virustotal && metadefender
         id: SUM
         run: |
@@ -174,7 +178,7 @@ jobs:
              script: himawari.ps1
     steps:
      # Run script
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: run script if
         shell: pwsh
         if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
@@ -209,8 +213,8 @@ jobs:
     needs: [build,dry_run,scan]
     steps:
      # Artifacts download
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
         id: download
         with:
          path: ./
