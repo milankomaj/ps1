@@ -134,7 +134,7 @@ jobs:
   m3u8:
     runs-on: ubuntu-latest
     continue-on-error: true
-    needs: [build]
+    needs: [Generate pifd]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -146,7 +146,6 @@ jobs:
          echo "#EXTM3U" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: Generate m3u8 daily
         shell: bash
-        needs: [ Generate pifd ]
         if:  ${{ success() && contains(needs.*.result, 'success')  && !(contains(needs.*.result, 'failure'))}}
         run: |
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
