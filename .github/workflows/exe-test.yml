@@ -28,7 +28,7 @@ jobs:
        Write-Output $version
        echo $version
        echo ----------------------
-       $short = "${{ matrix.script }} "-split(".ps1")
+       $short = "${{ matrix.script }} "-split(".ps1") -join ''
        Write-Output $short
        echo $short
        echo ----------------------
