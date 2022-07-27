@@ -99,6 +99,7 @@ jobs:
          sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
          echo "::set-output name=sha256::$(echo $sum)"
+         echo ${{ steps.SUM.outputs.sha256 }}
 
          echo UPLOAD
          curl -s --request POST \
