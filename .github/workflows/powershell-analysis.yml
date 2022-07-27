@@ -100,20 +100,20 @@ jobs:
          echo $sum
          echo "::set-output name=sha256::$(echo $sum)"
 
-         echo UPLOAD
+         echo UPLOAD Virustotal
          curl -s --request POST \
           --url https://www.virustotal.com/api/v3/files \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
           --form file=@/${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} \
          | jq
 
-         echo DATA
+         echo DATA Virustotal
          curl -s --request GET \
           --url https://www.virustotal.com/api/v3/files/$sum \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
          | jq .data.attributes.last_analysis_stats
 
-         echo meta test
+         echo UPLOAD Metadefender
          downloadurl=(https://raw.githubusercontent.com/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }})
          echo downloadurl=$downloadurl
          curl -s --request POST \
@@ -124,7 +124,7 @@ jobs:
           --header "filename: ${{ matrix.script }}_${{ github.workflow }}" \
          | jq
 
-         echo DATA
+         echo DATA Metadefender
          curl -s --request GET \
           --url https://api.metadefender.com/v4/hash/$sum \
           --header "downloadfrom: $downloadurl" \
