@@ -134,6 +134,3 @@ SystemParametersInfo( SetDesktopWallpaper, 0, path, UpdateIniFile | SendWinIniCh
 "@
 Add-Type -TypeDefinition $setwallpapersource
 [wallpaper]::SetWallpaper(($outpath + $outfile))
-
-
-Write-Output "Done"

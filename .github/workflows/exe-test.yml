@@ -37,6 +37,6 @@ jobs:
       with:
         name: files
         path: |
-        ./${{ matrix.path }}/${{ matrix.script }}
-        ./${{ matrix.path }}/*.exe
-        ./${{ matrix.path }}/*.xml
+         ./${{ matrix.path }}/${{ matrix.script }}
+         ./${{ matrix.path }}/*.exe
+         ./${{ matrix.path }}/*.xml
