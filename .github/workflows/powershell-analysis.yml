@@ -31,6 +31,8 @@ jobs:
              script: bing-wallpaper.ps1
            - path: executables/Himawari
              script: himawari.ps1
+           - path: executables/LigtDark
+             script: LigtDark.ps1
 
     steps:
       - uses: actions/checkout@v3
@@ -74,8 +76,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     outputs:
-     output1: ${{ steps.SUM.outputs.HimawariSum }}
-     output2: ${{ steps.SUM.outputs.BingSum }}
+     output1: ${{ steps.SUM.outputs.sha256 }}
     needs: []
     strategy:
      max-parallel: 5
@@ -86,8 +87,10 @@ jobs:
              script: bing-wallpaper.ps1
            - path: executables/Himawari
              script: himawari.ps1
-    steps: 
-      - uses: actions/checkout@v3 
+           - path: executables/LigtDark
+             script: LigtDark.ps1
+    steps:
+      - uses: actions/checkout@v3
       - name: virustotal && metadefender
         id: SUM
         run: |
@@ -95,12 +98,7 @@ jobs:
          sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " "
          sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
-         if [ ${{ matrix.script }} == 'himawari.ps1' ]
-         then
-         echo "::set-output name=HimawariSum::$(echo $sum)"
-         else
-         echo "::set-output name=BingSum::$(echo $sum)"
-         fi
+         echo "::set-output name=sha256::$(echo $sum)"
 
          echo UPLOAD
          curl -s --request POST \
@@ -111,7 +109,7 @@ jobs:
 
          echo DATA
          curl -s --request GET \
-          --url https://www.virustotal.com/api/v3/files/$sum \
+          --url https://www.virustotal.com/api/v3/files/${{ steps.SUM.outputs.sha256 }} \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
          | jq .data.attributes.last_analysis_stats
 
@@ -128,7 +126,7 @@ jobs:
 
          echo DATA
          curl -s --request GET \
-          --url https://api.metadefender.com/v4/hash/$sum \
+          --url https://api.metadefender.com/v4/hash/${{ steps.SUM.outputs.sha256 }} \
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
@@ -138,8 +136,7 @@ jobs:
       - name: outputs
         run: |
           echo outputs
-          echo ${{ steps.SUM.outputs.HimawariSum }}
-          echo ${{ steps.SUM.outputs.BingSum }}
+          echo ${{ steps.SUM.outputs.sha256}}
           echo github=${{ github }}
           echo github.action=${{ github.action }}
           echo github.action_path=${{ github.action_path }}
