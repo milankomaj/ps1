@@ -9,18 +9,15 @@ jobs:
      output2: ${{ steps.Version.outputs.short }}
     runs-on: windows-latest
     strategy:
-      max-parallel: 6
+      max-parallel: 3
       matrix:
         include:
            - path: executables/BING_2
              script: bing-wallpaper.ps1
-             runtime: [x64, x86]
            - path: executables/Himawari
              script: himawari.ps1
-             runtime: [x64, x86]
            - path: executables/LigtDark
              script: LigtDark.ps1
-             runtime: [x64, x86]
 
     steps:
     - uses: actions/checkout@v3
@@ -42,9 +39,10 @@ jobs:
 
     - name: Build
       run: |
+       echo "${{ steps.Version.outputs.short }} ${{ steps.Version.outputs.short }} :rocket:" >>> $GITHUB_STEP_SUMARY
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
-       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}_${{ matrix.runtime }}.exe -DPIAware -noConsole -${{ matrix.runtime }} -title ${{ steps.Version.outputs.short }} -iconFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.ico -version ${{ steps.Version.outputs.version }}
+       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.exe -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole -title ${{ steps.Version.outputs.short }} -iconFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.ico -version ${{ steps.Version.outputs.version }}
       shell: powershell
 
     - name: upload-artifacts
