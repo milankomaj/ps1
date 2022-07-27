@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+ <light>06:01</light>
+ <dark>18:35</dark>
+ <lightbrightness>32</lightbrightness>
+ <darkbrightness>22</darkbrightness>
+ <lightTheme>false</lightTheme>
+ <darkTheme>false</darkTheme>
+</Configuration>
+
+
+<!--
+lightTheme,darkTheme (change theme) - example: <lightTheme>hcwhite.theme</lightTheme> (*.theme in script folder)
+-->
