@@ -1,7 +1,7 @@
 ﻿#(v0.0.4)
-$Encoding = [Text.Encoding]::UTF8
+[Text.Encoding]::UTF8
 [void][System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
-$notification = New-Object System.Windows.Forms.NotifyIcon 
+$notification = New-Object System.Windows.Forms.NotifyIcon
 $notification.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon((Get-Process -id $pid | Select-Object -ExpandProperty Path))
 $notification.Visible = $True
 
