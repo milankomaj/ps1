@@ -130,7 +130,7 @@ jobs:
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
-         | jq '"total scan: \(.scan_results.total_avs),detected: \(.scan_results.total_detected_avs)"'
+         | jq '"total scan: \(.scan_results.total_avs), detected: \(.scan_results.total_detected_avs)"'
 
      # outputs
       - name: outputs
