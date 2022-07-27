@@ -9,16 +9,18 @@ jobs:
      output2: ${{ steps.Version.outputs.short }}
     runs-on: windows-latest
     strategy:
-      max-parallel: 3
+      max-parallel: 6
       matrix:
-        runtime: [x64, x86]
         include:
            - path: executables/BING_2
              script: bing-wallpaper.ps1
+             runtime: [x64, x86]
            - path: executables/Himawari
              script: himawari.ps1
+             runtime: [x64, x86]
            - path: executables/LigtDark
              script: LigtDark.ps1
+             runtime: [x64, x86]
 
     steps:
     - uses: actions/checkout@v3
