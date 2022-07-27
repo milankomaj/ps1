@@ -99,7 +99,6 @@ jobs:
          sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
          echo "::set-output name=sha256::$(echo $sum)"
-         echo ${{ steps.SUM.outputs.sha256 }}
 
          echo UPLOAD
          curl -s --request POST \
@@ -110,7 +109,7 @@ jobs:
 
          echo DATA
          curl -s --request GET \
-          --url 'https://www.virustotal.com/api/v3/files/${{ steps.SUM.outputs.sha256 }}' \
+          --url https://www.virustotal.com/api/v3/files/$sum \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
          | jq .data.attributes.last_analysis_stats
 
@@ -127,7 +126,7 @@ jobs:
 
          echo DATA
          curl -s --request GET \
-          --url 'https://api.metadefender.com/v4/hash/${{ steps.SUM.outputs.sha256 }}' \
+          --url https://api.metadefender.com/v4/hash/$sum \
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
