@@ -1,4 +1,4 @@
-﻿#
+﻿#(v0.0.1)
 # Himawari-8 Downloader
 #
 #
@@ -137,8 +137,3 @@ Add-Type -TypeDefinition $setwallpapersource
 
 
 Write-Output "Done"
-
-
-
-
-
