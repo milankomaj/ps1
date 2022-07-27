@@ -4,6 +4,9 @@ on: [repository_dispatch,workflow_dispatch]
 
 jobs:
  windows_executable:
+    outputs:
+     output1: ${{ steps.Version.outputs.version }}
+     output2: ${{ steps.Version.outputs.short }}
     runs-on: windows-latest
     strategy:
       max-parallel: 3
@@ -19,17 +22,25 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Version
+      id: Version
       run: |
        $version = (Get-Content ./${{ matrix.path }}/${{ matrix.script }} -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
        Write-Output $version
        echo $version
        echo ----------------------
-       $short = ${{ matrix.script }} -split(".ps1")
+       $short = (${{ matrix.script }} -split(".ps1"))
        Write-Output $short
        echo $short
        echo ----------------------
+       echo "::set-output name=version::$(echo $version)"
+       echo "::set-output name=short::$(echo $short)"
+      shell: powershell
+
+    - name: Build
+      run: |
+       echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
-       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/$short.exe -noConsole -title $short -iconFile ./${{ matrix.path }}/$short.ico -version $version
+       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.exe -noConsole -title ${{ steps.Version.outputs.short }} -iconFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.ico -version ${{ steps.Version.outputs.version }}
       shell: powershell
 
     - name: upload-artifacts
