@@ -129,6 +129,7 @@ jobs:
         shell: bash
         if:  steps.step2.outcome == 'success'
         run: |
+         echo ${{steps.step2.outcome }}
          echo "::set-output name=success_pifd::success"
 
       - name: tree
