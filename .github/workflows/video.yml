@@ -18,7 +18,7 @@ jobs:
       output9: ${{ steps.step1.outputs.last_day_moths }}
       output10: ${{ steps.step1.outputs.month_date }}
       output11: ${{ steps.step1.outputs.pifd_url }}
-      output12: ${{ steps.step2.outputs.success_pifd }}
+      output12: ${{ steps.step3.outputs.success_pifd }}
     timeout-minutes: 20
     continue-on-error: true
     strategy:
@@ -96,7 +96,6 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          echo "::set-output name=success_pifd::success"
           sudo apt-get install -y ffmpeg --fix-missing
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
@@ -124,6 +123,14 @@ jobs:
           else
           echo "-----"
           fi
+
+      - name: outcome
+        id: step3
+        shell: bash
+        if:  steps.step2.outcome == 'success'
+        run: |
+         echo "::set-output name=success_pifd::success"
+
       - name: tree
         run: |
          tree -h ./Himawari/
