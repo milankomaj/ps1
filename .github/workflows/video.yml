@@ -146,6 +146,7 @@ jobs:
 
   m3u8:
     runs-on: ubuntu-latest
+    if:  ${{ always() }}
     needs: [ build ]
     steps:
       - name: Checkout
@@ -160,10 +161,10 @@ jobs:
         shell: bash
         if:  ${{needs.build.outputs.output12 }} == "success"
         run: |
-         echo output12 = ${{ needs.build.outputs.output12 }}
-         echo pifd_outcome = ${{ steps.step2.outcome }}
-         echo pijp_outcome = ${{ steps.step3.outcome }}
-         echo pir3_outcome = ${{ steps.step4.outcome }}
+         echo  ${{ needs.build.outputs.output12 }}
+         echo  ${{ steps.step2.outcome }}
+         echo  ${{ steps.step3.outcome }}
+         echo  ${{ steps.step4.outcome }}
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
@@ -176,6 +177,7 @@ jobs:
 
   push:
     runs-on: ubuntu-latest
+    continue-on-error: true
     if:  ${{ always() }}
     needs: [build,m3u8]
     steps:
