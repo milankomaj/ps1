@@ -160,13 +160,13 @@ jobs:
          echo "#EXTM3U" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: Generate m3u8 daily
         shell: bash
-        if: ${{ needs.build.outputs.output12  == success }}
+        if: ${{ needs.build.outputs.output12 }} == success
         run: |
          ${{ needs.build.outputs.output12 }}
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: upload-artifacts
-        if: ${{needs.build.outputs.output12 }} == "success"
+        if: ${{ needs.build.outputs.output12 }} == "success"
         uses: actions/upload-artifact@v2
         with:
          name: pifd
