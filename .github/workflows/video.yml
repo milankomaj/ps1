@@ -148,7 +148,6 @@ jobs:
 
   m3u8:
     runs-on: ubuntu-latest
-    if:  ${{ always() }}
     needs: [ build ]
     steps:
       - name: Checkout
