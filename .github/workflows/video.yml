@@ -197,4 +197,8 @@ jobs:
           git add ./Himawari/*/himawari_*.*
           git add ./Himawari/m3u8/*_pifd.m3u8
           git commit -m "${{needs.build.outputs.output4}}"
+          echo '### Changed files' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          git show --name-only --format=tformat: >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY         
           git push
