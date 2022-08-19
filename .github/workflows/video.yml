@@ -169,7 +169,7 @@ jobs:
         if: ${{needs.build.outputs.output12 == 'success'}}
         uses: actions/upload-artifact@v2
         with:
-         name: pifd
+         name: m3u8
          path: |
           ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
 
@@ -192,7 +192,6 @@ jobs:
         run: |
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.NAME }}
-          mv ${{ github.workspace }}/Himawari/pifd/*_pifd.m3u8 ${{ github.workspace }}/Himawari/m3u8
           git status
           git add ./Himawari/*/himawari_*.*
           git add ./Himawari/m3u8/*_pifd.m3u8
