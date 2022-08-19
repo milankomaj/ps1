@@ -162,6 +162,7 @@ jobs:
         shell: bash
         if: ${{needs.build.outputs.output12 == 'success'}}
         run: |
+         echo ${{ github.event_path }}
          echo ${{needs.build.outputs.output12}}
          echo "#EXTINF:-1,${{needs.build.outputs.output7}}_pifd" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
          echo "${{needs.build.outputs.output11}}" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
