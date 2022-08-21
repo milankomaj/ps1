@@ -10,7 +10,7 @@
 <img src="Himawari/latest.jpg" width="auto" height="371" title="👉  Himawari  👈"> <img src="Himawari/pifd/himawari_pifd.webp" width="auto" height="371"/>
 
 
+---
 
-
-
+* [:link: wiki](https://github.com/milankomaj/ps1/wiki)
 
