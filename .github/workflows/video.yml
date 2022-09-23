@@ -140,7 +140,7 @@ jobs:
         run: |
          tree -h ./Himawari/
       - name: upload-artifacts
-        if:  steps.step2.outcome == 'success' || steps.step3.outcome == 'success' || steps.step4.outcome == 'success'
+        if:  steps.step2.outcome == 'success' || steps.step3.outcome == 'success' || steps.step4.outcome == 'success' &&  steps.step1.outputs.SCALE != '0'         
         uses: actions/upload-artifact@v3
         with:
          name: ${{ steps.step1.outputs.PREFIX }}
