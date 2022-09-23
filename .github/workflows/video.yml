@@ -161,7 +161,7 @@ jobs:
          echo "#EXTM3U" >> ./Himawari/m3u8/${{needs.build.outputs.output10}}_pifd.m3u8
       - name: Generate m3u8 daily
         shell: bash
-        if: ${{needs.build.outputs.output12 == 'success'}} && ${{needs.build.outputs.output1 != "0"}}
+        if: ${{needs.build.outputs.output12 == 'success' && needs.build.outputs.output1 != '0'}}
         run: |
          echo $PATH
          echo ${{needs.build.outputs.output12}}
