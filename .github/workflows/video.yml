@@ -58,17 +58,19 @@ jobs:
          month_date=$(date +'%Y%m');
          echo date=$month_date
 
-         echo "::set-output name=SCALE::$(echo $scale)"
-         echo "::set-output name=PREFIX::${{ matrix.prefix }}"
-         echo "::set-output name=URL::$(echo $url)"
-         echo "::set-output name=SKzone::$(echo $SKzone)"
-         echo "::set-output name=Tomorrow::$(echo $date_plus_1)"
-         echo "::set-output name=TomorrowUrl::$(echo $url_plus_1)"
-         echo "::set-output name=DateToday::$(echo $date)"
-         echo "::set-output name=first_day_moths::$(echo $first_day_moths)"
-         echo "::set-output name=last_day_moths::$(echo $last_day_moths)"
-         echo "::set-output name=month_date::$(echo $month_date)"
-         echo "::set-output name=pifd_url::$(echo $pifd_url)"
+         echo "SCALE=$(echo $scale)" >> $GITHUB_OUTPUT
+         echo "PREFIX=${{ matrix.prefix }}" >> $GITHUB_OUTPUT
+         echo "URL=$(echo $url)" >> $GITHUB_OUTPUT
+         echo "SKzone=$(echo $SKzone)" >> $GITHUB_OUTPUT
+         echo "Tomorrow=$(echo $date_plus_1)" >> $GITHUB_OUTPUT
+         echo "TomorrowUrl=$(echo $url_plus_1)" >> $GITHUB_OUTPUT
+         echo "DateToday=$(echo $date)" >> $GITHUB_OUTPUT
+         echo "first_day_moths=$(echo $first_day_moths)" >> $GITHUB_OUTPUT
+         echo "last_day_moths=$(echo $last_day_moths)" >> $GITHUB_OUTPUT
+         echo "month_date=$(echo $month_date)" >> $GITHUB_OUTPUT
+         echo "pifd_url=$(echo $pifd_url)" >> $GITHUB_OUTPUT
+
+
 
       - name: Generate pifd
         id: step2
@@ -134,7 +136,7 @@ jobs:
          echo ${{steps.step2.outcome }}
          echo ${{ steps.step3.outcome }}
          echo ${{ steps.step4.outcome }}
-         echo "::set-output name=success_pifd::success"
+         echo "success_pifd=success" >> $GITHUB_OUTPUT
 
       - name: tree
         run: |
