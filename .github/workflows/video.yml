@@ -1,5 +1,5 @@
 name: Video
-run-name: ${{ github.workflow }} ✅ ${{ github.actor }} ✅ ${{ github.event_name}}  ✅ ${{ github.job}}
+run-name: ${{ github.workflow }} ✅ ${{ github.actor }} ✅ ${{ github.event_name}}
 on:
   workflow_dispatch:
   schedule:
