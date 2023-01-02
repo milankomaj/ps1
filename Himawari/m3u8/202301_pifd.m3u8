@@ -2,3 +2,5 @@
 #EXTM3U
 #EXTINF:-1,20230101_pifd
 https://himawari8.nict.go.jp/movie/720/20230101_pifd.mp4
+#EXTINF:-1,20230102_pifd
+https://himawari8.nict.go.jp/movie/720/20230102_pifd.mp4
