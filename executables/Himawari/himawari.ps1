@@ -1,5 +1,5 @@
 ﻿#(v0.0.1)
-# Himawari-8 Downloader  
+# Himawari-8 Downloader
 #
 #
 #
