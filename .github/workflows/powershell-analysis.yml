@@ -11,7 +11,10 @@ name: PSScriptAnalyzer
 
 on:
   workflow_dispatch:
-
+  push:
+    branches: [ main ]
+    paths:
+    - '**.ps1'
   pull_request:
     branches: [ main ]
 
