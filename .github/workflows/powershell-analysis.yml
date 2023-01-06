@@ -41,7 +41,7 @@ jobs:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
         run: |
-         echo $path $script
+         echo ${{ matrix.path }}/${{ matrix.script }}
          echo 'artifact (.ps1.bak)'
          cp ./${{ matrix.path }}/${{ matrix.script }}{,.bak}
 
@@ -219,6 +219,9 @@ jobs:
         run: |
          echo ${{steps.download.outputs.download-path}}
          dir ./artifact | Select-Object Name,Length,LastWriteTime
+         Copy-Item "./artifact/bing-wallpaper.ps1" -Destination "./executables/BING_2"
+         Copy-Item "./artifact/himawari.ps1" -Destination "./executables/Himawari"
+         Copy-Item "./artifact/LigtDark.ps1" -Destination "./executables/LigtDark"
 
       - name: Update scripts
         run: |
