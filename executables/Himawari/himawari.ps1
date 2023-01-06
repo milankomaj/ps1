@@ -1,12 +1,12 @@
 ﻿#(v0.0.1)
-# Himawari-8 Downloader
+# Himawari-8 Downloader  
 #
 #
 #
 # This script will scrape the latest image from the Himawari-8 satellite, recombining the tiled image,
 # converting it to a JPG which is saved in My Pictures\Himawari\ and then set as the desktop background.
 #
-# http://himawari8.nict.go.jp/himawari8-image.htm
+# http://himawari8.nict.go.jp/himawari8-image.htm  
 #
 #
 
