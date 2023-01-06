@@ -98,7 +98,7 @@ jobs:
          sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " "
          sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
-         echo "::set-output name=sha256::$(echo $sum)"
+         echo "sha256=$(echo $sum)" >> $GITHUB_OUTPUT
 
          echo UPLOAD Virustotal
          curl -s --request POST \
