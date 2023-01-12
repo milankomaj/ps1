@@ -82,7 +82,7 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          sudo apt-get install -y ffmpeg --fix-missing
+          sudo apt-fast install ffmpeg
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vcodec libwebp -preset default -loop 0 -an -vsync 0 -vf "fps=30, scale=680:720" -qscale 70 -y ./Himawari/himawari_${{ steps.step1.outputs.PREFIX }}.webp
@@ -100,7 +100,7 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          sudo apt-get install -y ffmpeg --fix-missing
+          sudo apt-fast install ffmpeg
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
@@ -119,7 +119,7 @@ jobs:
           if [[ "${{ steps.step1.outputs.SCALE }}" -ge "1" ]]
           then
           echo "++++"
-          sudo apt-get install -y ffmpeg --fix-missing
+          sudo apt-fast install ffmpeg
           url=$(curl -s -L -o ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 ${{ steps.step1.outputs.URL }})
           echo url = ${{ steps.step1.outputs.URL }}
           ffmpeg -i ./Himawari/${{ steps.step1.outputs.PREFIX }}.mp4 -vf blackframe=0,metadata=select:key=lavfi.blackframe.pblack:value=90:function=less,minterpolate=mi_mode=mci:mc_mode=obmc:me_mode=bilat:vsbmc=0:me=tdls:fps=10 -c:a copy -y ./Himawari/${{ steps.step1.outputs.PREFIX }}_out.mp4
