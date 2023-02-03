@@ -19,11 +19,11 @@ jobs:
        $fileContent[$BingLineNumber-1] = $textToAdd
        $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
 
-       $textToAdd2 = ' <debug>true</debug>'
-       $BingLineNumber2 = 11
-       $fileContent2 = Get-Content ./executables/BING_2/SettingsBw.xml
-       $fileContent2[$BingLineNumber2-1] = $textToAdd2
-       $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
+       $filePath = "./executables/BING_2/SettingsBw.xml"
+       $content = ((Get-Content -Path $filePath) `
+       -replace '<debug>false</debug>','<debug>true</debug>' `
+       -replace '<notification>true</notification>','<notification>false</notification>' `
+       | Set-Content -Path $filePath)
 
        Write-Output pred
        cd ./BingWallpaper
