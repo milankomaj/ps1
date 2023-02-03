@@ -24,7 +24,7 @@ jobs:
     - name: Version
       id: Version
       run: |
-       $version = (Get-Content -Encoding utf8 ./${{ matrix.path }}/${{ matrix.script }} -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
+       $version = (Get-Content ./${{ matrix.path }}/${{ matrix.script }} -First 1).split('# (v)').split([IO.Path]::GetInvalidFileNameChars()) -join ''
        Write-Output $version
        echo $version
        echo ----------------------
@@ -41,7 +41,7 @@ jobs:
       run: |
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
-       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/$(echo $short).exe -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole -title $(echo $short) -iconFile ./${{ matrix.path }}/$(echo $short).ico -version $(echo $version)
+       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.exe -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole -title ${{ steps.Version.outputs.short }} -iconFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.ico -version ${{ steps.Version.outputs.version }}
       shell: powershell
 
     - name: upload-artifacts
