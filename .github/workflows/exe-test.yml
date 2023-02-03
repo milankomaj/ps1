@@ -45,9 +45,9 @@ jobs:
        -inputFile ./${{ matrix.path }}/${{ matrix.script }} `
        -outputFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.exe `
        -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole `
-       -title ${{ steps.Version.outputs.short }} `
+       -title "${{ steps.Version.outputs.short }}" `
        -iconFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.ico `
-       -version ${{ steps.Version.outputs.version }}
+       -version "${{ steps.Version.outputs.version }}"
       shell: powershell
 
     - name: upload-artifacts
