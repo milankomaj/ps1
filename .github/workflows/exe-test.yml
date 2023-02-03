@@ -41,7 +41,7 @@ jobs:
       run: |
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
-       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.exe -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole -title ${{ steps.Version.outputs.short }} -iconFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.ico -version ${{ steps.Version.outputs.version }}
+       ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/$short.exe -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole -title $short -iconFile ./${{ matrix.path }}/$short.ico -version $version
       shell: powershell
 
     - name: upload-artifacts
