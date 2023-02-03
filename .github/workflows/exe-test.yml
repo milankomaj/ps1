@@ -35,8 +35,8 @@ jobs:
        echo ----------------------
        echo "version=$(echo $version)" >> $GITHUB_OUTPUT
        echo "short=$(echo $short)" >> $GITHUB_OUTPUT
-       "{short}={$(echo $short)}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-       "{version}={$(echo $short)}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+       "short=$(echo $short)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+       "version=$(echo $version)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       shell: powershell
 
     - name: Build
