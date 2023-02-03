@@ -11,7 +11,10 @@ name: PSScriptAnalyzer
 
 on:
   workflow_dispatch:
-
+  push:
+    branches: [ main ]
+    paths:
+    - '**.ps1'
   pull_request:
     branches: [ main ]
 
@@ -41,7 +44,7 @@ jobs:
           path: ${{ matrix.path }}
           script: ${{ matrix.script }}
         run: |
-         echo $path $script
+         echo ${{ matrix.path }}/${{ matrix.script }}
          echo 'artifact (.ps1.bak)'
          cp ./${{ matrix.path }}/${{ matrix.script }}{,.bak}
 
@@ -98,7 +101,7 @@ jobs:
          sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " "
          sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
          echo $sum
-         echo "::set-output name=sha256::$(echo $sum)"
+         echo "sha256=$(echo $sum)" >> $GITHUB_OUTPUT
 
          echo UPLOAD Virustotal
          curl -s --request POST \
@@ -219,6 +222,9 @@ jobs:
         run: |
          echo ${{steps.download.outputs.download-path}}
          dir ./artifact | Select-Object Name,Length,LastWriteTime
+         Copy-Item "./artifact/bing-wallpaper.ps1" -Destination "./executables/BING_2"
+         Copy-Item "./artifact/himawari.ps1" -Destination "./executables/Himawari"
+         Copy-Item "./artifact/LigtDark.ps1" -Destination "./executables/LigtDark"
 
       - name: Update scripts
         run: |
