@@ -33,16 +33,18 @@ jobs:
        Write-Output $short
        echo $short
        echo ----------------------
-       echo "version=$(echo $version)" >> $GITHUB_OUTPUT
-       echo "short=$(echo $short)" >> $GITHUB_OUTPUT
+       echo "version=$(echo $version)" >> $env:GITHUB_OUTPUT
+       echo "short=$(echo $short)" >> $env:GITHUB_OUTPUT
        "short=$(echo $short)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
        "version=$(echo $version)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       shell: powershell
 
     - name: Build
       run: |
-       Write-Output "${{ env.short }}"
+       Write-Output ${{ env.short }}
        echo $short
+       Write-Output ${{ steps.Version.outputs.short }}
+       echo ${{ steps.Version.outputs.short }}
        echo ----------------------
       shell: powershell
 
