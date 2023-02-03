@@ -46,7 +46,7 @@ jobs:
        -outputFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.exe `
        -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole `
        -title "${{ steps.Version.outputs.short }}" `
-       -iconFile ./${{ matrix.path }}/${{ steps.Version.outputs.short }}.ico `
+       -iconFile ./${{ matrix.path }}/"${{ steps.Version.outputs.short }}".ico `
        -version "${{ steps.Version.outputs.version }}"
       shell: powershell
 
