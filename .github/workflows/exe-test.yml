@@ -39,7 +39,7 @@ jobs:
 
     - name: Build
       run: |
-       echo ${{ steps.Version.outputs.short }}
+       echo ${{ steps.Version.outputs.version }}
        echo ${{ steps.Version.outputs.short }}
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
