@@ -8,7 +8,7 @@ $notification.Visible = $True
 $speech = New-Object System.Speech.Synthesis.SpeechSynthesizer
 
 
-[xml]$Config = Get-Content Settings.xml
+[xml]$Config = Get-Content -Encoding utf8 Settings.xml
 $light = $Config.Configuration.light
 $dark = $Config.Configuration.dark
 $min = Get-Date $light
@@ -22,7 +22,7 @@ $darkTheme = $Config.Configuration.darkTheme
 if ($min.TimeOfDay -le $now.TimeOfDay -and $max.TimeOfDay -ge $now.TimeOfDay) {
 if ($lightTheme -eq "false") {
 }else {
-Invoke-Expression .\$lightTheme
+.\$lightTheme
 }
 
 Set-ItemProperty -Name AppsUseLightTheme -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Force -Value 1
@@ -41,7 +41,7 @@ $speech.Speak("Light mode activated.")
 } else {
 if ($darkTheme -eq "false") {
 }else {
-Invoke-Expression .\$darkTheme
+.\$darkTheme
 }
 Set-ItemProperty -Name AppsUseLightTheme -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Force -Value 0
 Set-ItemProperty -Name SystemUsesLightTheme -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Force -Value 0

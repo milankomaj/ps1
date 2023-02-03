@@ -9,7 +9,7 @@ public class Wallpaper {
    }
 }
 "@
-[xml]$Config = Get-Content SettingsBw.xml
+[xml]$Config = Get-Content -Encoding utf8 SettingsBw.xml
 $market = $Config.Configuration.market
 $resolution = $Config.Configuration.resolution
 $timeout = $Config.Configuration.timeout
