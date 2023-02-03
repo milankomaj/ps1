@@ -41,6 +41,7 @@ jobs:
 
     - name: Build
       run: |
+       echo ${{ env.short }}
        echo ----------------------
        Write-Output "Converts powershell scripts to standalone executables."
        ./executables/ps2exe.ps1 -inputFile ./${{ matrix.path }}/${{ matrix.script }} -outputFile ./${{ matrix.path }}/${{ env.short }}.exe -x64 -DPIAware -exitOnCancel -noVisualStyles -noConsole -title ${{ env.short }} -iconFile ./${{ matrix.path }}/${{ env.short }}.ico -version ${{ env.version }}
