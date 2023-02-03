@@ -35,8 +35,8 @@ jobs:
        echo ----------------------
        echo "version=$(echo $version)" >> $GITHUB_OUTPUT
        echo "short=$(echo $short)" >> $GITHUB_OUTPUT
-       echo "version=$(echo $version)" >> $GITHUB_ENV
-       echo "short=$(echo $short)" >> $GITHUB_ENV
+       Write-Output "version=$(echo $version)" >> $GITHUB_ENV
+       Write-Output "short=$(echo $short)" >> $GITHUB_ENV
       shell: powershell
 
     - name: Build
