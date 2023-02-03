@@ -41,15 +41,10 @@ jobs:
 
     - name: Build
       run: |
-       echo ${{ env.short }}
-       echo ${{ env.version }}
-       echo ${{ steps.Version.outputs.short }}
+       Write-Output "${{ env.short }}"
        echo $short
        echo ----------------------
-
       shell: powershell
-      env:
-        short: ${{ env.short }}
 
     - name: upload-artifacts
       uses: actions/upload-artifact@v3
