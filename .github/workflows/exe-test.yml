@@ -35,17 +35,20 @@ jobs:
        echo ----------------------
        echo "version=$(echo $version)" >> $GITHUB_OUTPUT
        echo "short=$(echo $short)" >> $GITHUB_OUTPUT
-       Write-Output "version=$version" >> $GITHUB_ENV
-       Write-Output "short=$short" >> $GITHUB_ENV
+       Write-Output "version=$(echo $version)" >> $GITHUB_ENV
+       Write-Output "short=$(echo $short)" >> $GITHUB_ENV
       shell: powershell
 
     - name: Build
       run: |
-       echo '${{ env.short }}'
-       echo '${{ steps.Version.outputs.short }}'
+       echo ${{ env.short }}
+       echo ${{ steps.Version.outputs.short }}
+       echo $short
        echo ----------------------
 
       shell: powershell
+      env:
+        short: ${{ env.short }}
 
     - name: upload-artifacts
       uses: actions/upload-artifact@v3
