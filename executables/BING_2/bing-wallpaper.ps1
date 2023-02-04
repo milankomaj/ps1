@@ -1,4 +1,4 @@
-#(v0.0.3)
+#(v0.0.4)
 [xml]$Config = Get-Content -Encoding utf8 SettingsBw.xml
 $market = $Config.Configuration.market
 $resolution = $Config.Configuration.resolution
