@@ -71,7 +71,7 @@ $BW.DownloadFile($url,$ImageFileName)
 [Wallpaper]::SetWallpaper($ImageFileName)
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
-$adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileName})`  # "`...` " This line has a backtick at the end trailed by a whitespace character.
+$adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${ImageFileName})` -- # This line has a backtick at the end trailed by a whitespace character.
 $adapter.Metadata.Title = ${copyright};
 $adapter.Metadata.Subject = ${author};
 $adapter.Metadata.Rating = $Config.Configuration.rating;
