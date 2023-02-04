@@ -184,7 +184,7 @@ jobs:
         if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
         run: |
           $textToAdd = '$outpath = "./BingWallpaper"'
-          $BingLineNumber = 39
+          $BingLineNumber = 29
           $fileContent = Get-Content ./executables/BING_2/bing-wallpaper.ps1
           $fileContent[$BingLineNumber-1] = $textToAdd
           $fileContent | Set-Content ./executables/BING_2/bing-wallpaper.ps1
