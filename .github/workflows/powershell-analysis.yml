@@ -209,7 +209,9 @@ jobs:
 
       - name: run script pwsh
         shell: pwsh
-        run: ./${{ matrix.script }}
+        run: |
+         cd ${{ matrix.path }}
+         ./${{ matrix.script }}
 
   push:
     runs-on: windows-latest
