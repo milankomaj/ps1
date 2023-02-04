@@ -207,7 +207,7 @@ jobs:
           Write-Output "This is ${{ matrix.script }}  script."
           type ${{ matrix.script }}
 
-      - name: run script pwsh
+      - name: run script pwsh # not all suported
         shell: pwsh
         run: |
          cd ${{ matrix.path }}
