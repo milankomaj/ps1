@@ -179,7 +179,7 @@ jobs:
     steps:
      # Run script
       - uses: actions/checkout@v3
-      - name: run script if
+      - name: run script if bing-wallpaper.ps1
         shell: pwsh
         if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
         run: |
@@ -196,7 +196,7 @@ jobs:
           $fileContent2 | Set-Content ./executables/BING_2/SettingsBw.xml
 
 
-      - name: run script
+      - name: run script powershell
         shell: powershell
         run: |
           echo ${{ github.workspace }}
@@ -207,6 +207,9 @@ jobs:
           Write-Output "This is ${{ matrix.script }}  script."
           type ${{ matrix.script }}
 
+      - name: run script pwsh
+        shell: pwsh
+        run: ./${{ matrix.script }}
 
   push:
     runs-on: windows-latest
