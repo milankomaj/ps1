@@ -53,7 +53,7 @@ for ($y = 0; $y -lt $numblocks; $y++)
 for ($x = 0; $x -lt $numblocks; $x++)
 {
     $thisurl = $url + "_" + [String]$x + "_" + [String]$y + ".png"
-    Write-Output "Downloading: $thisurl"
+    #  Write-Output "Downloading: $thisurl"
 
     try
     {
