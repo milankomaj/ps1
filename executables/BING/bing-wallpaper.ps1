@@ -75,7 +75,7 @@ Invoke-WebRequest -UseBasicParsing -Uri $ImageUrl -OutFile "$BingImageFullPath";
 
 if ($metadata -match 'true') {
 Add-Type -Path .\XperiCode.JpegMetadata.dll
-$adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${BingImageFullPath})`
+$adapter = `New-Object XperiCode.JpegMetadata.JpegMetadataAdapter(${BingImageFullPath})` --
 $adapter.Metadata.Title = ${copyright};
 $adapter.Metadata.Subject = ${author};
 $adapter.Metadata.Rating = $Config.Configuration.rating;
