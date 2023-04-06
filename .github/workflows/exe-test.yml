@@ -1,6 +1,6 @@
 name: ps1ToExe Test Matrix
 
-on: [repository_dispatch,workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
  windows_executable:
@@ -55,7 +55,7 @@ jobs:
     - name: upload-artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: files
+        name: ${{ steps.Version.outputs.short }}
         path: |
          ./${{ matrix.path }}/${{ matrix.script }}
          ./${{ matrix.path }}/*.exe
