@@ -60,3 +60,7 @@ jobs:
          ./${{ matrix.path }}/${{ matrix.script }}
          ./${{ matrix.path }}/*.exe
          ./${{ matrix.path }}/*.xml
+
+    - name: artifact
+      run: |
+       dir ./artifact | Select-Object Name,Length,LastWriteTime
