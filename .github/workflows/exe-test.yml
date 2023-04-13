@@ -63,4 +63,4 @@ jobs:
 
     - name: artifact
       run: |
-       dir ./artifact | Select-Object Name,Length,LastWriteTime
+       dir ./ | Select-Object Name,Length,LastWriteTime
