@@ -68,6 +68,6 @@ jobs:
         title: ${{ steps.Version.outputs.short }}_test
         tag: ${{ steps.Version.outputs.version }}
         files: |
-          ./${{ matrix.path }}/${{ matrix.script }}
-          ./${{ matrix.path }}/*.exe
+          ./${{ matrix.path }}/${{ matrix.script }} \
+          ./${{ matrix.path }}/*.exe \
           ./${{ matrix.path }}/*.xml
