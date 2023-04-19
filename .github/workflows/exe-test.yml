@@ -60,4 +60,3 @@ jobs:
          ./${{ matrix.path }}/${{ matrix.script }}
          ./${{ matrix.path }}/*.exe
          ./${{ matrix.path }}/*.xml
-
