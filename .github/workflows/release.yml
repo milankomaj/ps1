@@ -18,7 +18,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
-         path: ./artifact/
+         path: ./artifact
+
+      - name: tree
+        run: |
+         tree -h ./
 
       - uses: milankomaj/releases-x@v0.1
         with:
