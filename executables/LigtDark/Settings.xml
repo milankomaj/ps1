@@ -10,5 +10,6 @@
 
 
 <!--
+for windows 10 and 11 ( < 22H2 )
 lightTheme,darkTheme (change theme) - example: <lightTheme>hcwhite.theme</lightTheme> (*.theme in script folder)
 -->
