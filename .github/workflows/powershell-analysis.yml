@@ -38,7 +38,7 @@ jobs:
              script: LigtDark.ps1
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: details
         env:
           path: ${{ matrix.path }}
@@ -93,7 +93,7 @@ jobs:
            - path: executables/LigtDark
              script: LigtDark.ps1
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: virustotal && metadefender
         id: SUM
         run: |
@@ -178,7 +178,7 @@ jobs:
              script: himawari.ps1
     steps:
      # Run script
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: run script if bing-wallpaper.ps1
         shell: pwsh
         if: ${{ matrix.script == 'bing-wallpaper.ps1' }}
@@ -218,7 +218,7 @@ jobs:
     needs: [build,dry_run,scan]
     steps:
      # Artifacts download
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v3
         id: download
         with:
