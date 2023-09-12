@@ -57,16 +57,22 @@ jobs:
 
     - name: timestamp to readme
       run: |
+       $url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-GB"
+       $json = (New-Object System.Net.WebClient).DownloadString($url)
+       $data = $json | ConvertFrom-Json
        $prefix = "- ##### "
        $bingdate = Get-ChildItem ./BingWallpaper/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %d/%m/%Y %T %Z"
        $HimawariDate = Get-ChildItem ./Himawari/latest.jpg -Force | Select-Object LastWriteTime | Get-Date -UFormat "%A %d/%m/%Y %T %Z"
        $textToAdd = "$($prefix)$($bingdate)"
        $textToAdd2 = "$($prefix)$($HimawariDate)"
+       $textToAdd3 = "$($data.images.copyright)"
        $BingLineNumber = 4
        $HimawariLineNumber = 9
+       $CopyrightLineNumber = 6
        $fileContent = Get-Content ./README.md
        $fileContent[$BingLineNumber-1] = $textToAdd
        $fileContent[$HimawariLineNumber-1] = $textToAdd2
+       $fileContent[$CopyrightLineNumber-1] = $textToAdd3
        $fileContent | Set-Content ./README.md
 
     - name: Deploy
