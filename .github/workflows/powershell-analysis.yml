@@ -107,6 +107,8 @@ jobs:
          curl -s --request POST \
           --url https://www.virustotal.com/api/v3/files \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
+          --header 'accept: application/json' \
+          --header 'content-type: multipart/form-data' \
           --form file=@/${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} \
          | jq
 
@@ -114,6 +116,7 @@ jobs:
          curl -s --request GET \
           --url https://www.virustotal.com/api/v3/files/$sum \
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
+          --header 'accept: application/json' \
          | jq .data.attributes.last_analysis_stats
 
          echo UPLOAD Metadefender
