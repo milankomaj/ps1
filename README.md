@@ -1,12 +1,12 @@
 # ps1
 
 - ### [BingWallpaper](https://github.com/milankomaj/ps1/wiki/BingWallpaper)  [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml)
-- ##### Monday 25/09/2023 03:08:09 +00
+- ##### Tuesday 26/09/2023 03:08:01 +00
 <img src="BingWallpaper/latest.jpg" width="700" height="auto" title="👉  BingWallpaper  👈">
-Sea otter in Bartlett Cove, Glacier Bay National Park and Preserve, Alaska (© Andrew Peacock/Tandem Stills + Motion)
+Venice Beach Skatepark at sunset, Los Angeles, California (© EXTREME-PHOTOGRAPHER/Getty Images)
 
 - ### [Himawari](https://github.com/milankomaj/ps1/wiki/Himawari) [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml) [![Video](https://github.com/milankomaj/ps1/actions/workflows/video.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/video.yml)
-- ##### Monday 25/09/2023 03:08:59 +00
+- ##### Tuesday 26/09/2023 03:08:51 +00
 <img src="Himawari/latest.jpg" width="auto" height="371" title="👉  Himawari  👈"> <img src="Himawari/pifd/himawari_pifd.webp" width="auto" height="371"/>
 
 
