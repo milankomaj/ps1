@@ -1,12 +1,12 @@
 # ps1
 
 - ### [BingWallpaper](https://github.com/milankomaj/ps1/wiki/BingWallpaper)  [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml)
-- ##### Friday 10/11/2023 03:07:51 +00
+- ##### Saturday 11/11/2023 03:11:03 +00
 <img src="BingWallpaper/latest.jpg" width="700" height="auto" title="👉  BingWallpaper  👈">
-Badlands National Park, South Dakota, USA (© Grant Ordelheide/Tandem Stills + Motion)
+Val di Funes, South Tyrol, Italy (© Achim Thomae/Getty Images)
 
 - ### [Himawari](https://github.com/milankomaj/ps1/wiki/Himawari) [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml) [![Video](https://github.com/milankomaj/ps1/actions/workflows/video.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/video.yml)
-- ##### Friday 10/11/2023 03:08:27 +00
+- ##### Saturday 11/11/2023 03:11:37 +00
 <img src="Himawari/latest.jpg" width="auto" height="371" title="👉  Himawari  👈"> <img src="Himawari/pifd/himawari_pifd.webp" width="auto" height="371"/>
 
 
