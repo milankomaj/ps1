@@ -53,7 +53,7 @@ jobs:
       shell: powershell
 
     - name: upload-artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.Version.outputs.short }}
         path: |
