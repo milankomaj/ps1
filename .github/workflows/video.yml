@@ -188,7 +188,7 @@ jobs:
     needs: [build,m3u8]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
          path: ./Himawari/
       - name: Display structure of downloaded files
