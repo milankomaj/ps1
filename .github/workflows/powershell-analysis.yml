@@ -68,7 +68,7 @@ jobs:
         with:
           sarif_file: ./${{ matrix.path }}/${{ matrix.script }}.results.sarif
       # Artifacts upload
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
          path: |
           ./${{ matrix.path }}/*.sarif
