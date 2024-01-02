@@ -1,12 +1,12 @@
 # ps1
 
 - ### [BingWallpaper](https://github.com/milankomaj/ps1/wiki/BingWallpaper)  [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml)
-- ##### Monday 01/01/2024 03:08:59 +00
+- ##### Tuesday 02/01/2024 03:08:10 +00
 <img src="BingWallpaper/latest.jpg" width="700" height="auto" title="👉  BingWallpaper  👈">
-Red fox sleeping in the snow, Abruzzo, Italy (© marco vancini/500px/Getty Images)
+Prayer flags in Phobjikha Valley, Bhutan (© John Warburton-Lee/DanitaDelimont.com)
 
 - ### [Himawari](https://github.com/milankomaj/ps1/wiki/Himawari) [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml) [![Video](https://github.com/milankomaj/ps1/actions/workflows/video.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/video.yml)
-- ##### Monday 01/01/2024 03:09:33 +00
+- ##### Tuesday 02/01/2024 03:08:44 +00
 <img src="Himawari/latest.jpg" width="auto" height="371" title="👉  Himawari  👈"> <img src="Himawari/pifd/himawari_pifd.webp" width="auto" height="371"/>
 
 
