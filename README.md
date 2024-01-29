@@ -1,12 +1,12 @@
 # ps1
 
 - ### [BingWallpaper](https://github.com/milankomaj/ps1/wiki/BingWallpaper)  [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml)
-- ##### Sunday 28/01/2024 03:07:31 +00
+- ##### Monday 29/01/2024 03:08:05 +00
 <img src="BingWallpaper/latest.jpg" width="700" height="auto" title="👉  BingWallpaper  👈">
-Channel Country, Outback Queensland, Australia (© Southern Lightscapes-Australia/Getty Images)
+Gollinger Waterfalls, Tennengau, Salzburg, Austria (© Frank Fischbach/Alamy Stock Photo)
 
 - ### [Himawari](https://github.com/milankomaj/ps1/wiki/Himawari) [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml) [![Video](https://github.com/milankomaj/ps1/actions/workflows/video.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/video.yml)
-- ##### Sunday 28/01/2024 03:08:05 +00
+- ##### Monday 29/01/2024 03:08:40 +00
 <img src="Himawari/latest.jpg" width="auto" height="371" title="👉  Himawari  👈"> <img src="Himawari/pifd/himawari_pifd.webp" width="auto" height="371"/>
 
 
