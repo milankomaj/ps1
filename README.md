@@ -1,12 +1,12 @@
 # ps1
 
 - ### [BingWallpaper](https://github.com/milankomaj/ps1/wiki/BingWallpaper)  [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml)
-- ##### Monday 04/03/2024 03:38:20 +00
+- ##### Tuesday 05/03/2024 03:07:53 +00
 <img src="BingWallpaper/latest.jpg" width="700" height="auto" title="👉  BingWallpaper  👈">
-Arenal Volcano seen from Monteverde, Costa Rica (© Lukas Bischoff/Getty Images)
+Traffic circle and highway in Bangkok, Thailand (© Avigator Fortuner/Shutterstock)
 
 - ### [Himawari](https://github.com/milankomaj/ps1/wiki/Himawari) [![Generate Wallpapers Github README.md](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/GenWall.yml) [![Video](https://github.com/milankomaj/ps1/actions/workflows/video.yml/badge.svg?event=schedule)](https://github.com/milankomaj/ps1/actions/workflows/video.yml)
-- ##### Monday 04/03/2024 03:38:56 +00
+- ##### Tuesday 05/03/2024 03:17:10 +00
 <img src="Himawari/latest.jpg" width="auto" height="371" title="👉  Himawari  👈"> <img src="Himawari/pifd/himawari_pifd.webp" width="auto" height="371"/>
 
 
