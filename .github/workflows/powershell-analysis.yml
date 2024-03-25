@@ -121,7 +121,7 @@ jobs:
          | jq .data.attributes.last_analysis_stats
 
          echo UPLOAD Metadefender
-         downloadurl=(https://raw.githubusercontent.com/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }}).ps1
+         downloadurl=(https://raw.githubusercontent.com/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }}.ps1)
          echo downloadurl=$downloadurl
          curl -s --request POST \
           --url https://api.metadefender.com/v4/file \
