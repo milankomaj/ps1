@@ -31,11 +31,11 @@ jobs:
       matrix:
         include:
            - path: executables/BING_2
-             script: bing-wallpaper.ps1
+             script: bing-wallpaper
            - path: executables/Himawari
-             script: himawari.ps1
+             script: himawari
            - path: executables/LigtDark
-             script: LigtDark.ps1
+             script: LigtDark
 
     steps:
       - uses: actions/checkout@v4
@@ -177,9 +177,9 @@ jobs:
      matrix:
       include:
            - path: executables/BING_2
-             script: bing-wallpaper.ps1
+             script: bing-wallpaper
            - path: executables/Himawari
-             script: himawari.ps1
+             script: himawari
     steps:
      # Run script
       - uses: actions/checkout@v4
