@@ -70,7 +70,7 @@ jobs:
       # Artifacts upload
       - uses: actions/upload-artifact@v4
         with:
-         name: ${{ github.sha }}
+         name: ${{ steps.SUM.outputs.sha256}}
          path: |
           ./${{ matrix.path }}/*.sarif
           ./${{ matrix.path }}/${{ matrix.script }}
