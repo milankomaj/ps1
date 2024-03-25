@@ -70,8 +70,9 @@ jobs:
       # Artifacts upload
       - uses: actions/upload-artifact@v4
         with:
+         name: ${{ matrix.path }}
          path: |
-          # ./${{ matrix.path }}/*.sarif
+          ./${{ matrix.path }}/*.sarif
           ./${{ matrix.path }}/${{ matrix.script }}
           ./${{ matrix.path }}/${{ matrix.script }}.bak
 
