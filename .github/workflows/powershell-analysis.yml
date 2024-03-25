@@ -128,7 +128,7 @@ jobs:
           --header "downloadfrom: $downloadurl" \
           --header "apikey: ${{ secrets.META }}" \
           --header "Content-Type: application/octet-stream" \
-          --header "filename: ${{ github.workflow }}_${{ matrix.script }}" \
+          --header "filename: ${{ github.workflow }}_${{ matrix.script }}.ps1" \
          | jq
 
          echo DATA Metadefender
