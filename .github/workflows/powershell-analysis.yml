@@ -233,7 +233,7 @@ jobs:
       - name: 'download path && dir && Copy-Item'
         run: |
          echo ${{steps.download.outputs.download-path}}
-         dir ./ | Select-Object Name,Length,LastWriteTime
+         dir ./artifact | Select-Object Name,Length,LastWriteTime
          Copy-Item "./artifact/bing-wallpaper.ps1" -Destination "./executables/BING_2"
          Copy-Item "./artifact/himawari.ps1" -Destination "./executables/Himawari"
          Copy-Item "./artifact/LigtDark.ps1" -Destination "./executables/LigtDark"
