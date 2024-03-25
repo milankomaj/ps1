@@ -42,11 +42,11 @@ jobs:
       - name: details
         env:
           path: ${{ matrix.path }}
-          script: ${{ matrix.script }}
+          script: ${{ matrix.script }}.ps1
         run: |
-         echo ${{ matrix.path }}/${{ matrix.script }}
+         echo ${{ matrix.path }}/${{ matrix.script }}.ps1
          echo 'artifact (.ps1.bak)'
-         cp ./${{ matrix.path }}/${{ matrix.script }}{,.bak}
+         cp ./${{ matrix.path }}/${{ matrix.script }}.ps1{,.bak}
 
 
       - name: Run PSScriptAnalyzer
@@ -57,8 +57,8 @@ jobs:
           # Include your own basic security rules. Removing this option will run all the rules
           # includeRule: ''
           # excludeRule: '"PSAvoidUsingWriteHost", "PSAvoidTrailingWhitespace"'
-          output: ./${{ matrix.path }}/${{ matrix.script }}.results.sarif
-          path: ./${{ matrix.path }}/${{ matrix.script }}
+          output: ./${{ matrix.path }}/${{ matrix.script }}.ps1.results.sarif
+          path: ./${{ matrix.path }}/${{ matrix.script }}.ps1
           recurse: false
           fix: true
 
@@ -66,15 +66,15 @@ jobs:
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ./${{ matrix.path }}/${{ matrix.script }}.results.sarif
+          sarif_file: ./${{ matrix.path }}/${{ matrix.script }}.ps1.results.sarif
       # Artifacts upload
       - uses: actions/upload-artifact@v4
         with:
-         name: ${{ steps.SUM.outputs.sha256}}
+         name: ${{ matrix.script }}
          path: |
           ./${{ matrix.path }}/*.sarif
-          ./${{ matrix.path }}/${{ matrix.script }}
-          ./${{ matrix.path }}/${{ matrix.script }}.bak
+          ./${{ matrix.path }}/${{ matrix.script }}.ps1
+          ./${{ matrix.path }}/${{ matrix.script }}.ps1.bak
 
  # virustotal && metadefender
   scan:
@@ -88,19 +88,19 @@ jobs:
      matrix:
       include:
            - path: executables/BING_2
-             script: bing-wallpaper.ps1
+             script: bing-wallpaper
            - path: executables/Himawari
-             script: himawari.ps1
+             script: himawari
            - path: executables/LigtDark
-             script: LigtDark.ps1
+             script: LigtDark
     steps:
       - uses: actions/checkout@v4
       - name: virustotal && metadefender
         id: SUM
         run: |
          echo sha256sum
-         sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " "
-         sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} | cut -f 1 -d " ")
+         sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }}.ps1 | cut -f 1 -d " "
+         sum=$(sha256sum ${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }}.ps1 | cut -f 1 -d " ")
          echo $sum
          echo "sha256=$(echo $sum)" >> $GITHUB_OUTPUT
 
@@ -110,7 +110,7 @@ jobs:
           --header 'x-apikey: ${{ secrets.VTAPI }}' \
           --header 'accept: application/json' \
           --header 'content-type: multipart/form-data' \
-          --form file=@/${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }} \
+          --form file=@/${{ github.workspace }}/${{ matrix.path }}/${{ matrix.script }}.ps1 \
          | jq
 
          echo DATA Virustotal
@@ -121,7 +121,7 @@ jobs:
          | jq .data.attributes.last_analysis_stats
 
          echo UPLOAD Metadefender
-         downloadurl=(https://raw.githubusercontent.com/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }})
+         downloadurl=(https://raw.githubusercontent.com/${{ github.repository }}/main/${{ matrix.path }}/${{ matrix.script }}).ps1
          echo downloadurl=$downloadurl
          curl -s --request POST \
           --url https://api.metadefender.com/v4/file \
