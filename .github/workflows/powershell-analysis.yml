@@ -91,7 +91,8 @@ jobs:
              script: bing-wallpaper
            - path: executables/Himawari
              script: himawari
-
+           - path: executables/LigtDark
+             script: LigtDark
     steps:
       - uses: actions/checkout@v4
       - name: virustotal && metadefender
@@ -178,8 +179,6 @@ jobs:
              script: bing-wallpaper
            - path: executables/Himawari
              script: himawari
-           - path: executables/LigtDark
-             script: LigtDark
     runs-on: windows-latest 
     
     steps:
