@@ -169,12 +169,13 @@ jobs:
 
   # dry_run 🔄🔄
   dry_run:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     needs: [build]
     strategy:
      max-parallel: 5
      fail-fast: false
      matrix:
+      os: [ubuntu-latest, windows-latest, macos-latest]
       include:
            - path: executables/BING_2
              script: bing-wallpaper
@@ -201,6 +202,7 @@ jobs:
 
 
       - name: run script powershell
+        if: ${{ matrix.os == 'windows-latest' }}
         shell: powershell
         run: |
           echo ${{ github.workspace }}
@@ -212,6 +214,7 @@ jobs:
           type ${{ matrix.script }}.ps1
 
       - name: run script pwsh # not all suported
+        if: ${{ matrix.os != 'windows-latest' }}
         shell: pwsh
         run: |
          cd ${{ matrix.path }}
