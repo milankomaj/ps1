@@ -169,7 +169,6 @@ jobs:
 
   # dry_run 🔄🔄
   dry_run:
-    runs-on: ${{ matrix.os }}
     needs: [build]
     strategy:
      max-parallel: 5
@@ -181,6 +180,7 @@ jobs:
              script: bing-wallpaper
            - path: executables/Himawari
              script: himawari
+    runs-on: ${{ matrix.os }}          
     steps:
      # Run script
       - uses: actions/checkout@v4
