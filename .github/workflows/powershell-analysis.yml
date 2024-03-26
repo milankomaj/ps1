@@ -176,11 +176,26 @@ jobs:
      matrix:
       os: [ubuntu-latest, windows-latest, macos-latest]
       include:
-           - path: executables/BING_2
-             script: bing-wallpaper
-           - path: executables/Himawari
+           - os: windows-latest
+             path: executables/BING_2
+             script: bing-wallpaper          
+           - os: windows-latest
+             path: executables/Himawari  
              script: himawari
-    runs-on: ${{ matrix.os }}          
+           - os: ubuntu-latest
+             path: executables/BING_2
+             script: bing-wallpaper          
+           - os: ubuntu-latest
+             path: executables/Himawari  
+             script: himawari       
+           - os: macos-latest
+             path: executables/BING_2
+             script: bing-wallpaper          
+           - os: macos-latest
+             path: executables/Himawari  
+             script: himawari
+    runs-on: ${{ matrix.os }}  
+    
     steps:
      # Run script
       - uses: actions/checkout@v4
